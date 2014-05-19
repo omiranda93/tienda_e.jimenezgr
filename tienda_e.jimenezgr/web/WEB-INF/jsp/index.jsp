@@ -20,6 +20,5 @@
             <c:set target="${pageContext.session}" property="maxInactiveInterval" value="1800" />
         </c:if>
         <c:import url="cabecera.jsp" charEncoding="utf-8"/>
-
     </body>
 </html>
