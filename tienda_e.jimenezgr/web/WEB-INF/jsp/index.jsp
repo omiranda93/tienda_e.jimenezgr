@@ -1,19 +1,25 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+<%-- 
+    Document   : index
+    Created on : 19-may-2014, 16:37:30
+    Author     : eduas
+--%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Welcome to Spring Web MVC project</title>
-    </head>
-
+        <title>Poxmania: Venta Online de productos en Informática, Foto, Electrodomésticos</title>    </head>
     <body>
-        <p>Hello! This is the default welcome page for a Spring Web MVC project.</p>
-        <p><i>To display a different welcome page for this project, modify</i>
-            <tt>index.jsp</tt> <i>, or create your own welcome page then change
-                the redirection in</i> <tt>redirect.jsp</tt> <i>to point to the new
-                welcome page and also update the welcome-file setting in</i>
-            <tt>web.xml</tt>.</p>
+        <%//si la sesion es nueva%>
+        <c:if test="${pageContext.session.new}">
+            <%//establece el tiempo maximo de inactividad en 30 minutos%>
+            <c:set target="${pageContext.session}" property="maxInactiveInterval" value="1800" />
+        </c:if>
+        <c:import url="cabecera.jsp" charEncoding="utf-8"/>
+
     </body>
 </html>
