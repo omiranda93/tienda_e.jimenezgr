@@ -1,7 +1,7 @@
 <div id="footer">
     <div id="footTop">
 
-        <ul class="col3">
+        <ul class="col-lg-3">
             <li class="listHeader">¿Quiénes somos?</li>
             <li><a href="">Condiciones generales de venta de Poxmania</a></li>
             <li><a href="">  Términos y condiciones uso de la plataforma</a></li>
@@ -10,7 +10,7 @@
             <li><a href="">Nuestros compromisos</a></li>
         </ul>
 
-        <ul class="col3">
+        <ul class="col-lg-3">
             <li class="listHeader">Servicios</li>
             <li><a href="">Hacer un pedido</a></li>
             <li><a href="">Modos de entrega</a></li>
@@ -22,7 +22,7 @@
             <li><a href="">Libro de fotos cewe</a></li>
         </ul>
 
-        <ul class="col3">
+        <ul class="col-lg-3">
             <li class="listHeader">Ayuda</li>
             <li><a href="">FAQ</a></li>
             <li><a href="">Opiniones consumidores Poxmania</a></li>
@@ -31,7 +31,7 @@
             <li><a href="">Condiciones*</a></li>
         </ul>   
 
-        <ul class="col3">
+        <ul class="col-lg-3">
             <li class="listHeader">¡ÚNETE!</li>
             <li><a href=""><i class="icon-facebook icon-large"></i> <span>Facebook</span></a></li>
             <li><a href=""><i class="icon-twitter icon-large"></i> <span>Twitter</span></a></li>

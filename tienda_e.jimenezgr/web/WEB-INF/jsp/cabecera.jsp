@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="header">
     <a href="index.html" title="inicio">
         <img src="Recursos/poxmania-logo.png">
@@ -18,7 +19,7 @@
                 <c:set var="direccion" value="Autenticacion.jsp"/>
             </c:otherwise>
         </c:choose>
-        
+
         <a href="${direccion}" type="button" class="btn btn-primary">
             Mi cuenta
         </a>
@@ -39,5 +40,13 @@
             </c:if>                
         </a>        
     </div>
+</div>
+
+<div id="menu">
+    <ul>
+        <c:forEach var="categ" items="${categorias}">
+            <li><c:out value="${categ}"/></li>
+            </c:forEach>
+    </ul>
 </div>
 
