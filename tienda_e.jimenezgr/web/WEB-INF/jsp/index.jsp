@@ -13,6 +13,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Poxmania: Venta Online de productos en Informática, Foto, Electrodomésticos</title>    </head>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
     <body>
         <%//si la sesion es nueva%>
         <c:if test="${pageContext.session.new}">
@@ -20,5 +22,6 @@
             <c:set target="${pageContext.session}" property="maxInactiveInterval" value="1800" />
         </c:if>
         <c:import url="cabecera.jsp" charEncoding="utf-8"/>
+        <c:import url="footer.jsp" charEncoding="utf-8"/>
     </body>
 </html>

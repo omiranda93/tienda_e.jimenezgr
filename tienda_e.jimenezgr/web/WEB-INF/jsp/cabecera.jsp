@@ -6,17 +6,25 @@
     <form name="formNombre" method='get' action='ServletProductos'>
         <input type='search' name='nombreProd' />
         <input type='hidden' name='busqueda' value='nombre' />
-        <input type='submit' name='BuscarNombre' value='Buscar'>
+        <input type='submit' class="btn btn-primary" name='BuscarNombre' value='Buscar'>
     </form> 	
 
     <div>
-        <ul>
-            <li id="miCuenta">
-                <a>Mi cuenta </a>
-            </li>
-            <li id="carro">
-                <span>Cesta</span>
-                <%//si el parametro carro no esta vacio%>
+        <c:choose>
+            <c:when test="logueado"> <%--falta comprobar logueo--%>
+                <c:set var="direccion" value="miPedido.jsp"/>
+            </c:when>
+            <c:otherwise>
+                <c:set var="direccion" value="Autenticacion.jsp"/>
+            </c:otherwise>
+        </c:choose>
+        
+        <a href="${direccion}" type="button" class="btn btn-primary">
+            Mi cuenta
+        </a>
+        <a href="" type="button" class="btn btn-primary">
+            <span>Cesta</span>
+            <%//si el parametro carro no esta vacio%>
             <c:if test="${carro!= null}">
                 <%//asigna a la variable carro el valor del parametro de sesion carro%>
                 <c:set var="carro" value="${carro}"/>
@@ -27,10 +35,9 @@
                     <%//aumenta el total de productos%>
                     <c:set var="total" value="${total+prod.cantidad}"/>
                 </c:forEach>
-                <span>(<c:out value="${total}"/>)</span>
+                <span><c:out value="(${total})"/></span>
             </c:if>                
-            </li>
-        </ul>
+        </a>        
     </div>
 </div>
 
