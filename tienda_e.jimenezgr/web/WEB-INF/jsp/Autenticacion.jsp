@@ -27,14 +27,14 @@
                     </p>
                     <p>
                         Tu dirección de correo electrónico
-                        <input id="email" type="email" placeholder="Tu dirección de correo electrónico" value="" required>
+                        <input name="email" type="email" placeholder="Tu dirección de correo electrónico" value="" required>
                     </p>
                     <p>
                         Tu contraseña 
-                        <input id="password" type="password" placeholder="Tu contraseña " required>
+                        <input name="password" type="password" placeholder="Tu contraseña " required>
                     </p>
                     <p>
-                        <intput id="logBoton" type="submit" value="Continuar">
+                        <intput name="logBoton" type="submit" value="Continuar">
                     </p>
                 </form>
             </div>
@@ -50,11 +50,10 @@
                         Tu dirección de correo electrónico
                         <input name="email" type="text" placeholder="Tu dirección de correo electrónico" value="" required>
                     </p>
-                        <intput id="RegistroBoton" type="submit" value="Como crear una cuenta">
+                        <intput name="RegistroBoton" type="submit" value="Como crear una cuenta">
                     </p>
                 </form>
             </div>
         </div>
-        <label></label>
     </body>
 </html>

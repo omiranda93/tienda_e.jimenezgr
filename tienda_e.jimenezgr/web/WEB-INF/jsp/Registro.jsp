@@ -24,37 +24,36 @@
                     </p>
                     <p>
                         E-mail*
-                        <input id="email" type="email" value="${email}" required>
+                        <input name="email" type="email" value="${email}" required>
                     </p>
                     <p>
                         Contraseña* 
-                        <input id="password" type="password" required>
+                        <input name="password" type="password" required>
                     </p>
                     <p>
                         Confirmación de contraseña* 
-                        <input id="password" type="password" required>
+                        <input name="password" type="password" required>
                     </p>
                     <p>
                         Nombre y Apellidos* 
-                        <input id="Nombre" type="text" required>
+                        <input name="Nombre" type="text" required>
                     </p>
                     <p>
                         Usuario* 
-                        <input id="Usuario" type="text" required>
+                        <input name="Usuario" type="text" required>
                     </p>
                     <p>
                         Teléfono
-                        <input id="Telefono" type="text">
+                        <input name="Telefono" type="text">
                     </p>
                     <p>
                         Dirección
-                        <input id="Dirección" type="text">
+                        <input name="Dirección" type="text">
                     </p>
                     <p>
-                        <intput id="regBoton" type="submit" value="Continuar">
+                        <intput name="regBoton" type="submit" value="Continuar">
                     </p>
                 </form>
             </div>
-                    <label></label>
     </body>
 </html>
