@@ -6,6 +6,9 @@
 
 package com.dao;
 
+import com.dao.exceptions.NonexistentEntityException;
+import com.dao.exceptions.PreexistingEntityException;
+import com.dao.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -14,9 +17,6 @@ import javax.persistence.criteria.Root;
 import entities.Producto;
 import entities.ProductoTieneImagen;
 import entities.ProductoTieneImagenPK;
-import com.dao.exceptions.NonexistentEntityException;
-import com.dao.exceptions.PreexistingEntityException;
-import com.dao.exceptions.RollbackFailureException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

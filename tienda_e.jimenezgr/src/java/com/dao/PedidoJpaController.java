@@ -6,6 +6,10 @@
 
 package com.dao;
 
+import com.dao.exceptions.IllegalOrphanException;
+import com.dao.exceptions.NonexistentEntityException;
+import com.dao.exceptions.PreexistingEntityException;
+import com.dao.exceptions.RollbackFailureException;
 import entities.Pedido;
 import java.io.Serializable;
 import javax.persistence.Query;
@@ -14,10 +18,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import entities.Usuario;
 import entities.RegistroPedidos;
-import com.dao.exceptions.IllegalOrphanException;
-import com.dao.exceptions.NonexistentEntityException;
-import com.dao.exceptions.PreexistingEntityException;
-import com.dao.exceptions.RollbackFailureException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

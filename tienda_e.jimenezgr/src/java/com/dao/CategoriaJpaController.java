@@ -6,6 +6,9 @@
 
 package com.dao;
 
+import com.dao.exceptions.NonexistentEntityException;
+import com.dao.exceptions.PreexistingEntityException;
+import com.dao.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -15,9 +18,6 @@ import entities.Categoria;
 import java.util.ArrayList;
 import java.util.Collection;
 import entities.Producto;
-import com.dao.exceptions.NonexistentEntityException;
-import com.dao.exceptions.PreexistingEntityException;
-import com.dao.exceptions.RollbackFailureException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

@@ -7,6 +7,8 @@
 package entities;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -14,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -28,6 +31,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ProductoTieneImagen.findByProducto", query = "SELECT p FROM ProductoTieneImagen p WHERE p.productoTieneImagenPK.producto = :producto"),
     @NamedQuery(name = "ProductoTieneImagen.findByUri", query = "SELECT p FROM ProductoTieneImagen p WHERE p.productoTieneImagenPK.uri = :uri")})
 public class ProductoTieneImagen implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "PRINCIPAL")
+    private Serializable principal;
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ProductoTieneImagenPK productoTieneImagenPK;
@@ -85,6 +92,14 @@ public class ProductoTieneImagen implements Serializable {
     @Override
     public String toString() {
         return "clases.ProductoTieneImagen[ productoTieneImagenPK=" + productoTieneImagenPK + " ]";
+    }
+
+    public Serializable getPrincipal() {
+        return principal;
+    }
+
+    public void setPrincipal(Serializable principal) {
+        this.principal = principal;
     }
     
 }

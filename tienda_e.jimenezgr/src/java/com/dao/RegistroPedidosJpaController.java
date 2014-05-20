@@ -6,6 +6,9 @@
 
 package com.dao;
 
+import com.dao.exceptions.NonexistentEntityException;
+import com.dao.exceptions.PreexistingEntityException;
+import com.dao.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -15,9 +18,6 @@ import entities.Producto;
 import entities.Pedido;
 import entities.RegistroPedidos;
 import entities.RegistroPedidosPK;
-import com.dao.exceptions.NonexistentEntityException;
-import com.dao.exceptions.PreexistingEntityException;
-import com.dao.exceptions.RollbackFailureException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -44,8 +44,8 @@ public class RegistroPedidosJpaController implements Serializable {
         if (registroPedidos.getRegistroPedidosPK() == null) {
             registroPedidos.setRegistroPedidosPK(new RegistroPedidosPK());
         }
-        registroPedidos.getRegistroPedidosPK().setNumero(registroPedidos.getPedido().getNumero());
         registroPedidos.getRegistroPedidosPK().setProducto(registroPedidos.getProducto1().getNombre());
+        registroPedidos.getRegistroPedidosPK().setNumero(registroPedidos.getPedido().getNumero());
         EntityManager em = null;
         try {
             utx.begin();
@@ -88,8 +88,8 @@ public class RegistroPedidosJpaController implements Serializable {
     }
 
     public void edit(RegistroPedidos registroPedidos) throws NonexistentEntityException, RollbackFailureException, Exception {
-        registroPedidos.getRegistroPedidosPK().setNumero(registroPedidos.getPedido().getNumero());
         registroPedidos.getRegistroPedidosPK().setProducto(registroPedidos.getProducto1().getNombre());
+        registroPedidos.getRegistroPedidosPK().setNumero(registroPedidos.getPedido().getNumero());
         EntityManager em = null;
         try {
             utx.begin();

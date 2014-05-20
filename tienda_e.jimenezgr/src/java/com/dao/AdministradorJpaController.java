@@ -6,10 +6,10 @@
 
 package com.dao;
 
-import entities.Administrador;
 import com.dao.exceptions.NonexistentEntityException;
 import com.dao.exceptions.PreexistingEntityException;
 import com.dao.exceptions.RollbackFailureException;
+import entities.Administrador;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
