@@ -38,4 +38,10 @@ public class ControllerInicio {
       return "Registro";
    }
    
+   @RequestMapping(value="/MuestraProductos", method = RequestMethod.GET)
+   public String muestraProductos(ModelMap model, HttpSession session, String nombreProd) {
+      
+      return "muestraProductos";
+   }
+   
 }

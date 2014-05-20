@@ -4,7 +4,7 @@
         <img src="<c:url value='/Recursos/poxmania-logo.png'/>">
     </a>
 
-    <form name="formNombre" method='get' action='ServletProductos'>
+    <form name="formNombre" method='get' action='/tienda_e.jimenezgr/Inicio/MuestraProductos'>
         <input type='search' name='nombreProd' />
         <input type='hidden' name='busqueda' value='nombre' />
         <input type='submit' class="btn btn-primary" name='BuscarNombre' value='Buscar'>
