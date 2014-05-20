@@ -44,7 +44,7 @@
 
 <div id="menu" class="btn-group">
     <ul>
-        <c:forEach var="categ" items="${categoriasPadres}">
+        <c:forEach var="categ" items="${categorias}">
             <c:if test="${categ.tienePadre()==false}">
                 <c:choose>
                     <c:when test="${categ.tieneHija()==true}">
