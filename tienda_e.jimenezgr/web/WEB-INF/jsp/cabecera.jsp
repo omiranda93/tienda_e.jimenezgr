@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="header">
     <a href="index.html" title="inicio">
-        <img src="Recursos/poxmania-logo.png">
+        <img src="<c:url value='/Recursos/poxmania-logo.png'/>">
     </a>
 
     <form name="formNombre" method='get' action='ServletProductos'>
