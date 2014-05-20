@@ -6,7 +6,7 @@
 
 package com.dao;
 
-import clases.Administrador;
+import entities.Administrador;
 import com.dao.exceptions.NonexistentEntityException;
 import com.dao.exceptions.PreexistingEntityException;
 import com.dao.exceptions.RollbackFailureException;

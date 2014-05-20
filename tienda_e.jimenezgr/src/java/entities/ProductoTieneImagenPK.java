@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package clases;
+package entities;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -18,31 +18,24 @@ import javax.validation.constraints.Size;
  * @author Shkire
  */
 @Embeddable
-public class RegistroPedidosPK implements Serializable {
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "NUMERO")
-    private int numero;
+public class ProductoTieneImagenPK implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "PRODUCTO")
     private String producto;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "URI")
+    private String uri;
 
-    public RegistroPedidosPK() {
+    public ProductoTieneImagenPK() {
     }
 
-    public RegistroPedidosPK(int numero, String producto) {
-        this.numero = numero;
+    public ProductoTieneImagenPK(String producto, String uri) {
         this.producto = producto;
-    }
-
-    public int getNumero() {
-        return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
+        this.uri = uri;
     }
 
     public String getProducto() {
@@ -53,25 +46,33 @@ public class RegistroPedidosPK implements Serializable {
         this.producto = producto;
     }
 
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) numero;
         hash += (producto != null ? producto.hashCode() : 0);
+        hash += (uri != null ? uri.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof RegistroPedidosPK)) {
+        if (!(object instanceof ProductoTieneImagenPK)) {
             return false;
         }
-        RegistroPedidosPK other = (RegistroPedidosPK) object;
-        if (this.numero != other.numero) {
-            return false;
-        }
+        ProductoTieneImagenPK other = (ProductoTieneImagenPK) object;
         if ((this.producto == null && other.producto != null) || (this.producto != null && !this.producto.equals(other.producto))) {
+            return false;
+        }
+        if ((this.uri == null && other.uri != null) || (this.uri != null && !this.uri.equals(other.uri))) {
             return false;
         }
         return true;
@@ -79,7 +80,7 @@ public class RegistroPedidosPK implements Serializable {
 
     @Override
     public String toString() {
-        return "clases.RegistroPedidosPK[ numero=" + numero + ", producto=" + producto + " ]";
+        return "clases.ProductoTieneImagenPK[ producto=" + producto + ", uri=" + uri + " ]";
     }
     
 }

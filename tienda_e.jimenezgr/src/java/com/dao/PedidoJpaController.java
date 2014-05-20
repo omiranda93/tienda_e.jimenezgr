@@ -6,14 +6,14 @@
 
 package com.dao;
 
-import clases.Pedido;
+import entities.Pedido;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import clases.Usuario;
-import clases.RegistroPedidos;
+import entities.Usuario;
+import entities.RegistroPedidos;
 import com.dao.exceptions.IllegalOrphanException;
 import com.dao.exceptions.NonexistentEntityException;
 import com.dao.exceptions.PreexistingEntityException;
