@@ -13,33 +13,23 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Productos</title>
+        <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap-theme.min.css'/>"/>
+        <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
     </head>
     <body>
         <c:import url="cabecera.jsp" charEncoding="utf-8"/>
 
-        <table class="table table-hover">
+        <table>
             <%//por cada producto en productosListados%>
             <c:forEach var="prod" items="${productosListados}" varStatus="status">
                 <tr>
                     <%//muestra el producto%>
-                    <td><c:out value="${prod.getNombre()}"/></td>
-                    <td><c:out value="${prod.formateaPrecio(prod.getPrecio())}"/></td>
-                    <td><c:out value="${prod.getCategoria()}"/></td>
-                    <td><img src="<c:out value="${prod.getImagen()}"/>"/></td>
-                    <td>
-                        <%//agrega el producto al carro;
-                            //Formulario de tipo get que llama a ServletAgregarProductos con el parametro cantidad con el valor introducido
-                            //y el parametro oculto posicion con valor posicion del producto en la lista%>
-                        <form method="get" action="ServletAgregarAlCarro">
-                            <label>Cantidad</label>
-                            <input type="number" size="5" min="0" name="cantidad" value="0" onkeypress="validarCantidad()" />
-                            <input type="hidden" name="posicion" value="${status.index}"/>
-                            <input type="submit" name="comprarProducto" value="Añadir">
-                        </form>
-                    </td>   
+                    <td>${status.index()}</td>
+                    <td><a href="<%--verProducto.jsp--%>"><img src="<c:out value="${prod.getImagen()}"/>"/></a></td>
+                    <td><a href="<%--verProducto.jsp--%>"><c:out value="${prod.getNombre()}"/></a></td>
+                    <td><a href="<%--verProducto.jsp--%>"><c:out value="${prod.formateaPrecio(prod.getPrecio())}"/></a></td>                    
                 </tr>
             </c:forEach>
-
         </table>
 
         <c:import url="footer.jsp" charEncoding="utf-8"/>

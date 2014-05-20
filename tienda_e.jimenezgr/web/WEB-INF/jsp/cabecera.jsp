@@ -42,11 +42,34 @@
     </div>
 </div>
 
-<div id="menu">
+<div id="menu" class="btn-group">
     <ul>
-        <c:forEach var="categ" items="${categorias}">
-            <li><c:out value="${categ}"/></li>
-            </c:forEach>
+        <c:forEach var="categ" items="${categoriasPadres}">
+            <c:if test="${categ.tienePadre()==false}">
+                <c:choose>
+                    <c:when test="${categ.tieneHija()==true}">
+                        <li>
+                            <a href="" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><c:out value="${categ}"/>
+                            </a>            
+                            <%--buscar hijos y guardarlos en hijos--%>
+                            <ul class="dropdown-menu">
+                                <c:forEach var="hijo" items="${hijos}">
+                                    <li>
+                                        <a href=""><c:out value="${hijo}"/></a>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li>
+                            <a href="" type="button" class="btn btn-default"><c:out value="${categ}"/>
+                            </a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
+            </c:if>
+        </c:forEach>
     </ul>
 </div>
 
