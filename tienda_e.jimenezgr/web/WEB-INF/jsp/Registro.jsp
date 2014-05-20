@@ -15,6 +15,7 @@
         <title>Poxmania: Venta Online de productos en Informática, Foto, Electrodomésticos</title>
     </head>
     <body>
+        <c:import url="cabecera.jsp" charEncoding="utf-8"/>
         <div id="formReg">
                 <form method="post" action="/ControlerLogin">
                     <p>
@@ -55,5 +56,6 @@
                     </p>
                 </form>
             </div>
+            <c:import url="footer.jsp" charEncoding="utf-8"/>
     </body>
 </html>

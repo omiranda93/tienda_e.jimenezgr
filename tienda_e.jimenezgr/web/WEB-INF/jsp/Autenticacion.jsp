@@ -15,7 +15,7 @@
         <title>Mi cuenta Poxmania y yo - Poxmania</title>
     </head>
     <body>
-
+        <c:import url="cabecera.jsp" charEncoding="utf-8"/>
         <div id = "registro">
             <div id="formLog">
                 <form method="post" action="/ControlerLogin">
@@ -55,5 +55,6 @@
                 </form>
             </div>
         </div>
+        <c:import url="footer.jsp" charEncoding="utf-8"/>
     </body>
 </html>
