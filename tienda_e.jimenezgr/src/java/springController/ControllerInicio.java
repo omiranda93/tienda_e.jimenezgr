@@ -22,13 +22,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ControllerInicio {
     
     @RequestMapping(method=RequestMethod.GET)
-    public String index(){
+    public String index(ModelMap model, HttpSession session){
+        
+        
         return "index";
     }
     
     @RequestMapping(value="/Autenticacion", method = RequestMethod.GET)
    public String Autenticacion(ModelMap model, HttpSession session) {
-      
       return "Autenticacion";
    }
     
@@ -40,7 +41,7 @@ public class ControllerInicio {
    
    @RequestMapping(value="/MuestraProductos", method = RequestMethod.GET)
    public String muestraProductos(ModelMap model, HttpSession session, String nombreProd, String categoriaProd) {
-      
+ 
       return "muestraProductos";
    }
    
