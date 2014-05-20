@@ -7,30 +7,36 @@
 package clases;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Shkire
  */
 @Entity
-@Table(name = "ADMINISTRADOR")
+@Table(name = "USUARIO")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Administrador.findAll", query = "SELECT a FROM Administrador a"),
-    @NamedQuery(name = "Administrador.findByCredencialusuario", query = "SELECT a FROM Administrador a WHERE a.credencialusuario = :credencialusuario"),
-    @NamedQuery(name = "Administrador.findByCredencialcontrasenia", query = "SELECT a FROM Administrador a WHERE a.credencialcontrasenia = :credencialcontrasenia"),
-    @NamedQuery(name = "Administrador.findByNombre", query = "SELECT a FROM Administrador a WHERE a.nombre = :nombre")})
-public class Administrador implements Serializable {
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
+    @NamedQuery(name = "Usuario.findByCredencialusuario", query = "SELECT u FROM Usuario u WHERE u.credencialusuario = :credencialusuario"),
+    @NamedQuery(name = "Usuario.findByCredencialcontrasenia", query = "SELECT u FROM Usuario u WHERE u.credencialcontrasenia = :credencialcontrasenia"),
+    @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = :nombre"),
+    @NamedQuery(name = "Usuario.findByDireccion", query = "SELECT u FROM Usuario u WHERE u.direccion = :direccion"),
+    @NamedQuery(name = "Usuario.findByTelefono", query = "SELECT u FROM Usuario u WHERE u.telefono = :telefono")})
+public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -48,15 +54,23 @@ public class Administrador implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "NOMBRE")
     private String nombre;
+    @Size(max = 200)
+    @Column(name = "DIRECCION")
+    private String direccion;
+    @Size(max = 20)
+    @Column(name = "TELEFONO")
+    private String telefono;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private Collection<Pedido> pedidoCollection;
 
-    public Administrador() {
+    public Usuario() {
     }
 
-    public Administrador(String credencialusuario) {
+    public Usuario(String credencialusuario) {
         this.credencialusuario = credencialusuario;
     }
 
-    public Administrador(String credencialusuario, String credencialcontrasenia, String nombre) {
+    public Usuario(String credencialusuario, String credencialcontrasenia, String nombre) {
         this.credencialusuario = credencialusuario;
         this.credencialcontrasenia = credencialcontrasenia;
         this.nombre = nombre;
@@ -86,6 +100,31 @@ public class Administrador implements Serializable {
         this.nombre = nombre;
     }
 
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    @XmlTransient
+    public Collection<Pedido> getPedidoCollection() {
+        return pedidoCollection;
+    }
+
+    public void setPedidoCollection(Collection<Pedido> pedidoCollection) {
+        this.pedidoCollection = pedidoCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -96,10 +135,10 @@ public class Administrador implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Administrador)) {
+        if (!(object instanceof Usuario)) {
             return false;
         }
-        Administrador other = (Administrador) object;
+        Usuario other = (Usuario) object;
         if ((this.credencialusuario == null && other.credencialusuario != null) || (this.credencialusuario != null && !this.credencialusuario.equals(other.credencialusuario))) {
             return false;
         }
@@ -108,7 +147,7 @@ public class Administrador implements Serializable {
 
     @Override
     public String toString() {
-        return "clases.Administrador[ credencialusuario=" + credencialusuario + " ]";
+        return "clases.Usuario[ credencialusuario=" + credencialusuario + " ]";
     }
     
 }
