@@ -49,7 +49,7 @@
                 <c:choose>
                     <c:when test="${categ.tieneHija()==true}">
                         <li>
-                            <a href="" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><c:out value="${categ}"/>
+                            <a href="/tienda_e.jimenezgr/Inicio/MuestraProductos" name= "categoriaProd" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><c:out value="${categ}"/>
                             </a>            
                             <%--buscar hijos y guardarlos en hijos--%>
                             <ul class="dropdown-menu">
@@ -63,7 +63,7 @@
                     </c:when>
                     <c:otherwise>
                         <li>
-                            <a href="" type="button" class="btn btn-default"><c:out value="${categ}"/>
+                            <a href="/tienda_e.jimenezgr/Inicio/MuestraProductos" name= "categoriaProd" type="button" class="btn btn-default"><c:out value="${categ}"/>
                             </a>
                         </li>
                     </c:otherwise>

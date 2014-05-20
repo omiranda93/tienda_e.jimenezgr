@@ -39,7 +39,7 @@ public class ControllerInicio {
    }
    
    @RequestMapping(value="/MuestraProductos", method = RequestMethod.GET)
-   public String muestraProductos(ModelMap model, HttpSession session, String nombreProd) {
+   public String muestraProductos(ModelMap model, HttpSession session, String nombreProd, String categoriaProd) {
       
       return "muestraProductos";
    }
