@@ -15,7 +15,7 @@
             <li><a href="">Hacer un pedido</a></li>
             <li><a href="">Modos de entrega</a></li>
             <li><a href="">Pago</a></li>
-            <li><a href="Registro.jsp">Registrarse</a></li>
+            <li><a href="/tienda_e.jimenezgr/Inicio/Registro">Registrarse</a></li>
             <li><a href="">Seguimiento de mi pedido</a></li>
             <li><a href="">Anular mi pedido</a></li>
             <li><a href="">Mi seguimiento SPV</a></li>

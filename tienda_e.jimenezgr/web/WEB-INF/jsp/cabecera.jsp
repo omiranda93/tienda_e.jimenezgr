@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="header">
-    <a href="index.html" title="inicio">
+    <a href="/tienda_e.jimenezgr/Inicio" title="inicio">
         <img src="<c:url value='/Recursos/poxmania-logo.png'/>">
     </a>
 
@@ -20,7 +20,7 @@
             </c:otherwise>
         </c:choose>
 
-        <a href="${direccion}" type="button" class="btn btn-primary">
+        <a href="/tienda_e.jimenezgr/Inicio/Autenticacion" type="button" class="btn btn-primary">
             Mi cuenta
         </a>
         <a href="" type="button" class="btn btn-primary">

@@ -18,7 +18,7 @@
         <c:import url="cabecera.jsp" charEncoding="utf-8"/>
         <div id = "registro">
             <div id="formLog">
-                <form method="post" action="/ControlerLogin">
+                <form method="post" action="/ControllerLogin">
                     <p>
                         <strong>¿Eres YA CLIENTE de Poxmania? </strong>
                     </p>
@@ -33,13 +33,11 @@
                         Tu contraseña 
                         <input name="password" type="password" placeholder="Tu contraseña " required>
                     </p>
-                    <p>
-                        <intput name="logBoton" type="submit" value="Continuar">
-                    </p>
+                        <input name="logBoton" type="button" value="Continuar">
                 </form>
             </div>
             <div id ="formRegistro">
-                <form method="post" action="/Registro.jsp">
+                <form method="get" action="/tienda_e.jimenezgr/Inicio/Registro">
                     <p>
                         <strong>¿Eres un NUEVO cliente? </strong>
                     </p>
@@ -48,10 +46,9 @@
                     </p>
                     <p>
                         Tu dirección de correo electrónico
-                        <input name="email" type="text" placeholder="Tu dirección de correo electrónico" value="" required>
+                        <input name="email" type="email" placeholder="Tu dirección de correo electrónico" required>
                     </p>
-                        <intput name="RegistroBoton" type="submit" value="Como crear una cuenta">
-                    </p>
+                        <input name="RegistroBoton" type="submit" value="Como crear una cuenta">
                 </form>
             </div>
         </div>

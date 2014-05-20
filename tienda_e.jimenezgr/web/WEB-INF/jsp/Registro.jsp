@@ -52,7 +52,7 @@
                         <input name="Dirección" type="text">
                     </p>
                     <p>
-                        <intput name="regBoton" type="submit" value="Continuar">
+                        <input name="regBoton" type="submit" value="Continuar">
                     </p>
                 </form>
             </div>
