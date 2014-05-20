@@ -15,7 +15,7 @@
         <title>Poxmania: Venta Online de productos en Informática, Foto, Electrodomésticos</title>    </head>
     <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap-theme.min.css'/>"/>
     <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
-    <body>
+    <body class="container">
         <%//si la sesion es nueva%>
         <c:if test="${pageContext.session.new}">
             <%//establece el tiempo maximo de inactividad en 30 minutos%>

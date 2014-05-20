@@ -13,42 +13,44 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Mi cuenta Poxmania y yo - Poxmania</title>
+        <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap-theme.min.css'/>"/>
+        <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
     </head>
-    <body>
+    <body class="container">
         <c:import url="cabecera.jsp" charEncoding="utf-8"/>
-        <div id = "registro">
-            <div id="formLog">
+        <div id = "registro" class="row">
+            <div id="formLog" class="panel panel-default col-sm-5">
                 <form method="post" action="/ControllerLogin">
-                    <p>
+                    <p class="row">
                         <strong>¿Eres YA CLIENTE de Poxmania? </strong>
                     </p>
-                    <p>
+                    <p class="row">
                         Introduce tus identificantes por favor: 
                     </p>
-                    <p>
-                        Tu dirección de correo electrónico
-                        <input name="email" type="email" placeholder="Tu dirección de correo electrónico" value="" required>
+                    <p class="row">
+                        <span class="col-lg-4">Tu dirección de correo electrónico</span>
+                        <input class="col-lg-6" name="email" type="email" placeholder="Tu dirección de correo electrónico" value="" required>
                     </p>
-                    <p>
-                        Tu contraseña 
-                        <input name="password" type="password" placeholder="Tu contraseña " required>
+                    <p class="row">
+                        <span class="col-lg-4">Tu contraseña</span>
+                        <input class="col-lg-6" name="password" type="password" placeholder="Tu contraseña " required>
                     </p>
-                        <input name="logBoton" type="button" value="Continuar">
+                    <input class="btn btn-primary row col-lg-offset-4" name="logBoton" type="button" value="Continuar">
                 </form>
             </div>
-            <div id ="formRegistro">
+            <div id ="formRegistro" class="panel panel-default col-sm-5 col-lg-offset-1">
                 <form method="get" action="/tienda_e.jimenezgr/Inicio/Registro">
-                    <p>
+                    <p class="row">
                         <strong>¿Eres un NUEVO cliente? </strong>
                     </p>
-                    <p>
+                    <p class="row">
                         Vamos a proceder a la creación de tu cuenta     
                     </p>
-                    <p>
-                        Tu dirección de correo electrónico
-                        <input name="email" type="email" placeholder="Tu dirección de correo electrónico" required>
+                    <p class="row">
+                        <span class="col-lg-4">Tu dirección de correo electrónico</span>
+                        <input class="col-lg-6" name="email" type="email" placeholder="Tu dirección de correo electrónico" required>
                     </p>
-                        <input name="RegistroBoton" type="submit" value="Como crear una cuenta">
+                    <input class="btn btn-primary row col-lg-offset-4" name="RegistroBoton" type="submit" value="Como crear una cuenta">
                 </form>
             </div>
         </div>

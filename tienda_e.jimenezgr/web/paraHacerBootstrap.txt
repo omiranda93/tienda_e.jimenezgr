@@ -10,4 +10,12 @@ Width de body y que tenga un contenedor donde esté toda la web
 
 El precio en VerPrecio.jsp tiene que verse rojo y grande como en pixmania.
 
-botón añadir al carro con fondo verde etc 
+botón añadir al carro con fondo verde etc
+
+los enlaces del footer, de webmaster y eso deben de estar en gris
+
+a ver si se puede hacer mas grande el contenedor para el body
+
+dale algo de padding a los contenedores de cosas en general (contenedor, paneles, botones,... cosas que tengan cosas dentro)
+
+los parrafos son negros, no grises

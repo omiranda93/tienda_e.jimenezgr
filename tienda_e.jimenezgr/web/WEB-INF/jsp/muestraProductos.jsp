@@ -16,7 +16,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap-theme.min.css'/>"/>
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
     </head>
-    <body>
+    <body class="container">
         <c:import url="cabecera.jsp" charEncoding="utf-8"/>
         <div id="contenido">
             <c:choose>
