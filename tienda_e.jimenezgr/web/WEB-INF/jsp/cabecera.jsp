@@ -21,9 +21,11 @@
         </c:choose>
 
         <a href="/tienda_e.jimenezgr/Inicio/Autenticacion" type="button" class="btn btn-primary">
-            Mi cuenta
+            <span class="glyphicon glyphicon-user"></span>
+            <span>Mi cuenta</span>
         </a>
         <a href="" type="button" class="btn btn-primary">
+            <span class="glyphicon glyphicon-shopping-cart"></span>
             <span>Cesta</span>
             <%//si el parametro carro no esta vacio%>
             <c:if test="${carro!= null}">

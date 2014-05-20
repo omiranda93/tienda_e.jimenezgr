@@ -4,3 +4,10 @@ para el menu de categorias ya he visto que son "Button groups" los "Nesting" y s
 También seriviría para el botón de "Mi Cuenta"
 
 El buscador por nombre es un "Input-Group-addon"
+
+
+Width de body y que tenga un contenedor donde esté toda la web
+
+El precio en VerPrecio.jsp tiene que verse rojo y grande como en pixmania.
+
+botón añadir al carro con fondo verde etc 

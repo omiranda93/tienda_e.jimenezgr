@@ -18,20 +18,34 @@
     </head>
     <body>
         <c:import url="cabecera.jsp" charEncoding="utf-8"/>
+        <div id="contenido">
+            <c:choose>
+                <c:when test="${productosListados!=null}">
+                    <form id="formOrdenarPor" method="get" action="">
+                        <select id="ordenarPor" name="ordenarPor">
+                            <option>Precio Creciente </option>
+                            <option>Precio Decreciente </option>
+                        </select>
+                    </form>
+                    <table>
+                        <%//por cada producto en productosListados%>
+                        <c:forEach var="prod" items="${productosListados}" varStatus="status">
+                            <tr>
+                                <%//muestra el producto%>
+                                <td>${status.index()}</td>
+                                <td><a href="<%--verProducto.jsp--%>"><img src="<c:out value="${prod}"/>"/></a></td>
+                                <td><a href="<%--verProducto.jsp--%>"><c:out value="${prod.getNombre()}"/></a></td>
+                                <td><a href="<%--verProducto.jsp--%>"><c:out value="${prod.formateaPrecio(prod.getPrecio())}"/></a></td>                    
+                            </tr>
+                        </c:forEach>
+                    </table>            
+                </c:when>
 
-        <table>
-            <%//por cada producto en productosListados%>
-            <c:forEach var="prod" items="${productosListados}" varStatus="status">
-                <tr>
-                    <%//muestra el producto%>
-                    <td>${status.index()}</td>
-                    <td><a href="<%--verProducto.jsp--%>"><img src="<c:out value="${prod.getImagen()}"/>"/></a></td>
-                    <td><a href="<%--verProducto.jsp--%>"><c:out value="${prod.getNombre()}"/></a></td>
-                    <td><a href="<%--verProducto.jsp--%>"><c:out value="${prod.formateaPrecio(prod.getPrecio())}"/></a></td>                    
-                </tr>
-            </c:forEach>
-        </table>
-
+                <c:otherwise>
+                    <p>No hay productos para mostrar</p>
+                </c:otherwise>
+            </c:choose>
+        </div>
         <c:import url="footer.jsp" charEncoding="utf-8"/>
     </body>
 </html>
