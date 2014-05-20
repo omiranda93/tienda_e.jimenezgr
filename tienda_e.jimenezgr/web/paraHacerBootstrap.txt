@@ -1,0 +1,6 @@
+Necesitamos de bootstrap:
+
+para el menu de categorias ya he visto que son "Button groups" los "Nesting" y son de color gris. 
+También seriviría para el botón de "Mi Cuenta"
+
+El buscador por nombre es un "Input-Group-addon"
