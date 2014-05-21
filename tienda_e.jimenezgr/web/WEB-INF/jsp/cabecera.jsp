@@ -54,21 +54,25 @@
         </span>
     </div>
 </div>
+  
 
 <div id="menu" class="btn-group">
     <ul>
         <c:forEach var="categ" items="${categorias}">
-            <c:if test="${categ.tienePadre()==false}">
+            <c:if test="${categ.essuper==true}">
                 <c:choose>
-                    <c:when test="${categ.tieneHija()==true}">
+                    <c:when test="${categ.categoriaCollection != null}">
                         <li>
-                            <a href="/tienda_e.jimenezgr/Inicio/MuestraProductos" name= "categoriaProd" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" value="${categ}"><c:out value="${categ}"/>
+                            <a href="/tienda_e.jimenezgr/Inicio/MuestraProductos?clave=${categ.clave}" name= "categoriaProd" ><c:out value="${categ.nombre}"/>
                             </a>            
                             <%--buscar hijos y guardarlos en hijos--%>
-                            <ul class="dropdown-menu">
-                                <c:forEach var="hijo" items="${hijos}">
+                            <ul>
+                                <li>
+                                    ${categ.categoriaCollection.get(0).nombre}
+                                </li>
+                                <c:forEach var="hijo" items="${categ.categoriaCollection}">
                                     <li>
-                                        <a href=""><c:out value="${hijo}"/></a>
+                                        <a href="/tienda_e.jimenezgr/Inicio/MuestraProductos?clave=${hijo.clave}"><c:out value="${hijo.nombre}"/></a>
                                     </li>
                                 </c:forEach>
                             </ul>
@@ -76,7 +80,7 @@
                     </c:when>
                     <c:otherwise>
                         <li>
-                            <a href="/tienda_e.jimenezgr/Inicio/MuestraProductos" name= "categoriaProd" type="button" class="btn btn-default" value="${categ}"><c:out value="${categ}"/>
+                            <a href="/tienda_e.jimenezgr/Inicio/MuestraProductos?clave=${categ.clave}" name= "categoriaProd"><c:out value="${categ.nombre}"/>
                             </a>
                         </li>
                     </c:otherwise>

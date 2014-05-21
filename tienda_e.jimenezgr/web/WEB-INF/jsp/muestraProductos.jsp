@@ -32,11 +32,10 @@
                         <c:forEach var="prod" items="${productosListados}" varStatus="status">
                             <tr>
                                 <%//muestra el producto%>
-                                <td>${status.index()}</td>
                                 
-                                <td><a href="/tienda_e.jimenezgr/Indice/VerProducto?indice=${status.index}"><img src="<c:out value="${prod}"/>"/></a></td>
-                                <td><a href="/tienda_e.jimenezgr/Indice/VerProducto?indice=${status.index}"><c:out value="${prod.getNombre()}"/></a></td>
-                                <td><a href="/tienda_e.jimenezgr/Indice/VerProducto?indice=${status.index}"><c:out value="${prod.formateaPrecio(prod.getPrecio())}"/></a></td>                    
+                                <td><a href="/tienda_e.jimenezgr/Indice/VerProducto"><img src="<c:out value="${prod}"/>"/></a></td>
+                                <td><a href="/tienda_e.jimenezgr/Indice/VerProducto"><c:out value="${prod.getNombre()}"/></a></td>
+                                <td><a href="/tienda_e.jimenezgr/Indice/VerProducto"><c:out value="${prod.precio}"/></a></td>                    
                             </tr>
                         </c:forEach>
                     </table>            

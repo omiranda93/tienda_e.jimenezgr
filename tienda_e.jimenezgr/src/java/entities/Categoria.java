@@ -51,14 +51,14 @@ public class Categoria implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ESSUPER")
-    private Serializable essuper;
+    private Boolean essuper;
     @JoinTable(name = "CATEGORIA_TIENE_HIJAS", joinColumns = {
         @JoinColumn(name = "HIJA", referencedColumnName = "CLAVE")}, inverseJoinColumns = {
         @JoinColumn(name = "MADRE", referencedColumnName = "CLAVE")})
     @ManyToMany
-    private Collection<Categoria> categoriaCollection;
+    private Collection<Categoria> categoriaCollection;//Padre
     @ManyToMany(mappedBy = "categoriaCollection")
-    private Collection<Categoria> categoriaCollection1;
+    private Collection<Categoria> categoriaCollection1;//Hijas
     @JoinTable(name = "PRODUCTO_TIENE_CATEGORIA", joinColumns = {
         @JoinColumn(name = "CATEGORIA", referencedColumnName = "CLAVE")}, inverseJoinColumns = {
         @JoinColumn(name = "PRODUCTO", referencedColumnName = "NOMBRE")})
@@ -72,7 +72,7 @@ public class Categoria implements Serializable {
         this.clave = clave;
     }
 
-    public Categoria(String clave, String nombre, Serializable essuper) {
+    public Categoria(String clave, String nombre, Boolean essuper) {
         this.clave = clave;
         this.nombre = nombre;
         this.essuper = essuper;
@@ -98,7 +98,7 @@ public class Categoria implements Serializable {
         return essuper;
     }
 
-    public void setEssuper(Serializable essuper) {
+    public void setEssuper(Boolean essuper) {
         this.essuper = essuper;
     }
 

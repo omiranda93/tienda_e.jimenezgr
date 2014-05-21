@@ -53,6 +53,11 @@
                 </a>
             </div><!--/Carousel--></div>
 
+            <c:forEach var="prod" items="${productosAleatorios}" varStatus="indice">
+                   ${prod.nombre}
+
+            </c:forEach>
+
         <c:import url="footer.jsp" charEncoding="utf-8"/>
     </body>
 </html>
