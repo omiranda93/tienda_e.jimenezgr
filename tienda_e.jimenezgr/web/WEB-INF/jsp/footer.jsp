@@ -42,11 +42,15 @@
     </div>
 
     <div id="footBop" class="row well">
-        <ul class="row">
-            <li><a href="">Información legal</a>  | </li>
-            <li><a href="mailto:webmaster@poxmania.com">webmaster@poxmania.com</a>  | </li>
-            <li><a href="mailto:promoes@poxmania.com">promoes@poxmania.com</a> </li>
-        </ul>
-        <p class="row">Copyright 2014 Poxmania. Reservados todos los derechos</p>
+        <div class="row">
+            <center>
+                <span><a href="">Información legal</a>  | </span>
+                <span><a href="mailto:webmaster@poxmania.com">webmaster@poxmania.com</a>  | </span>
+                <span><a href="mailto:promoes@poxmania.com">promoes@poxmania.com</a> </span>
+            </center>
+        </div>
+        <center>
+            <p class="row">Copyright 2014 Poxmania. Reservados todos los derechos</p>
+        </center>
     </div>
 </div>

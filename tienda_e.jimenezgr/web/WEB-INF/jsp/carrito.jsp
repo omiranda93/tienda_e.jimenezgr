@@ -14,7 +14,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
+    <body class="container">
+        <c:import url="cabecera.jsp" charEncoding="utf-8"/>
         <h1>Mi cesta</h1>
         <div><c:forEach var="prod" items="${carrito}">
                 <div>
@@ -48,5 +49,6 @@
                 Hacer mi pedido
             </a>
         </div>
+        <c:import url="footer.jsp" charEncoding="utf-8"/>
     </body>
 </html>

@@ -58,7 +58,7 @@
                 
   
 
-<div id="menu" class="row navbar-btn">
+<div id="menu">
     <ul>
         <c:forEach var="categ" items="${categorias}">
             <c:if test="${categ.essuper==true}">

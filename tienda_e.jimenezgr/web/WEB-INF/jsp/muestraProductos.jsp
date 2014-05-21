@@ -20,29 +20,52 @@
         <c:import url="cabecera.jsp" charEncoding="utf-8"/>
         <div id="contenido">
             <c:choose>
-                <c:when test="${productosListados!=null}">
+                <c:when test="${productosListados.size()>0}">
                     <form id="formOrdenarPor" method="get" action="">
                         <select id="ordenarPor" name="ordenarPor">
                             <option>Precio Creciente </option>
                             <option>Precio Decreciente </option>
                         </select>
                     </form>
-                    <table>
-                        <%//por cada producto en productosListados%>
-                        <c:forEach var="prod" items="${productosListados}" varStatus="status">
-                            <tr>
-                                <%//muestra el producto%>
-                                
-                                <td><a href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"><img src="<c:out value="${prod}"/>"/></a></td>
-                                <td><a href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"><c:out value="${prod.getNombre()}"/></a></td>
-                                <td><a href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"><c:out value="${prod.precio}"/></a></td>                    
-                            </tr>
-                        </c:forEach>
-                    </table>            
+
+                    <%//por cada producto en productosListados%>
+                    <c:forEach var="prod" items="${productosListados}" varStatus="status">
+                        <div class="row panel panel-default">
+                            <%//muestra el producto%>
+                            <c:set var="imagenPrincipal" value="${null}"/>
+                            <c:forEach var="img" items="${prod.productoTieneImagenCollection}">
+                                <c:if test="${img.principal}">
+                                    <c:set var="imagenPrincipal" value="${img.productoTieneImagenPK.uri}"/>
+                                </c:if>           
+
+                            </c:forEach>
+
+                            <a class="col-lg-2" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"><img width="100px" src="<c:url value='/${imagenPrincipal}'/>"></a>
+                            <a class="col-lg-2" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"><c:out value="${prod.getNombre()}"/></a>
+                            <a class="col-lg-3 col-lg-offset-2" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}">
+                                <span><c:out value="${prod.precio}"/> €</span>
+                                <div id="estado">
+                                    <c:choose>
+                                        <c:when test="${prod.cantidad>0}">
+                                            <span class="glyphicon glyphicon-ok"></span>
+                                            <span>En stock</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                            <span>Sin stock. "Entrega en 3 semanas".</span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                            </a> 
+                        </div>
+                    </c:forEach>
+
+
+
                 </c:when>
 
                 <c:otherwise>
-                    <p>No hay productos para mostrar</p>
+                    <p class="well">No hay productos para mostrar</p>
                 </c:otherwise>
             </c:choose>
         </div>

@@ -17,36 +17,42 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
     </head>
     <body class="container">
-        
+
         <c:import url="cabecera.jsp" charEncoding="utf-8"/>
         <div id="contenido">
             <h1><c:out value="${producto.nombre}"/></h1>
             <div id="infoProd">
-                <div id="infoSup">
-                    <div class="col4">
-                        ${producto}
-                    </div>
-                    <div class="col5">
-                        ${producto.precio}
-                    </div>
-                    <div class="col12">
-                        <p>Información de entrega:</p>
-                        <c:choose>
-                            <c:when test="${producto.cantidad>0}">
-                                <ul>
-                                    <li>En stock. Plazo de entrega 4-6 dias hábiles. Garantia 1 año.</li>
-                                </ul>
-                            </c:when>
-                            <c:otherwise>
-                                <ul>
-                                    <li>"Entrega en 3 semanas".</li>
-                                </ul>
-                            </c:otherwise>
-                        </c:choose>
+                <div id="infoSup" class="row">
+                    <div id="imagenesProd" class="col-lg-3 panel panel-default">
+                        <c:set var="imagenPrincipal" value="${null}"/>
+                        <c:forEach var="img" items="${producto.productoTieneImagenCollection}">
+                            <c:if test="${img.principal}">
+                                <c:set var="imagenPrincipal" value="${img.productoTieneImagenPK.uri}"/>
+                            </c:if>        
+                        </c:forEach>
 
+                        <img class="row center-block" width="260px" src="<c:url value='/${imagenPrincipal}'/>">
+                        <div id="thumbs" class="row">                            
+                            <c:forEach var="img" items="${producto.productoTieneImagenCollection}">
+                                <a href="#" class="thumbnail col-lg-3">
+                                    <img src="<c:url value='/${img.productoTieneImagenPK.uri}'/>">  
+                                </a>
+                            </c:forEach>                               
+                        </div>
                     </div>
-                    <div>
 
+                    <div id="precioProd" class="col-lg-6">  
+                        <div class="col5">
+                            <span>${producto.precio} € IVA incluido</span>
+                        </div>                    
+
+                        <div id="infoInf" class="row well center-block">
+                            <h2>Descripción:</h2>
+                            <p>${producto.descripcion }</p>
+                        </div>
+                    </div>
+
+                    <div id="comprarProd" class="panel panel-default col-lg-3">
                         <a href="/tienda_e.jimenezgr/Inicio/Carrito?nombreProd=${producto.nombre}">
                             <span class="glyphicon glyphicon-shopping-cart"></span>
                             Añadir a la cesta 
@@ -54,32 +60,24 @@
                         <div class="availability">
                             <c:choose>
                                 <c:when test="${producto.cantidad>0}">
-                                    <ul>
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                        <li>En stock. Plazo de entrega 4-6 dias hábiles. Garantia 1 año.</li>
-                                    </ul>
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                    <span>En stock. Plazo de entrega 4-6 dias hábiles. Garantia 1 año.</span>
                                 </c:when>
-                                <c:otherwise>
-                                    <ul>
-                                        <span class="glyphicon glyphicon-remove"></span>
-                                        <li>Sin stock. "Entrega en 3 semanas".</li>
-                                    </ul>
+                                <c:otherwise>                                  
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                    <span>Sin stock. "Entrega en 3 semanas".</span>
                                 </c:otherwise>
                             </c:choose>
 
                             <strong>
-                                Sin gastos de envio
+                                <span>Sin gastos de envio</span>
                             </strong>
                         </div>
                     </div>
                 </div>
-                <div id="infoInf">
-                    <h2>Descripción:</h2>
-                    <p>${producto.descripcion }</p>
-                </div>
             </div>
         </div>
-                
+
         <c:import url="footer.jsp" charEncoding="utf-8"/>
     </body>
 </html>
