@@ -33,9 +33,10 @@
                             <tr>
                                 <%//muestra el producto%>
                                 <td>${status.index()}</td>
-                                <td><a href="<%--verProducto.jsp--%>"><img src="<c:out value="${prod}"/>"/></a></td>
-                                <td><a href="<%--verProducto.jsp--%>"><c:out value="${prod.getNombre()}"/></a></td>
-                                <td><a href="<%--verProducto.jsp--%>"><c:out value="${prod.formateaPrecio(prod.getPrecio())}"/></a></td>                    
+                                
+                                <td><a href="/tienda_e.jimenezgr/Indice/VerProducto?indice=${status.index}"><img src="<c:out value="${prod}"/>"/></a></td>
+                                <td><a href="/tienda_e.jimenezgr/Indice/VerProducto?indice=${status.index}"><c:out value="${prod.getNombre()}"/></a></td>
+                                <td><a href="/tienda_e.jimenezgr/Indice/VerProducto?indice=${status.index}"><c:out value="${prod.formateaPrecio(prod.getPrecio())}"/></a></td>                    
                             </tr>
                         </c:forEach>
                     </table>            

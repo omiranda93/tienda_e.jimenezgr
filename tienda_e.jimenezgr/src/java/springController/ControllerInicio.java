@@ -59,8 +59,15 @@ public class ControllerInicio {
    
    @RequestMapping(value="/MuestraProductos", method = RequestMethod.GET)
    public String muestraProductos(ModelMap model, HttpSession session, String nombreProd, String categoriaProd) {
- 
+       
       return "muestraProductos";
+   }
+   
+   @RequestMapping(value="/VerProducto", method = RequestMethod.GET)
+   public String VerProducto(ModelMap model, HttpSession session, String indice) {
+       
+       
+      return "verProducto";
    }
    
 }
