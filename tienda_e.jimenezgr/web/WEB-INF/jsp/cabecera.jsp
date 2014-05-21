@@ -54,19 +54,21 @@
         </span>
     </div>
 </div>
+                
+                
   
 
-<div id="menu" class="btn-group">
+<div id="menu" class="row navbar-btn">
     <ul>
         <c:forEach var="categ" items="${categorias}">
             <c:if test="${categ.essuper==true}">
                 <c:choose>
                     <c:when test="${categ.categoriaCollection1.size()>0}">
-                        <li>
-                            <a href="/tienda_e.jimenezgr/Inicio/MuestraProductos?clave=${categ.clave}" name= "categoriaProd" ><c:out value="${categ.nombre}"/>
+                        <li class="btn-group">
+                            <a href="/tienda_e.jimenezgr/Inicio/MuestraProductos?clave=${categ.clave}" name= "categoriaProd" class="btn-default dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><c:out value="${categ.nombre}"/>
                             </a>            
                             <%--buscar hijos y guardarlos en hijos--%>
-                            <ul>
+                            <ul class="dropdown-menu">
                                 <c:forEach var="hijo" items="${categ.categoriaCollection1}">
                                     <li>
                                         <a href="/tienda_e.jimenezgr/Inicio/MuestraProductos?clave=${hijo.clave}"><c:out value="${hijo.nombre}"/></a>

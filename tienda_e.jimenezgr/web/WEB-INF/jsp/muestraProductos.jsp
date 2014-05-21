@@ -33,9 +33,9 @@
                             <tr>
                                 <%//muestra el producto%>
                                 
-                                <td><a href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"/></"><img src="<c:out value="${prod}"/>"/></a></td>
-                                <td><a href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"/></"><c:out value="${prod.getNombre()}"/></a></td>
-                                <td><a href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"/></"><c:out value="${prod.precio}"/></a></td>                    
+                                <td><a href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"><img src="<c:out value="${prod}"/>"/></a></td>
+                                <td><a href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"><c:out value="${prod.getNombre()}"/></a></td>
+                                <td><a href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"><c:out value="${prod.precio}"/></a></td>                    
                             </tr>
                         </c:forEach>
                     </table>            

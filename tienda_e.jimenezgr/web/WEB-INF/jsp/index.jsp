@@ -11,10 +11,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″>
-    <title>Poxmania: Venta Online de productos en Informática, Foto, Electrodomésticos</title>    </head>
-    <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap-theme.min.css'/>"/>
-    <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
+        <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″>
+        <title>Poxmania: Venta Online de productos en Informática, Foto, Electrodomésticos</title>  
+        <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap-theme.min.css'/>"/>
+        <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
+    </head>
+
     <body class="container">
         <%//si la sesion es nueva%>
         <c:if test="${pageContext.session.new}">
@@ -51,13 +53,28 @@
                 <a class="right carousel-control" href="#sidebar-carousel-1" data-slide="next">
                     <span class="glyphicon glyphicon-chevron-right"></span>
                 </a>
-            </div><!--/Carousel--></div>
+            </div><!--/Carousel-->
+        </div>
 
-            <c:forEach var="prod" items="${productosAleatorios}" varStatus="indice">
-                   ${prod.nombre}
+        <div id="prodAleatorios" class="row">
+            <h2 class="row">Algunos alguno de nuestros productos:</h2>
+            <div class="panel panel-default row">
+                <c:forEach var="prod" items="${productosAleatorios}" varStatus="indice">
+                    <div class="col-lg-2">
+                        <c:set var="imagenPrincipal" value="${null}"/>
+                        <c:forEach var="img" items="${prod.productoTieneImagenCollection}">
+                            <c:if test="${img.principal}">
+                                <c:set var="imagenPrincipal" value="${img.productoTieneImagenPK.uri}"/>
+                            </c:if>           
 
-            </c:forEach>
-
+                        </c:forEach>
+                        <img width="150px" src="<c:url value='/${imagenPrincipal}'/>">
+                        <a class="row" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}">${prod.nombre}</a>
+                        <a class="row" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}">${prod.precio}</a>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
         <c:import url="footer.jsp" charEncoding="utf-8"/>
     </body>
 </html>
