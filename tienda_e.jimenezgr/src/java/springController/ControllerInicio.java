@@ -43,7 +43,11 @@ public class ControllerInicio {
         Random rand = new Random();
         for (int i = 0; i<=5; i++){
             int posAleatoria = rand.nextInt(dao.getTodosProductos().size()-1);
-            productosRandom.add(dao.getTodosProductos().get(posAleatoria));
+            if(productosRandom.contains(dao.getTodosProductos().get(posAleatoria))){
+                i = i-1;
+            }else{
+                productosRandom.add(dao.getTodosProductos().get(posAleatoria));
+            }
         }
         session.setAttribute("productosAleatorios", productosRandom);
         
