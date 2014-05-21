@@ -6,6 +6,12 @@
 
 package springController;
 
+import entities.Categoria;
+import entities.Producto;
+import entities.tiendaDAO;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,10 +27,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/Inicio")
 public class ControllerInicio {
     
+    tiendaDAO dao = new tiendaDAO();
+    
     @RequestMapping(method=RequestMethod.GET)
     public String index(ModelMap model, HttpSession session){
         
+        List <Producto> productosRandom = new ArrayList <Producto>();
+        Random rand = new Random();
+        for (int i = 0; i<=5; i++){
+            int posAleatoria = rand.nextInt(dao.getTodosProductos().size()-1);
+            productosRandom.add(dao.getTodosProductos().get(posAleatoria));
+        }
+        session.setAttribute("productosAleatorios", productosRandom);
         
+        List <Categoria> categorias = new ArrayList <Categoria>();
+        categorias = dao.getTodasCategorias();
+        session.setAttribute("categorias", categorias);
         return "index";
     }
     
