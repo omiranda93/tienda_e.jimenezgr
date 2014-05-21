@@ -1,5 +1,13 @@
 Necesitamos de bootstrap:
 
+Color boton primario,links y hover de 1er button group:
+@brand-primary: #C100A4
+@btn-primary-color: #fff
+@btn-primary-bg: @brand-primary
+@btn-primary-border: darken(@btn-primary-bg, 5%)
+@link-color: @brand-primary
+
+
 para el menu de categorias ya he visto que son "Button groups" los "Nesting" y son de color gris. 
 También seriviría para el botón de "Mi Cuenta"
 
