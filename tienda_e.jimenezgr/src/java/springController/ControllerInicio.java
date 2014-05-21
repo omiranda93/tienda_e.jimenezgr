@@ -36,6 +36,9 @@ public class ControllerInicio {
     @RequestMapping(method=RequestMethod.GET)
     public String index(ModelMap model, HttpSession session){
         
+        List <Producto> carrito = new ArrayList <Producto>();
+        session.setAttribute("carrito", carrito);
+        
         List <Producto> productosRandom = new ArrayList <Producto>();
         Random rand = new Random();
         for (int i = 0; i<=5; i++){
@@ -86,6 +89,21 @@ public class ControllerInicio {
        productosListados = dao.getNombreLike(nombreProd);
        session.setAttribute("productosListados", productosListados);
        return "muestraProductos";
+   }
+   
+   @RequestMapping(value="/Carrito", method = RequestMethod.GET)
+   public String Carrito(@RequestParam("nombreProd")String nombreProd, ModelMap model, HttpSession session) {
+
+       List <Producto> productos = new ArrayList<Producto>();
+       productos = (List<Producto>) session.getAttribute("carrito");
+       productos.add(dao.getNombre(nombreProd));
+       session.setAttribute("carrito", productos);
+       return "carrito";
+   }
+   
+   @RequestMapping(value="/CarritoVer", method = RequestMethod.GET)
+   public String CarritoVer(ModelMap model, HttpSession session) {
+      return "carrito";
    }
    
 }

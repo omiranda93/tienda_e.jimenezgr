@@ -34,11 +34,11 @@
             </a>
         </span>
         <span class="col-lg-5">
-            <a href="" type="button" class="btn btn-primary">
+            <a href="/tienda_e.jimenezgr/Inicio/CarritoVer" type="button" class="btn btn-primary">
                 <span class="glyphicon glyphicon-shopping-cart"></span>
                 <span>Cesta</span>
                 <%//si el parametro carro no esta vacio%>
-                <c:if test="${carro!= null}">
+                <c:if test="${carro.size() > 0}">
                     <%//asigna a la variable carro el valor del parametro de sesion carro%>
                     <c:set var="carro" value="${carro}"/>
                     <%//asigna a la variable total el valor 0%>

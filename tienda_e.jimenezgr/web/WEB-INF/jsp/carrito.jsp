@@ -16,7 +16,7 @@
     </head>
     <body>
         <h1>Mi cesta</h1>
-        <div><c:forEach var="prod" items="${carro}">
+        <div><c:forEach var="prod" items="${carrito}">
                 <div>
                     <%//muestra el producto%>
                     <a href="/tienda_e.jimenezgr/Indice/VerProducto"><img src="<c:out value="${prod}"/>"/></a>

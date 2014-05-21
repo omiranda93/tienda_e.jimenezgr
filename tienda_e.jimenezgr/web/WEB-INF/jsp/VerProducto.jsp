@@ -47,7 +47,7 @@
                     </div>
                     <div>
 
-                        <a>
+                        <a href="/tienda_e.jimenezgr/Inicio/Carrito?nombreProd=${producto.nombre}">
                             <span class="glyphicon glyphicon-shopping-cart"></span>
                             Añadir a la cesta 
                         </a>
