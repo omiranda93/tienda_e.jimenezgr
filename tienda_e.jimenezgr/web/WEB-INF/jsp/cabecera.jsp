@@ -68,7 +68,7 @@
                             <%--buscar hijos y guardarlos en hijos--%>
                             <ul>
                                 <li>
-                                    aaaaa
+                                    ${categ.categoriaCollection.get(0).nombre}
                                 </li>
                                 <c:forEach var="hijo" items="${categ.categoriaCollection}">
                                     <li>
