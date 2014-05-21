@@ -56,9 +56,17 @@ public class tiendaDAO {
         tx.commit();
         //manager.flush();
     }
+    public Producto getNombre(String nombre) {
+        return manager.find(Producto.class, nombre);
+    }
     
+    public List<Producto> getNombreLike(String nombre) {
+        String where = "upper(p.nombre) like upper('%"+nombre+"%')";
+        return getProductosQuery(where);
+    }
     
-    //Categorias:
+
+//Categorias:
     public List<Categoria> getTodasCategorias() {
         return getCategoriasQuery(null);
     }
@@ -80,6 +88,9 @@ public class tiendaDAO {
         manager.persist(categoria);
         tx.commit();
         //manager.flush();
+    }
+    public Categoria getCategoria(String clave) {
+        return manager.find(Categoria.class, clave);
     }
     
     //Pedidos:

@@ -8,7 +8,7 @@
 
 
     <div class="col-lg-4 well  col-lg-offset-1">
-        <form name="formNombre" method='get' action='/tienda_e.jimenezgr/Inicio/MuestraProductos'>
+        <form name="formNombre" method='get' action='/tienda_e.jimenezgr/Inicio/BuscaProductos'>
             <div class="form-group col-lg-9">
                 <input class="form-control" type='search' name='nombreProd' value="¿Qué estás buscando?"/>
             </div>
@@ -61,16 +61,13 @@
         <c:forEach var="categ" items="${categorias}">
             <c:if test="${categ.essuper==true}">
                 <c:choose>
-                    <c:when test="${categ.categoriaCollection != null}">
+                    <c:when test="${categ.categoriaCollection1.size()>0}">
                         <li>
                             <a href="/tienda_e.jimenezgr/Inicio/MuestraProductos?clave=${categ.clave}" name= "categoriaProd" ><c:out value="${categ.nombre}"/>
                             </a>            
                             <%--buscar hijos y guardarlos en hijos--%>
                             <ul>
-                                <li>
-                                    ${categ.categoriaCollection.get(0).nombre}
-                                </li>
-                                <c:forEach var="hijo" items="${categ.categoriaCollection}">
+                                <c:forEach var="hijo" items="${categ.categoriaCollection1}">
                                     <li>
                                         <a href="/tienda_e.jimenezgr/Inicio/MuestraProductos?clave=${hijo.clave}"><c:out value="${hijo.nombre}"/></a>
                                     </li>

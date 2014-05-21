@@ -56,7 +56,7 @@ public class Categoria implements Serializable {
         @JoinColumn(name = "HIJA", referencedColumnName = "CLAVE")}, inverseJoinColumns = {
         @JoinColumn(name = "MADRE", referencedColumnName = "CLAVE")})
     @ManyToMany
-    private Collection<Categoria> categoriaCollection;//Padre
+    private Collection<Categoria> categoriaCollection;//Madre
     @ManyToMany(mappedBy = "categoriaCollection")
     private Collection<Categoria> categoriaCollection1;//Hijas
     @JoinTable(name = "PRODUCTO_TIENE_CATEGORIA", joinColumns = {
@@ -116,7 +116,7 @@ public class Categoria implements Serializable {
         return categoriaCollection1;
     }
 
-    public void setCategoriaCollection1(Collection<Categoria> categoriaCollection1) {
+    public void setCategoriaCollectionHija(Collection<Categoria> categoriaCollection1) {
         this.categoriaCollection1 = categoriaCollection1;
     }
 

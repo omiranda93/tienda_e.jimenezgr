@@ -14,9 +14,11 @@ import java.util.List;
 import java.util.Random;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -27,7 +29,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/Inicio")
 public class ControllerInicio {
     
+    
     tiendaDAO dao = new tiendaDAO();
+    
     
     @RequestMapping(method=RequestMethod.GET)
     public String index(ModelMap model, HttpSession session){
@@ -58,16 +62,30 @@ public class ControllerInicio {
    }
    
    @RequestMapping(value="/MuestraProductos", method = RequestMethod.GET)
-   public String muestraProductos(ModelMap model, HttpSession session, String nombreProd, String categoriaProd) {
-       
-      return "muestraProductos";
+   public String muestraProductos(@RequestParam("clave")String clave, ModelMap model, HttpSession session) {
+      
+       List <Producto> productosListados = new ArrayList<Producto>();
+       productosListados = (List<Producto>) dao.getCategoria(clave).getProductoCollection();
+       session.setAttribute("productosListados", productosListados);
+       return "muestraProductos";
    }
    
    @RequestMapping(value="/VerProducto", method = RequestMethod.GET)
-   public String VerProducto(ModelMap model, HttpSession session, String indice) {
+   public String VerProducto(@RequestParam("nombre") String nombre, ModelMap model, HttpSession session) {
        
-       
-      return "verProducto";
+      Producto p = dao.getNombre(nombre);
+      session.setAttribute("producto", p);
+      
+      return "VerProducto";
+   }
+   
+   @RequestMapping(value="/BuscaProductos", method = RequestMethod.GET)
+   public String busca(@RequestParam("nombreProd")String nombreProd, ModelMap model, HttpSession session) {
+      
+       List <Producto> productosListados = new ArrayList<Producto>();
+       productosListados = dao.getNombreLike(nombreProd);
+       session.setAttribute("productosListados", productosListados);
+       return "muestraProductos";
    }
    
 }

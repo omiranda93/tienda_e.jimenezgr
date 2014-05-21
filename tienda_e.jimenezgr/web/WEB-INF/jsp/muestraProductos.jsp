@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″>
         <title>Productos</title>
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap-theme.min.css'/>"/>
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
@@ -33,9 +33,9 @@
                             <tr>
                                 <%//muestra el producto%>
                                 
-                                <td><a href="/tienda_e.jimenezgr/Indice/VerProducto"><img src="<c:out value="${prod}"/>"/></a></td>
-                                <td><a href="/tienda_e.jimenezgr/Indice/VerProducto"><c:out value="${prod.getNombre()}"/></a></td>
-                                <td><a href="/tienda_e.jimenezgr/Indice/VerProducto"><c:out value="${prod.precio}"/></a></td>                    
+                                <td><a href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"/></"><img src="<c:out value="${prod}"/>"/></a></td>
+                                <td><a href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"/></"><c:out value="${prod.getNombre()}"/></a></td>
+                                <td><a href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"/></"><c:out value="${prod.precio}"/></a></td>                    
                             </tr>
                         </c:forEach>
                     </table>            
