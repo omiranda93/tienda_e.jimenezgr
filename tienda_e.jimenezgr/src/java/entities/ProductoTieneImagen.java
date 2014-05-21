@@ -34,7 +34,7 @@ public class ProductoTieneImagen implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "PRINCIPAL")
-    private Serializable principal;
+    private Boolean principal;
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ProductoTieneImagenPK productoTieneImagenPK;
@@ -94,11 +94,11 @@ public class ProductoTieneImagen implements Serializable {
         return "clases.ProductoTieneImagen[ productoTieneImagenPK=" + productoTieneImagenPK + " ]";
     }
 
-    public Serializable getPrincipal() {
+    public Boolean getPrincipal() {
         return principal;
     }
 
-    public void setPrincipal(Serializable principal) {
+    public void setPrincipal(Boolean principal) {
         this.principal = principal;
     }
     
