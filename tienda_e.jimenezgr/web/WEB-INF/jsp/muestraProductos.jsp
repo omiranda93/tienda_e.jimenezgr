@@ -15,6 +15,7 @@
         <title>Productos</title>
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap-theme.min.css'/>"/>
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
+        <script src="<c:url value='/js/funciones.js'/>"></script>
     </head>
     <body class="container">
         <c:import url="cabecera.jsp" charEncoding="utf-8"/>
@@ -43,7 +44,13 @@
                             <a class="col-lg-2" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"><img width="100px" src="<c:url value='${imagenPrincipal}'/>"></a>
                             <a class="col-lg-2" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"><c:out value="${prod.getNombre()}"/></a>
                             <a class="col-lg-3 col-lg-offset-2" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}">
-                                <span><c:out value="${prod.precio}"/> €</span>
+                                <span>         
+                                    <script>
+                                        var precio =${prod.precio};
+                                        precio = formatoPrecio(precio);
+                                        document.write(precio);
+                                    </script>
+                                </span>
                                 <div id="estado">
                                     <c:choose>
                                         <c:when test="${prod.cantidad>0}">

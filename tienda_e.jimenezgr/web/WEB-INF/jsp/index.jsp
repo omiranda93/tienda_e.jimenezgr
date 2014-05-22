@@ -15,6 +15,7 @@
         <title>Poxmania: Venta Online de productos en Informática, Foto, Electrodomésticos</title>  
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap-theme.min.css'/>"/>
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
+        <script src="<c:url value='/js/funciones.js'/>"></script>
     </head>
 
     <body class="container">
@@ -70,7 +71,14 @@
                         </c:forEach>
                         <img width="150px" src="<c:url value='${imagenPrincipal}'/>">
                         <a class="row" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}">${prod.nombre}</a>
-                        <a class="row" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}">${prod.precio}</a>
+                        <a class="row" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}">
+                            <script>
+                                var precio =${prod.precio};
+                                precio=formatoPrecio(precio);
+                                document.write(precio);
+                            </script>
+
+                        </a>
                     </div>
                 </c:forEach>
             </div>

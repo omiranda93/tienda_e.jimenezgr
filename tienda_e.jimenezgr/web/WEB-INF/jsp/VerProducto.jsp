@@ -12,9 +12,10 @@
 <html>
     <head>
         <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″>
-        <title>JSP Page</title>
+        <title>Ver ${producto.nombre}</title>
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap-theme.min.css'/>"/>
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
+        <script src="<c:url value='/js/funciones.js'/>"></script>
     </head>
     <body class="container">
 
@@ -43,7 +44,16 @@
 
                     <div id="precioProd" class="col-lg-6">  
                         <div class="col5">
-                            <span>${producto.precio} € IVA incluido</span>
+                            <span>         
+                                <script>
+                                    var precio =${producto.precio};
+                                    precio = formatoPrecio(precio);
+                                    document.write(precio);
+                                </script>
+                            </span>
+                            <span>
+                                IVA incluido
+                            </span>
                         </div>                    
 
                         <div id="infoInf" class="row well center-block">
