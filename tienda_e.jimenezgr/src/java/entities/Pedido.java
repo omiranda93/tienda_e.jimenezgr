@@ -189,4 +189,12 @@ public class Pedido implements Serializable {
         }
         return total;
     }
+    
+    public int totalProductos(){
+        int total=0;
+        for (RegistroPedidos registro:registroPedidosCollection){
+            total=total+registro.getCantidad();
+        }
+        return total;
+    }
 }
