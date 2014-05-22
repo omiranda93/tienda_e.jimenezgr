@@ -49,7 +49,7 @@ public class Pedido implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "PENDIENTE")
-    private Serializable pendiente;
+    private Boolean pendiente;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
@@ -83,7 +83,7 @@ public class Pedido implements Serializable {
         this.numero = numero;
     }
 
-    public Pedido(Integer numero, Serializable pendiente, String estado, String nombre, String direccion, String telefono) {
+    public Pedido(Integer numero, Boolean pendiente, String estado, String nombre, String direccion, String telefono) {
         this.numero = numero;
         this.pendiente = pendiente;
         this.estado = estado;
@@ -104,7 +104,7 @@ public class Pedido implements Serializable {
         return pendiente;
     }
 
-    public void setPendiente(Serializable pendiente) {
+    public void setPendiente(Boolean pendiente) {
         this.pendiente = pendiente;
     }
 

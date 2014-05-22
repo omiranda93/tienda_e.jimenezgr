@@ -16,6 +16,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap-theme.min.css'/>"/>
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
         <script src="<c:url value='/js/funciones.js'/>"></script>
+        <script src="<c:url value='/bootstrap/js/bootstrap.min.js'/>"></script>
         <script src="http://code.jquery.com/jquery-1.7.2.js"></script>
         <link rel="stylesheet" type="text/css" href="<c:url value='/css/estilo.css'/>"/>
     </head>
@@ -31,34 +32,28 @@
 
             <c:import url="cabecera.jsp" charEncoding="utf-8"/>
 
-            <div>
-                <!--Carousel-->
-                <div id="sidebar-carousel-1" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators grey">
-                        <li data-target="#sidebar-carousel-1" data-slide-to="0" class="active"></li>
-                        <li data-target="#sidebar-carousel-1" data-slide-to="1"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <a href="" data-lightbox="image-1" title="">
-                                <img src="<c:url value='/Recursos/anuncio1.jpg'/>">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="" data-lightbox="image-2" title="">
-                                <img src="<c:url value='/Recursos/anuncio2.gif'/>">
-                            </a>                  
-                        </div>
-                    </div>
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#sidebar-carousel-1" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                    </a>
-                    <a class="right carousel-control" href="#sidebar-carousel-1" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                    </a>
-                </div><!--/Carousel-->
+
+
+
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                </ol>
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+                    <div class="active item"><img src="<c:url value='/Recursos/anuncio1.jpg'/>"></div>
+                    <div class="item"><img src="<c:url value='/Recursos/anuncio2.gif'/>"></div>
+
+                </div>
+                <!-- Carousel nav -->
+                <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
             </div>
+
+
+
+
 
             <div id="prodAleatorios" class="row">
                 <h2 class="row">Algunos alguno de nuestros productos:</h2>
@@ -69,8 +64,7 @@
                             <c:forEach var="img" items="${prod.productoTieneImagenCollection}">
                                 <c:if test="${img.principal}">
                                     <c:set var="imagenPrincipal" value="${img.productoTieneImagenPK.uri}"/>
-                                </c:if>           
-
+                                </c:if>       
                             </c:forEach>
                             <a class="row" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"><img width="150px" src="<c:url value='${imagenPrincipal}'/>"></a>
                             <a class="row" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}">${prod.nombre}</a>

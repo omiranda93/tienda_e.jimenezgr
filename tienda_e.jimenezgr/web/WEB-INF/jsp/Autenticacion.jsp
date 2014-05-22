@@ -20,8 +20,9 @@
     <body>
         <div id="contenedor">
             <c:import url="cabecera.jsp" charEncoding="utf-8"/>
+            
             <div id = "registro" class="row">
-                <div id="formLog" class="panel panel-default col-sm-5">
+                <div id="formLog" class="panel panel-default col-lg-5">
                     <form method="post" action="/ControllerLogin">
                         <p class="row">
                             <strong>¿Eres YA CLIENTE de Poxmania? </strong>
@@ -40,7 +41,7 @@
                         <input class="btn btn-primary row col-lg-offset-4" name="logBoton" type="button" value="Continuar">
                     </form>
                 </div>
-                <div id ="formRegistro" class="panel panel-default col-sm-5 col-lg-offset-1">
+                <div id ="formRegistro" class="panel panel-default col-lg-5 col-lg-offset-1">
                     <form method="get" action="/tienda_e.jimenezgr/Inicio/Registro">
                         <p class="row">
                             <strong>¿Eres un NUEVO cliente? </strong>

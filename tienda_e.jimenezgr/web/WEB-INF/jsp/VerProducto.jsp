@@ -52,7 +52,7 @@
                                         document.write(precio);
                                     </script>
                                 </span>
-                                <span>
+                                <span class="precioM">
                                     IVA incluido
                                 </span>
                             </div>                    
@@ -64,18 +64,18 @@
                         </div>
 
                         <div id="comprarProd" class="panel panel-default col-lg-3">
-                            <a href="/tienda_e.jimenezgr/Inicio/Carrito?nombreProd=${producto.nombre}">
+                            <a class="btn btn-link" href="/tienda_e.jimenezgr/Inicio/Carrito?nombreProd=${producto.nombre}">
                                 <span class="glyphicon glyphicon-shopping-cart"></span>
                                 Añadir a la cesta 
                             </a>
                             <div class="availability">
                                 <c:choose>
                                     <c:when test="${producto.cantidad>0}">
-                                        <span class="glyphicon glyphicon-ok"></span>
+                                        <span class="glyphicon glyphicon-ok ok"></span>
                                         <span>En stock. Plazo de entrega 4-6 dias hábiles. Garantia 1 año.</span>
                                     </c:when>
                                     <c:otherwise>                                  
-                                        <span class="glyphicon glyphicon-remove"></span>
+                                        <span class="glyphicon glyphicon-remove delete"></span>
                                         <span>Sin stock. "Entrega en 3 semanas".</span>
                                     </c:otherwise>
                                 </c:choose>
