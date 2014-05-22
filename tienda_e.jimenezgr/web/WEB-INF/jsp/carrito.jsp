@@ -56,10 +56,9 @@
                 </div>
             </c:forEach>
             <div>Importe total:(¡Gastos de envío gratuitos!)
-                <c:set var="total" value="${0}"></c:set>
-                <c:forEach var="prod" items="${carro}">
-                    <c:set var="total" value="${total+prod.precio}"></c:set>
-                </c:forEach>
+                <c:set var="total" value="${carrito.precioTotal()}"></c:set>
+                ${total};
+                
             </div>
             <a href="" class="btn btn-primary">
                 Hacer mi pedido
