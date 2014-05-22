@@ -38,17 +38,8 @@
                 <span class="glyphicon glyphicon-shopping-cart"></span>
                 <span>Cesta</span>
                 <%//si el parametro carro no esta vacio%>
-                <c:if test="${carro.size() > 0}">
-                    <%//asigna a la variable carro el valor del parametro de sesion carro%>
-                    <c:set var="carro" value="${carro}"/>
-                    <%//asigna a la variable total el valor 0%>
-                    <c:set var="total" value="${0}"/>
-                    <%//por cada producto en carro%>
-                    <c:forEach var="prod" items="${carro}">
-                        <%//aumenta el total de productos%>
-                        <c:set var="total" value="${total+prod.cantidad}"/>
-                    </c:forEach>
-                    <span><c:out value="(${total})"/></span>
+                <c:if test="${carro!=null}">
+                    <span><c:out value="(${carro.totalProductos()})"/></span>
                 </c:if>                
             </a>    
         </span>

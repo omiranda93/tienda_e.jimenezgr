@@ -182,4 +182,19 @@ public class Pedido implements Serializable {
         return "clases.Pedido[ numero=" + numero + " ]";
     }
     
+    public double precioTotal(){
+        double total=0;
+        for (RegistroPedidos registro:registroPedidosCollection){
+            total=total+(registro.getProducto1().getPrecio()*registro.getCantidad());
+        }
+        return total;
+    }
+    
+    public int totalProductos(){
+        int total=0;
+        for (RegistroPedidos registro:registroPedidosCollection){
+            total=total+registro.getCantidad();
+        }
+        return total;
+    }
 }

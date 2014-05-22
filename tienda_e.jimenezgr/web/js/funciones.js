@@ -82,8 +82,8 @@ function confirmar(msg)
 }
 
 function formatoPrecio(precio){
-    var a=parseFloat(precio).round(2);
-    a= a+" €";
+    precio=parseFloat(precio).toFixed(2);
+    precio= precio+" €";
     return precio;
 }
 
