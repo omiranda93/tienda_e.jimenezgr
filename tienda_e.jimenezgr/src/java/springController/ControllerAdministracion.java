@@ -6,7 +6,9 @@
 
 package springController;
 
+import static com.sun.j3d.internal.UtilFreelistManager.MAXINT;
 import entities.Categoria;
+import entities.Pedido;
 import entities.Producto;
 import entities.tiendaDAO;
 import java.util.ArrayList;
@@ -49,6 +51,10 @@ public class ControllerAdministracion {
         categoriasListadas = dao.getTodasCategorias();
         session.setAttribute("categoriasListadas", categoriasListadas);
         
+        List <Pedido> pedidosListados = new ArrayList <Pedido>();
+        pedidosListados = dao.getTododosPedidos();
+        session.setAttribute("pedidosListados", pedidosListados);
+        
         return "LogAdministrador";
     }
     
@@ -75,6 +81,10 @@ public class ControllerAdministracion {
     @RequestMapping(value="/AdminProductos", method=RequestMethod.GET)
     public String AdminProducto(ModelMap model, HttpSession session){
         
+        List <Producto> productosListados = new ArrayList <Producto>();
+        productosListados = dao.getTodosProductos();
+        session.setAttribute("productosListados", productosListados);
+        
         return "AdministrarProductos";
     }
     
@@ -86,7 +96,9 @@ public class ControllerAdministracion {
     
     @RequestMapping(value="/AdminCategorias", method=RequestMethod.GET)
     public String AdminCategorias(ModelMap model, HttpSession session){
-        
+        List <Categoria> categoriasListadas = new ArrayList <Categoria>();
+        categoriasListadas = dao.getTodasCategorias();
+        session.setAttribute("categoriasListadas", categoriasListadas);
         return "AdministrarCategorias";
     }
     
@@ -97,6 +109,7 @@ public class ControllerAdministracion {
         categorias.add(dao.getCategoria(categoria));
         Producto p = new Producto(nombre, Double.parseDouble(precio), Integer.parseInt(cantidad), descripcion, categorias);
         dao.insertarProducto(p);
+        session.setAttribute("productosListados", dao.getTodosProductos());
         return "Administrador";
     }
     
@@ -130,20 +143,44 @@ public class ControllerAdministracion {
     
     
     @RequestMapping(value="/InsertarCategoria", method=RequestMethod.GET)
-    public String InsertarCategoria(ModelMap model, HttpSession session){
-        
+    public String InsertarCategoria(@RequestParam("nombreCategoria") String nombre, @RequestParam(value="claveSuper", required = false) String claveSuper  , ModelMap model, HttpSession session){
+        String clave = "cat";
+        int cont = dao.getTodasCategorias().size();
+        for(int i = 0; i<Integer.MAX_VALUE;i++){
+            if (!(clave+cont).equals(dao.getTodasCategorias().get(i).getClave())){
+                break;
+            }
+            cont++;
+        }
+        clave = "clave"+cont;
+        if (claveSuper != null){
+            Categoria c = new Categoria(clave, nombre, false);
+            Categoria madre = dao.getCategoria(claveSuper);
+            dao.insertarCategoria(c);
+            dao.añadirMadre(madre, c);
+            dao.añadirHija(madre, c);
+            
+        }else{
+            Categoria c = new Categoria(clave, nombre, true);
+            dao.insertarCategoria(c);
+        }
+        session.setAttribute("categoriasListadas", dao.getTodasCategorias());
         return "Administrador";
     }
     
-    @RequestMapping(value="/EliminarCategoria", method=RequestMethod.GET)
-    public String EliminarCategoria(ModelMap model, HttpSession session){
-        
+    @RequestMapping(value="/BorrarCategoria", method=RequestMethod.GET)
+    public String EliminarCategoria(@RequestParam("clave") String clave, ModelMap model, HttpSession session){
+        Categoria c = dao.getCategoria(clave);
+        dao.eliminarCategoria(c);
+        session.setAttribute("categoriasListadas", dao.getTodasCategorias());
         return "Administrador";
     }
     
     @RequestMapping(value="/EditarCategoria", method=RequestMethod.GET)
-    public String EditarCategoria(ModelMap model, HttpSession session){
+    public String EditarCategoria(@RequestParam("clave") String clave, @RequestParam("nombreCategoria") String nombre ,ModelMap model, HttpSession session){
         
+        dao.actualizarCategoria(clave, nombre);
+        session.setAttribute("categoriasListadas", dao.getTodasCategorias());
         return "Administrador";
     }
     

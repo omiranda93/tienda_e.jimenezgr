@@ -5,6 +5,7 @@ import entities.Categoria;
 import entities.Pedido;
 import entities.Producto;
 import entities.Usuario;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.*;
@@ -109,6 +110,32 @@ public class tiendaDAO {
     }
     public Categoria getCategoria(String clave) {
         return manager.find(Categoria.class, clave);
+    }
+    public void eliminarCategoria(Categoria c){
+        manager.getTransaction().begin();
+        manager.remove(c);
+        manager.getTransaction().commit();
+    }
+    
+    public void actualizarCategoria(String clave, String nombre){
+        manager.getTransaction().begin();
+        Categoria c = manager.find(Categoria.class, clave);
+        c.setNombre(nombre);
+        manager.getTransaction().commit();
+    }
+    
+    public void añadirHija(Categoria madre, Categoria hija){
+        manager.getTransaction().begin();
+        Categoria madree = manager.find(Categoria.class, madre.getClave());
+        madree.getCategoriaCollection1().add(hija);
+        manager.getTransaction().commit();
+    }
+    
+    public void añadirMadre(Categoria madre, Categoria hija){
+        manager.getTransaction().begin();
+        Categoria hijaa = manager.find(Categoria.class, hija.getClave());
+        hijaa.getCategoriaCollection().add(madre);
+        manager.getTransaction().commit();
     }
     
     //Pedidos:

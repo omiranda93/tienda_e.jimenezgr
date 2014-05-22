@@ -68,6 +68,6 @@
             <input type='hidden' name='accion' value='anadir'>
             <input type='submit' name='Añadir' value='Agregar' onclick="alert('Has añadido este producto a los disponibles.')">
         </form>
-        <a href="Administracion.jsp">Volver</a>
+        <a href="/tienda_e.jimenezgr/Administracion">Volver</a>
     </body>
 </html>
