@@ -57,6 +57,13 @@
                                         precio = formatoPrecio(precio);
                                         document.write(precio);
                                     </script>
+                                    Cantidad: ${prod.cantidad}
+                                    Modificar cantidad:
+                                    <form method="get" action="/tienda_e.jimenezgr/Inicio/CarritoNuevaCantidad">
+                                        <input type="number" min="1" max="${prod.producto1.cantidad}" name="cantidad" value="${prod.cantidad}">
+                                        <input type="hidden" name="nombreProd" value="${prod.producto1.nombre}">
+                                        <input type="submit" name="actualizar" value="Actualizar cantidad">
+                                    </form>
                                 </span>
                             </div>
                         </c:forEach>

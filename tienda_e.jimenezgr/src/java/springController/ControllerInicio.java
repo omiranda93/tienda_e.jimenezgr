@@ -36,7 +36,6 @@ public class ControllerInicio {
 
 //        Pedido carrito = new Pedido();
 //        session.setAttribute("carrito", carrito);
-
         List<Producto> productosRandom = new ArrayList<Producto>();
         Random rand = new Random();
         for (int i = 0; i <= 5; i++) {
@@ -124,6 +123,18 @@ public class ControllerInicio {
 
     @RequestMapping(value = "/CarritoVer", method = RequestMethod.GET)
     public String CarritoVer(ModelMap model, HttpSession session) {
+        return "carrito";
+    }
+
+    @RequestMapping(value = "/CarritoNuevaCantidad", method = RequestMethod.GET)
+    public String CarritoNuevaCantidad(@RequestParam("cantidad") int cantidad,@RequestParam("nombreProd") String nombreProd, ModelMap model, HttpSession session) {
+        Pedido carro = (Pedido)(session.getAttribute("carrito"));
+        for (RegistroPedidos prod:carro.getRegistroPedidosCollection()){
+            if (prod.getProducto1().getNombre().equals(nombreProd)){
+                prod.setCantidad(cantidad);
+            }
+        }
+        session.setAttribute("carrito",carro);
         return "carrito";
     }
 
