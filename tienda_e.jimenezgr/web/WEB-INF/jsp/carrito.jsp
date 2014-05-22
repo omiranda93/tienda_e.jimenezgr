@@ -16,54 +16,67 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap-theme.min.css'/>"/>
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
         <script src="<c:url value='/js/funciones.js'/>"></script>
+        <link rel="stylesheet" type="text/css" href="<c:url value='/css/estilo.css'/>"/>
     </head>
-    <body class="container">
-        <c:import url="cabecera.jsp" charEncoding="utf-8"/>
-        <h1>Mi cesta</h1>
-        <div><c:forEach var="prod" items="${carrito}">
-                <div>
-                    <%//muestra el producto%>
-                    <c:set var="imagenPrincipal" value="${null}"/>
-                    <c:forEach var="img" items="${prod.productoTieneImagenCollection}">
-                        <c:if test="${img.principal}">
-                            <c:set var="imagenPrincipal" value="${img.productoTieneImagenPK.uri}"/>
-                        </c:if>           
+    <body>
+        <div id="contenedor">
+            <c:import url="cabecera.jsp" charEncoding="utf-8"/>
+            <h1>Mi cesta</h1>
+            <div>
+                <c:choose>
+                    <c:when test="${carrito!=null}">
+                        <c:forEach var="prod" items="${carrito.registroPedidosCollection}">
+                            <div>
+                                <%//muestra el producto%>
+                                <c:set var="imagenPrincipal" value="${null}"/>
+                                <c:forEach var="img" items="${prod.producto1.productoTieneImagenCollection}">
+                                    <c:if test="${img.principal}">
+                                        <c:set var="imagenPrincipal" value="${img.productoTieneImagenPK.uri}"/>
+                                    </c:if>           
 
-                    </c:forEach>
-                    <a href="/tienda_e.jimenezgr/Indice/VerProducto"><img width="80px" src="<c:url value='${imagenPrincipal}'/>"></a>
-                        <c:choose>
-                            <c:when test="${prod.getCantidad()>0}">
-                            <ul>
-                                <span class="glyphicon glyphicon-ok"></span>
-                                <li>En stock. Plazo de entrega 4-6 dias hábiles. Garantia 1 año.</li>
-                            </ul>
-                        </c:when>
-                        <c:otherwise>
-                            <ul>
-                                <span class="glyphicon glyphicon-remove"></span>
-                                <li>Sin stock. "Entrega en 3 semanas".</li>
-                            </ul>
-                        </c:otherwise>
-                    </c:choose>
-                    <a href="/tienda_e.jimenezgr/Indice/VerProducto"><c:out value="${prod.getNombre()}"/></a>
-                    <span>         
-                        <script>
-                            var precio =${prod.precio};
-                            precio = formatoPrecio(precio);
-                            document.write(precio);
-                        </script>
-                    </span>
+                                </c:forEach>
+                                <a href="/tienda_e.jimenezgr/Indice/VerProducto"><img width="80px" src="<c:url value='${imagenPrincipal}'/>"></a>
+                                    <c:choose>
+                                        <c:when test="${prod.producto1.getCantidad()>0}">
+                                        <ul>
+                                            <span class="glyphicon glyphicon-ok"></span>
+                                            <li>En stock. Plazo de entrega 4-6 dias hábiles. Garantia 1 año.</li>
+                                        </ul>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <ul>
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                            <li>Sin stock. "Entrega en 3 semanas".</li>
+                                        </ul>
+                                    </c:otherwise>
+                                </c:choose>
+                                <a href="/tienda_e.jimenezgr/Indice/VerProducto"><c:out value="${prod.producto1.getNombre()}"/></a>
+                                <span>         
+                                    <script>
+                                        var precio =${prod.producto1.precio};
+                                        precio = formatoPrecio(precio);
+                                        document.write(precio);
+                                    </script>
+                                </span>
+                            </div>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <span class="well">No hay productos en la cesta</span>
+                    </c:otherwise>
+                </c:choose>
+
+
+                <div>Importe total:(¡Gastos de envío gratuitos!)
+                    <c:set var="total" value="${carrito.precioTotal()}"></c:set>
+                    ${total};
+
                 </div>
-            </c:forEach>
-            <div>Importe total:(¡Gastos de envío gratuitos!)
-                <c:set var="total" value="${carrito.precioTotal()}"></c:set>
-                ${total};
-                
+                <a href="" class="btn btn-primary">
+                    Hacer mi pedido
+                </a>
             </div>
-            <a href="" class="btn btn-primary">
-                Hacer mi pedido
-            </a>
+            <c:import url="footer.jsp" charEncoding="utf-8"/>
         </div>
-        <c:import url="footer.jsp" charEncoding="utf-8"/>
     </body>
 </html>

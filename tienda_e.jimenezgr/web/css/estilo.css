@@ -1,0 +1,17 @@
+body{
+    
+    
+}
+
+*{
+    margin:0px;
+    padding:0px;
+}
+
+#contenedor{
+    width:1250px;
+    position:absolute;
+    margin-left:-625px;
+    left:50%;
+    padding: 5px 1px 0px 1px;
+}
