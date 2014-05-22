@@ -32,12 +32,12 @@
                                 <c:forEach var="img" items="${prod.producto1.productoTieneImagenCollection}">
                                     <c:if test="${img.principal}">
                                         <c:set var="imagenPrincipal" value="${img.productoTieneImagenPK.uri}"/>
-                                    </c:if>           
+                                    </c:if>          
 
                                 </c:forEach>
                                 <a href="/tienda_e.jimenezgr/Indice/VerProducto"><img width="80px" src="<c:url value='${imagenPrincipal}'/>"></a>
                                     <c:choose>
-                                        <c:when test="${prod.producto1.getCantidad()>0}">
+                                        <c:when test="${prod.producto1.cantidad>0}">
                                         <ul>
                                             <span class="glyphicon glyphicon-ok"></span>
                                             <li>En stock. Plazo de entrega 4-6 dias hábiles. Garantia 1 año.</li>
@@ -60,6 +60,17 @@
                                 </span>
                             </div>
                         </c:forEach>
+                        <div>Importe total:(¡Gastos de envío gratuitos!)
+                            <c:set var="total" value="${carrito.precioTotal()}"></c:set>
+                            <span>         
+                                <script>
+                                    var precio =${total};
+                                    precio = formatoPrecio(precio);
+                                    document.write(precio);
+                                </script>
+                            </span>
+
+                        </div>
                     </c:when>
                     <c:otherwise>
                         <span class="well">No hay productos en la cesta</span>
@@ -67,11 +78,7 @@
                 </c:choose>
 
 
-                <div>Importe total:(¡Gastos de envío gratuitos!)
-                    <c:set var="total" value="${carrito.precioTotal()}"></c:set>
-                    ${total};
 
-                </div>
                 <a href="" class="btn btn-primary">
                     Hacer mi pedido
                 </a>

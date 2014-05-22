@@ -34,8 +34,8 @@ public class ControllerInicio {
     @RequestMapping(method = RequestMethod.GET)
     public String index(ModelMap model, HttpSession session) {
 
-        Pedido carrito = new Pedido();
-        session.setAttribute("carrito", carrito);
+//        Pedido carrito = new Pedido();
+//        session.setAttribute("carrito", carrito);
 
         List<Producto> productosRandom = new ArrayList<Producto>();
         Random rand = new Random();
