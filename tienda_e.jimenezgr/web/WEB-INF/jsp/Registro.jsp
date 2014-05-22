@@ -22,42 +22,53 @@
             <c:import url="cabecera.jsp" charEncoding="utf-8"/>
             <div id="formReg">
                 <form method="post" action="/ControlerLogin">
-                    <p>
-                    <h4>
-                        Tu login
-                    </h4>
-                    </p>
-                    <p>
-                        E-mail*
-                        <input name="email" type="email" value="${email}" required>
-                    </p>
-                    <p>
-                        Contraseña* 
-                        <input name="password" type="password" required>
-                    </p>
-                    <p>
-                        Confirmación de contraseña* 
-                        <input name="password" type="password" required>
-                    </p>
-                    <p>
-                        Nombre y Apellidos* 
-                        <input name="Nombre" type="text" required>
-                    </p>
-                    <p>
-                        Usuario* 
-                        <input name="Usuario" type="text" required>
-                    </p>
-                    <p>
-                        Teléfono
-                        <input name="Telefono" type="text">
-                    </p>
-                    <p>
-                        Dirección
-                        <input name="Dirección" type="text">
-                    </p>
-                    <p>
-                        <input name="regBoton" type="submit" value="Continuar">
-                    </p>
+                    <div class="row panel panel-default">
+
+                        <h4 class="col-lg-1">
+                            Tu login
+                        </h4>
+                        <div class="col-lg-10 col-lg-offset-1">
+                            <p>
+                                E-mail*
+                                <input name="email" size="40" type="email" value="${email}" required>
+                            </p>
+                            <p>
+                                Contraseña* 
+                                <input name="password" size="40" type="password" required>
+                            </p>
+                            <p>
+                                Confirmación de contraseña* 
+                                <input name="password" size="40" type="password" required>
+                            </p>
+                            <p>
+                                Usuario* 
+                                <input name="Usuario" size="40" type="text" required>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row panel panel-default">
+                        <h4 class="col-lg-1">
+                            Datos personales
+                        </h4>
+                        <div class="col-lg-10 col-lg-offset-1">
+                            <p>
+                                Nombre y Apellidos* 
+                                <input name="Nombre" size="40" type="text" required>
+                            </p>
+
+                            <p>
+                                Teléfono
+                                <input name="Telefono" size="40" type="text">
+                            </p>
+                            <p>
+                                Dirección
+                                <input name="Dirección" size="40" type="text">
+                            </p>
+                            <p>
+                                <input class="btn btn-primary" name="regBoton" type="submit" value="Continuar">
+                            </p>
+                        </div>
+                    </div>
                 </form>
             </div>
             <c:import url="footer.jsp" charEncoding="utf-8"/>

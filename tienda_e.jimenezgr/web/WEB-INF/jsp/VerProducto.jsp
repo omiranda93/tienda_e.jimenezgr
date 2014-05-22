@@ -45,14 +45,14 @@
 
                         <div id="precioProd" class="col-lg-6">  
                             <div class="col5">
-                                <span>         
+                                <span class="precioL">         
                                     <script>
                                         var precio =${producto.precio};
                                         precio = formatoPrecio(precio);
                                         document.write(precio);
                                     </script>
                                 </span>
-                                <span class="precioM">
+                                <span class="precioS">
                                     IVA incluido
                                 </span>
                             </div>                    
@@ -65,7 +65,7 @@
 
                         <div id="comprarProd" class="panel panel-default col-lg-3">
                             <a class="btn btn-link" href="/tienda_e.jimenezgr/Inicio/Carrito?nombreProd=${producto.nombre}">
-                                <span class="glyphicon glyphicon-shopping-cart"></span>
+                                <span class="glyphicon glyphicon-shopping-cart center-block"></span>
                                 Añadir a la cesta 
                             </a>
                             <div class="availability">

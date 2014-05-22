@@ -62,32 +62,36 @@
                                             <input type="hidden" name="nombreProd" value="${prod.producto1.nombre}">
                                             <input type="submit" name="actualizar" value="Actualizar cantidad">
                                         </form>
-                                            <a href="/tienda_e.jimenezgr/Inicio/CarritoNuevaCantidad?cantidad=0&nombreProd=${prod.producto1.nombre}" class="row"><span class="glyphicon glyphicon-remove delete"></span>Eliminar</a>
+                                        <a href="/tienda_e.jimenezgr/Inicio/CarritoNuevaCantidad?cantidad=0&nombreProd=${prod.producto1.nombre}" class="row"><span class="glyphicon glyphicon-remove delete"></span>Eliminar</a>
 
                                     </div>
                                     <div class="col-lg-3 col-lg-offset-4">      
-                                        <span>         
+                                        <span class="precioM">         
                                             <script>
                                                 var precio =${prod.producto1.precio};
                                                 precio = formatoPrecio(precio);
                                                 document.write(precio);
                                             </script>
                                         </span>
-                                        <span>IVA incluido</span>
+                                        <span class="precioS">IVA incluido</span>
                                     </div>
                                 </div>
                             </c:forEach>
-                            <div class="row panel panel-default"><b>Importe total:</b>(¡Gastos de envío gratuitos!)
+                            <div class="row panel panel-default">
+                                <div class="col-lg-5">
+                                    <b>Importe total:</b>(¡Gastos de envío gratuitos!)
+                                </div>
                                 <c:set var="total" value="${carrito.precioTotal()}"></c:set>
-                                    <span>         
-                                        <script>
-                                            var precio =${total};
-                                            precio = formatoPrecio(precio);
-                                            document.write(precio);
-                                    </script>
-                                </span>
-                                <span>IVA incluido</span>
-
+                                    <div class="col-lg-4 col-lg-offset-3">
+                                        <span class="precioL">         
+                                            <script>
+                                                var precio =${total};
+                                                precio = formatoPrecio(precio);
+                                                document.write(precio);
+                                        </script>
+                                    </span>
+                                    <span class="precioS">IVA incluido</span>
+                                </div>
                             </div>
                         </c:when>
                         <c:otherwise>
@@ -103,7 +107,8 @@
                     </div>
 
                     <div class="col-lg-5 col-lg-offset-1">
-                        <script>document.write(precio);</script>
+                        <span class="precioM"><script>document.write(precio);</script></span>
+                        <span class="precioS">IVA incluido</span>
                     </div>
                 </div>
             </div>

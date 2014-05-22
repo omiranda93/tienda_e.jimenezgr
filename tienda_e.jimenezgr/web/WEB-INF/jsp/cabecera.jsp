@@ -10,7 +10,7 @@
     <div class="col-lg-4 well col-lg-offset-1">
         <form name="formNombre" method='get' action='/tienda_e.jimenezgr/Inicio/BuscaProductos'>
             <div class="form-group col-lg-9">
-                <input class="form-control" type='search' name='nombreProd' value="¿Qué estás buscando?"/>
+                <input class="form-control" type='search' name='nombreProd' placeholder="¿Qué estás buscando?"/>
             </div>
             <input type='hidden' name='busqueda' value='nombre' />
             <input type='submit' class="btn btn-primary" name='BuscarNombre' value='Buscar'>
@@ -51,7 +51,7 @@
 
 <div id="menu" class="collapse navbar-collapse navbar-default ">
     <ul class="nav navbar-nav">
-        <li><a href="" class="glyphicon glyphicon-home"></a></li>
+        <li><a href="/tienda_e.jimenezgr/Inicio" class="glyphicon glyphicon-home"></a></li>
             <c:forEach var="categ" items="${categorias}">
                 <c:if test="${categ.essuper==true}">
                     <c:choose>

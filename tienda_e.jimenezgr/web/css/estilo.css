@@ -29,16 +29,19 @@ ul li:hover > ul{
 }
 
 .precioS{
-    font-size: 1.5em;
+    font-size: 1em;
     color: #f82000;
+    font-weight: bold;
 }
 
 .precioM{
     color: #f82000;
     font-size: 1.5em;
+    font-weight: bold;
 }
 
 .precioL{
     color: #f82000;
-    font-size: 1.5em;
+    font-size: 2em;
+    font-weight: bold;
 }
