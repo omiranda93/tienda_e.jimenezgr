@@ -104,11 +104,29 @@ public class ControllerInicio {
                 List<RegistroPedidos> productos = new ArrayList<RegistroPedidos>();
                 carro.setRegistroPedidosCollection(productos);
             }
-            RegistroPedidos producto = new RegistroPedidos();
-            producto.setCantidad(1);
-            producto.setProducto1(dao.getNombre(nombreProd));
-            producto.setPedido(carro);
-            carro.getRegistroPedidosCollection().add(producto);
+            int i = 0;
+            boolean encontrado = false;
+            int pos=-1;
+            ArrayList<RegistroPedidos> rp = (ArrayList) carro.getRegistroPedidosCollection();
+            while (i < rp.size() && !encontrado) {                
+                if (rp.get(i).getProducto1().getNombre().equals(nombreProd)) {
+                    encontrado = true;
+                    pos=i;
+                }
+                i++;
+            }
+            if (encontrado) {
+                int can=rp.get(pos).getCantidad()+1;
+                rp.get(pos).setCantidad(can);
+//                carro.setRegistroPedidosCollection(rp);
+
+            } else {
+                RegistroPedidos producto = new RegistroPedidos();
+                producto.setCantidad(1);
+                producto.setProducto1(dao.getNombre(nombreProd));
+                producto.setPedido(carro);
+                carro.getRegistroPedidosCollection().add(producto);
+            }
 //       productos.add(dao.getNombre(nombreProd));
 //       productos = (List<Producto>) session.getAttribute("carrito");
 //       productos.add(dao.getNombre(nombreProd));
@@ -127,14 +145,14 @@ public class ControllerInicio {
     }
 
     @RequestMapping(value = "/CarritoNuevaCantidad", method = RequestMethod.GET)
-    public String CarritoNuevaCantidad(@RequestParam("cantidad") int cantidad,@RequestParam("nombreProd") String nombreProd, ModelMap model, HttpSession session) {
-        Pedido carro = (Pedido)(session.getAttribute("carrito"));
-        for (RegistroPedidos prod:carro.getRegistroPedidosCollection()){
-            if (prod.getProducto1().getNombre().equals(nombreProd)){
+    public String CarritoNuevaCantidad(@RequestParam("cantidad") int cantidad, @RequestParam("nombreProd") String nombreProd, ModelMap model, HttpSession session) {
+        Pedido carro = (Pedido) (session.getAttribute("carrito"));
+        for (RegistroPedidos prod : carro.getRegistroPedidosCollection()) {
+            if (prod.getProducto1().getNombre().equals(nombreProd)) {
                 prod.setCantidad(cantidad);
             }
         }
-        session.setAttribute("carrito",carro);
+        session.setAttribute("carrito", carro);
         return "carrito";
     }
 
