@@ -31,11 +31,11 @@
                             </c:if>        
                         </c:forEach>
 
-                        <img class="row center-block" width="260px" src="<c:url value='/${imagenPrincipal}'/>">
+                        <img class="row center-block" width="260px" src="<c:url value='${imagenPrincipal}'/>">
                         <div id="thumbs" class="row">                            
                             <c:forEach var="img" items="${producto.productoTieneImagenCollection}">
                                 <a href="#" class="thumbnail col-lg-3">
-                                    <img src="<c:url value='/${img.productoTieneImagenPK.uri}'/>">  
+                                    <img src="<c:url value='${img.productoTieneImagenPK.uri}'/>">  
                                 </a>
                             </c:forEach>                               
                         </div>

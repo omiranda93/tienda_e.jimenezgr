@@ -29,7 +29,7 @@
                             </c:if>           
 
                         </c:forEach>
-                    <a href="/tienda_e.jimenezgr/Indice/VerProducto"><img width="80px" src="<c:url value='/${imagenPrincipal}'/>"></a>
+                    <a href="/tienda_e.jimenezgr/Indice/VerProducto"><img width="80px" src="<c:url value='${imagenPrincipal}'/>"></a>
                         <c:choose>
                             <c:when test="${prod.getCantidad()>0}">
                             <ul>

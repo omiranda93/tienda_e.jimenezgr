@@ -68,7 +68,7 @@
                             </c:if>           
 
                         </c:forEach>
-                        <img width="150px" src="<c:url value='/${imagenPrincipal}'/>">
+                        <img width="150px" src="<c:url value='${imagenPrincipal}'/>">
                         <a class="row" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}">${prod.nombre}</a>
                         <a class="row" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}">${prod.precio}</a>
                     </div>
