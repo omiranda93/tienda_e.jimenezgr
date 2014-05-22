@@ -20,9 +20,9 @@ function validar_camposLogin() {
         return false;
     }
 
-    if (document.formLog.password.value == "") {
+    if (document.formLog.pwd.value == "") {
         alert("Debe indicarnos la contraseña");
-        document.formLog.password.focus();
+        document.formLog.pwd.focus();
         return false;
     }
 

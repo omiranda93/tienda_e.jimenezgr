@@ -142,6 +142,11 @@ public class tiendaDAO {
     }
     
     //Administrador
+    public List<Administrador> getAdministrador(String usuario, String pwd) {
+        String where = "a.credencialusuario = '"+usuario+"'"+"and a.credencialcontrasenia = '"+pwd+"'";
+        return getAdministradoresQuery(where);
+    }
+    
     public List<Administrador> getTodosAdministradores() {
         return getAdministradoresQuery(null);
     }

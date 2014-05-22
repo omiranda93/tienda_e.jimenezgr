@@ -20,6 +20,7 @@
     <!-- <mvc:resources mapping="/resources/**" location="/resources/" />-->
     <mvc:resources mapping="/bootstrap/**" location="/bootstrap/" />
     <mvc:resources mapping="/Recursos/**" location="/Recursos/" />
+    <mvc:resources mapping="/js/**" location="/js/" />
 
     <mvc:annotation-driven/>
 </beans>
