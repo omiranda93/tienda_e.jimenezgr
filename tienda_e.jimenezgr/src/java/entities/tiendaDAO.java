@@ -5,6 +5,7 @@ import entities.Categoria;
 import entities.Pedido;
 import entities.Producto;
 import entities.Usuario;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.*;
 
@@ -63,6 +64,23 @@ public class tiendaDAO {
     public List<Producto> getNombreLike(String nombre) {
         String where = "upper(p.nombre) like upper('%"+nombre+"%')";
         return getProductosQuery(where);
+    }
+    
+    public void eliminarProducto(Producto p){
+        manager.getTransaction().begin();
+        manager.remove(p);
+        manager.getTransaction().commit();
+    }
+    
+    public void actualizarProducto(String nombre, double precio, int cantidad, String descripcion, Collection <Categoria> categorias, Collection <ProductoTieneImagen> img){
+        manager.getTransaction().begin();
+        Producto p = manager.find(Producto.class, nombre);
+        p.setCantidad(cantidad);
+        p.setCategoriaCollection(categorias);
+        p.setDescripcion(descripcion);
+        p.setPrecio(precio);
+        p.setProductoTieneImagenCollection(img);
+        manager.getTransaction().commit();
     }
     
 

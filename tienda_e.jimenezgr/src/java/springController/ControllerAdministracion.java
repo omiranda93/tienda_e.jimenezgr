@@ -10,6 +10,7 @@ import entities.Categoria;
 import entities.Producto;
 import entities.tiendaDAO;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import javax.servlet.http.HttpSession;
@@ -40,6 +41,14 @@ public class ControllerAdministracion {
     @RequestMapping(method=RequestMethod.GET)
     public String index(ModelMap model, HttpSession session){
         
+        List <Producto> productosListados = new ArrayList <Producto>();
+        productosListados = dao.getTodosProductos();
+        session.setAttribute("productosListados", productosListados);
+        
+        List <Categoria> categoriasListadas = new ArrayList <Categoria>();
+        categoriasListadas = dao.getTodasCategorias();
+        session.setAttribute("categoriasListadas", categoriasListadas);
+        
         return "LogAdministrador";
     }
     
@@ -62,23 +71,63 @@ public class ControllerAdministracion {
         return "Administrador";
     }
     
-    @RequestMapping(value="/InsertarProducto", method=RequestMethod.GET)
-    public String InsertarProducto(ModelMap model, HttpSession session){
+    
+    @RequestMapping(value="/AdminProductos", method=RequestMethod.GET)
+    public String AdminProducto(ModelMap model, HttpSession session){
         
+        return "AdministrarProductos";
+    }
+    
+    @RequestMapping(value="/AdminPedidos", method=RequestMethod.GET)
+    public String AdminPedidos(ModelMap model, HttpSession session){
+        
+        return "AdministrarPedidos";
+    }
+    
+    @RequestMapping(value="/AdminCategorias", method=RequestMethod.GET)
+    public String AdminCategorias(ModelMap model, HttpSession session){
+        
+        return "AdministrarCategorias";
+    }
+    
+    
+    @RequestMapping(value="/InsertarProducto", method=RequestMethod.GET)
+    public String InsertarProducto(@RequestParam("nombre") String nombre, @RequestParam("cantidad") String cantidad, @RequestParam("precio") String precio, @RequestParam("descripcion") String descripcion,  @RequestParam("categorias") String categoria, ModelMap model, HttpSession session){
+        Collection <Categoria> categorias = new ArrayList <Categoria>();
+        categorias.add(dao.getCategoria(categoria));
+        Producto p = new Producto(nombre, Double.parseDouble(precio), Integer.parseInt(cantidad), descripcion, categorias);
+        dao.insertarProducto(p);
         return "Administrador";
     }
     
     @RequestMapping(value="/EliminarProducto", method=RequestMethod.GET)
-    public String EliminarProducto(ModelMap model, HttpSession session){
+    public String EliminarProducto(@RequestParam("contador") String contador, ModelMap model, HttpSession session){
         
+        List <Producto>lista = (List <Producto>) session.getAttribute("productosListados");
+        Producto p = lista.get(Integer.parseInt(contador));
+        dao.eliminarProducto(p);
+        lista = dao.getTodosProductos();
+        session.setAttribute("productosListados", lista);
         return "Administrador";
     }
     
     @RequestMapping(value="/EditarProducto", method=RequestMethod.GET)
-    public String EditarProducto(ModelMap model, HttpSession session){
+    public String EditarProducto(@RequestParam("cantidad") String cantidad, @RequestParam("precio") String precio, @RequestParam("descripcion") String descripcion, @RequestParam("categorias") String categoria, @RequestParam("contador") String contador, ModelMap model, HttpSession session){
+        List <Producto>lista = (List <Producto>) session.getAttribute("productosListados");
+        Producto p = lista.get(Integer.parseInt(contador));
+        p.getCategoriaCollection().add(dao.getCategoria(categoria));
         
+        
+        dao.actualizarProducto(p.getNombre(), Double.parseDouble(precio), Integer.parseInt(cantidad), descripcion, p.getCategoriaCollection(), p.getProductoTieneImagenCollection());
+        lista = dao.getTodosProductos();
+        session.setAttribute("productosListados", lista);
         return "Administrador";
     }
+    
+    
+    
+    
+    
     
     @RequestMapping(value="/InsertarCategoria", method=RequestMethod.GET)
     public String InsertarCategoria(ModelMap model, HttpSession session){
@@ -97,6 +146,10 @@ public class ControllerAdministracion {
         
         return "Administrador";
     }
+    
+    
+    
+    
     
     @RequestMapping(value="/EstadoPedido", method=RequestMethod.GET)
     public String EstadoPedido(ModelMap model, HttpSession session){
