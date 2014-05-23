@@ -91,6 +91,16 @@ public class Pedido implements Serializable {
         this.direccion = direccion;
         this.telefono = telefono;
     }
+    
+    public void setPedido(Pedido ped){
+        setPendiente(ped.getPendiente());
+        setEstado(ped.getEstado());
+        setDireccion(ped.getDireccion());
+        setNombre(ped.getNombre());
+        setRegistroPedidosCollection(ped.getRegistroPedidosCollection());
+        setTelefono(ped.getTelefono());
+        setUsuario(ped.getUsuario());
+    }
 
     public Integer getNumero() {
         return numero;
@@ -100,7 +110,7 @@ public class Pedido implements Serializable {
         this.numero = numero;
     }
 
-    public Serializable getPendiente() {
+    public Boolean getPendiente() {
         return pendiente;
     }
 

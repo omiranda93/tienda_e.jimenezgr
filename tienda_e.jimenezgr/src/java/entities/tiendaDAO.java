@@ -129,7 +129,7 @@ public class tiendaDAO {
     public void actualizarPedido(int num, Pedido pedido) {
         manager.getTransaction().begin();
         Pedido p = manager.find(Pedido.class, num);
-        p = pedido;
+        p.setPedido(pedido);
         manager.getTransaction().commit();
     }
 
