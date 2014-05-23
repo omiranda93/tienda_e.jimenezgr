@@ -164,10 +164,12 @@ public class tiendaDAO {
     }
 
     public void insertarPedido(Pedido pedido) {
-        EntityTransaction tx = manager.getTransaction();
-        tx.begin();
+//        EntityTransaction tx = manager.getTransaction();
+//        tx.begin();
+        manager.getTransaction().begin();
         manager.persist(pedido);
-        tx.commit();
+        manager.getTransaction().commit();
+//        tx.commit();
         //manager.flush();
     }
 

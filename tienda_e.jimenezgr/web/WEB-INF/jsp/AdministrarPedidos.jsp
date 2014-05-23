@@ -16,7 +16,7 @@
         <c:set var="a" value="carrito" ></c:set>
         <c:forEach var="pedido" items="${pedidosListados}" varStatus="contador">
             <c:if test="${pedido.estado != a && pedido.pendiente == false}">
-                ${pedido.nomero}
+                ${pedido.numero}
                 <form method="get" action='/tienda_e.jimenezgr/Administracion/EstadoPedido' >
                             <input type='text' name='estado' value='${pedido.estado}'>
                             <input type='submit' name='editar' value='Editar estado' onclick="alert('Has cambiado el estado del pedido ${pedido.numero}')">
