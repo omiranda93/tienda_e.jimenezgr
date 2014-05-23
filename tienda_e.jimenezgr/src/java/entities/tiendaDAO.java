@@ -124,6 +124,13 @@ public class tiendaDAO {
         manager.getTransaction().commit();
     }
     
+    public void actualizarPedido(int num, Pedido pedido){
+        manager.getTransaction().begin();
+        Pedido p = manager.find(Pedido.class, num);
+        p=pedido;
+        manager.getTransaction().commit();
+    }
+    
     public void añadirHija(Categoria madre, Categoria hija){
         manager.getTransaction().begin();
         Categoria madree = manager.find(Categoria.class, madre.getClave());
