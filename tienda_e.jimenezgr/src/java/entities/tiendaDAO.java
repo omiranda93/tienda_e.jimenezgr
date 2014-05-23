@@ -187,6 +187,11 @@ public class tiendaDAO {
     public List<Usuario> getTodosUsuarios() {
         return getUsuariosQuery(null);
     }
+    
+    public List<Usuario> getUsuario(String usuario) {
+        String where = "u.credencialusuario = '"+usuario;
+        return getUsuariosQuery(where);
+    }
 
     private List<Usuario> getUsuariosQuery(String where) {
 

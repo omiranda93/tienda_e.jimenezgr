@@ -9,6 +9,7 @@ import entities.Categoria;
 import entities.Pedido;
 import entities.Producto;
 import entities.RegistroPedidos;
+import entities.Usuario;
 import entities.tiendaDAO;
 import java.util.ArrayList;
 import java.util.List;
@@ -148,7 +149,9 @@ public class ControllerInicio {
                 }
                 carro.setEstado("Carrito");
                 carro.setNumero(num);
-//                carro.setUsuario(null);
+                String nomUsu=(String)(session.getAttribute("usuario"));
+                Usuario usuario = dao.getUsuario(nomUsu).get(0);
+                carro.setUsuario(usuario);
                 List<RegistroPedidos> productos = new ArrayList<RegistroPedidos>();
                 carro.setRegistroPedidosCollection(productos);
                 dao.insertarPedido(carro);
