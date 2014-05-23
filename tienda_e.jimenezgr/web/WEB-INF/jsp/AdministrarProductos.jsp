@@ -16,7 +16,7 @@
         <table>
             <tr><td><b>Productos</b></td></tr>
                 <c:forEach var="producto" items="${productosListados}" varStatus="contador">
-                <tr><td><form method= "get" action='/tienda_e.jimenezgr/Administracion/EditarProducto' enctype="multipart/form-data">
+                <tr><td><form method= "post" action='/tienda_e.jimenezgr/Administracion/EditarProducto' enctype="multipart/form-data">
                             <input type='hidden' name='accion' value='editar'>
                             <input type='hidden' name='contador' value='${contador.index}'>
                             ${producto.nombre}
@@ -35,7 +35,8 @@
                                     </c:choose>
                                 </c:forEach>
                             </select>
-                            <input type='file' name='imagen' size='60'>
+                             Imagen: <input type="file" name="file"><br /> 
+                             Nombre: <input type="text" name="name"><br /> <br /> 
                             <input type='submit' name='editar' value='Editar' onclick="alert('Has editado este producto')">
                         </form>
                     </td><td><form method="get" action='/tienda_e.jimenezgr/Administracion/EliminarProducto' >
@@ -48,7 +49,7 @@
 
             </c:forEach>
         </table>
-        <form method= "get" action='/tienda_e.jimenezgr/Administracion/InsertarProducto' enctype="multipart/form-data">
+        <form method= "post" action='/tienda_e.jimenezgr/Administracion/InsertarProducto' enctype="multipart/form-data">
             <b>Nombre:</b>
             <input type='text' name='nombre'>
             <b>Precio:</b>
@@ -64,8 +65,8 @@
                                 </c:forEach>
             </select>
             <b>Imagen:</b>
-            <input type='file' name='imagen' size='60'>
-            <input type='hidden' name='accion' value='anadir'>
+            Imagen: <input type="file" name="file"><br /> 
+            Nombre: <input type="text" name="name"><br /> <br /> 
             <input type='submit' name='Añadir' value='Agregar' onclick="alert('Has añadido este producto a los disponibles.')">
         </form>
         <a href="/tienda_e.jimenezgr/Administracion">Volver</a>
