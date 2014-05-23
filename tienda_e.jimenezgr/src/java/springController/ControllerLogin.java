@@ -52,7 +52,7 @@ public class ControllerLogin {
                 //NO AUMENTA SI MISMO PRODUCTO
                 usuarioCarrito.getRegistroPedidosCollection().addAll(p.getRegistroPedidosCollection());
                 session.setAttribute("carrito", usuarioCarrito);
-                dao.actualizarPedido(p.getNumero(),usuarioCarrito);
+                dao.actualizarPedido(usuarioCarrito.getNumero(),usuarioCarrito);
             }
            
             //comprobar cesta
