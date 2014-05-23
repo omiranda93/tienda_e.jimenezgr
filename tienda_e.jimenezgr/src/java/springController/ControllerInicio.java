@@ -136,7 +136,7 @@ public class ControllerInicio {
                 boolean valido = false;
                 int i = 0;
                 int num = Integer.MAX_VALUE;
-                if (pedidos != null) {
+                if (pedidos.size()==0) {
                     while (valido == false) {
                         if (pedidos.get(i).getNumero() != num) {
                             i++;
