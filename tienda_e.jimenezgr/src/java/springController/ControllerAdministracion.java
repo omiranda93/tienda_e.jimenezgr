@@ -6,7 +6,6 @@
 
 package springController;
 
-import static com.sun.j3d.internal.UtilFreelistManager.MAXINT;
 import entities.Categoria;
 import entities.Pedido;
 import entities.Producto;

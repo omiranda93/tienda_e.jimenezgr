@@ -50,7 +50,7 @@ public class tiendaDAO {
         Query query = manager.createQuery(sql);
         return (List<Producto>) query.getResultList();
     }
-    
+
     public void insertarProducto(Producto producto) {
         EntityTransaction tx = manager.getTransaction();
         tx.begin();
@@ -58,22 +58,23 @@ public class tiendaDAO {
         tx.commit();
         //manager.flush();
     }
+
     public Producto getNombre(String nombre) {
         return manager.find(Producto.class, nombre);
     }
-    
+
     public List<Producto> getNombreLike(String nombre) {
-        String where = "upper(p.nombre) like upper('%"+nombre+"%')";
+        String where = "upper(p.nombre) like upper('%" + nombre + "%')";
         return getProductosQuery(where);
     }
-    
-    public void eliminarProducto(Producto p){
+
+    public void eliminarProducto(Producto p) {
         manager.getTransaction().begin();
         manager.remove(p);
         manager.getTransaction().commit();
     }
-    
-    public void actualizarProducto(String nombre, double precio, int cantidad, String descripcion, Collection <Categoria> categorias, Collection <ProductoTieneImagen> img){
+
+    public void actualizarProducto(String nombre, double precio, int cantidad, String descripcion, Collection<Categoria> categorias, Collection<ProductoTieneImagen> img) {
         manager.getTransaction().begin();
         Producto p = manager.find(Producto.class, nombre);
         p.setCantidad(cantidad);
@@ -83,7 +84,6 @@ public class tiendaDAO {
         p.setProductoTieneImagenCollection(img);
         manager.getTransaction().commit();
     }
-    
 
 //Categorias:
     public List<Categoria> getTodasCategorias() {
@@ -100,7 +100,7 @@ public class tiendaDAO {
         Query query = manager.createQuery(sql);
         return (List<Categoria>) query.getResultList();
     }
-    
+
     public void insertarCategoria(Categoria categoria) {
         EntityTransaction tx = manager.getTransaction();
         tx.begin();
@@ -108,36 +108,45 @@ public class tiendaDAO {
         tx.commit();
         //manager.flush();
     }
+
     public Categoria getCategoria(String clave) {
         return manager.find(Categoria.class, clave);
     }
-    public void eliminarCategoria(Categoria c){
+
+    public void eliminarCategoria(Categoria c) {
         manager.getTransaction().begin();
         manager.remove(c);
         manager.getTransaction().commit();
     }
-    
-    public void actualizarCategoria(String clave, String nombre){
+
+    public void actualizarCategoria(String clave, String nombre) {
         manager.getTransaction().begin();
         Categoria c = manager.find(Categoria.class, clave);
         c.setNombre(nombre);
         manager.getTransaction().commit();
     }
-    
-    public void añadirHija(Categoria madre, Categoria hija){
+
+    public void actualizarPedido(int num, Pedido pedido) {
+        manager.getTransaction().begin();
+        Pedido p = manager.find(Pedido.class, num);
+        p = pedido;
+        manager.getTransaction().commit();
+    }
+
+    public void añadirHija(Categoria madre, Categoria hija) {
         manager.getTransaction().begin();
         Categoria madree = manager.find(Categoria.class, madre.getClave());
         madree.getCategoriaCollection1().add(hija);
         manager.getTransaction().commit();
     }
-    
-    public void añadirMadre(Categoria madre, Categoria hija){
+
+    public void añadirMadre(Categoria madre, Categoria hija) {
         manager.getTransaction().begin();
         Categoria hijaa = manager.find(Categoria.class, hija.getClave());
         hijaa.getCategoriaCollection().add(madre);
         manager.getTransaction().commit();
     }
-    
+
     //Pedidos:
     public List<Pedido> getTododosPedidos() {
         return getPedidosQuery(null);
@@ -153,7 +162,7 @@ public class tiendaDAO {
         Query query = manager.createQuery(sql);
         return (List<Pedido>) query.getResultList();
     }
-    
+
     public void insertarPedido(Pedido pedido) {
         EntityTransaction tx = manager.getTransaction();
         tx.begin();
@@ -161,15 +170,15 @@ public class tiendaDAO {
         tx.commit();
         //manager.flush();
     }
-    
-    public void actualizarPedidos(Pedido p, String estado){
+
+    public void actualizarPedidos(Pedido p, String estado) {
         manager.getTransaction().begin();
         Pedido pedido = manager.find(Pedido.class, p.getNumero());
         pedido.setEstado(estado);
         manager.getTransaction().commit();
     }
-    
-    public void actualizarPreparado(Pedido p){
+
+    public void actualizarPreparado(Pedido p) {
         manager.getTransaction().begin();
         Pedido pedido = manager.find(Pedido.class, p.getNumero());
         pedido.setPendiente(true);
@@ -179,6 +188,16 @@ public class tiendaDAO {
     //Ususarios
     public List<Usuario> getTodosUsuarios() {
         return getUsuariosQuery(null);
+    }
+
+    public List<Usuario> getUsuario(String usuario) {
+        String where = "u.credencialusuario = '" + usuario;
+        return getUsuariosQuery(where);
+    }
+
+    public List<Usuario> getUsuario(String usuario, String pwd) {
+        String where = "u.credencialusuario = '" + usuario + "'" + "and u.credencialcontrasenia = '" + pwd + "'";
+        return getUsuariosQuery(where);
     }
 
     private List<Usuario> getUsuariosQuery(String where) {
@@ -191,7 +210,7 @@ public class tiendaDAO {
         Query query = manager.createQuery(sql);
         return (List<Usuario>) query.getResultList();
     }
-    
+
     public void insertarUsuario(Usuario u) {
         EntityTransaction tx = manager.getTransaction();
         tx.begin();
@@ -199,13 +218,13 @@ public class tiendaDAO {
         tx.commit();
         //manager.flush();
     }
-    
+
     //Administrador
     public List<Administrador> getAdministrador(String usuario, String pwd) {
-        String where = "a.credencialusuario = '"+usuario+"'"+"and a.credencialcontrasenia = '"+pwd+"'";
+        String where = "a.credencialusuario = '" + usuario + "'" + "and a.credencialcontrasenia = '" + pwd + "'";
         return getAdministradoresQuery(where);
     }
-    
+
     public List<Administrador> getTodosAdministradores() {
         return getAdministradoresQuery(null);
     }
@@ -220,7 +239,7 @@ public class tiendaDAO {
         Query query = manager.createQuery(sql);
         return (List<Administrador>) query.getResultList();
     }
-    
+
     public void insertarAdministrador(Administrador a) {
         EntityTransaction tx = manager.getTransaction();
         tx.begin();
@@ -228,10 +247,6 @@ public class tiendaDAO {
         tx.commit();
         //manager.flush();
     }
-    
-    
-
-    
 
 //    public Autor getAutor(int codigoAutor) {
 //        //String sql = "select a from Autor a where a.idautor = "+codigoAutor;

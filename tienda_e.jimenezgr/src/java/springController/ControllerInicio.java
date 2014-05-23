@@ -9,6 +9,7 @@ import entities.Categoria;
 import entities.Pedido;
 import entities.Producto;
 import entities.RegistroPedidos;
+import entities.Usuario;
 import entities.tiendaDAO;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +70,7 @@ public class ControllerInicio {
         List<Producto> productosListados = new ArrayList<Producto>();
         productosListados = (List<Producto>) dao.getCategoria(clave).getProductoCollection();
         session.setAttribute("productosListados", productosListados);
-        String categoria=dao.getCategoria(clave).getNombre();
+        String categoria = dao.getCategoria(clave).getNombre();
         session.setAttribute("categoriaActual", categoria);
         return "muestraProductos";
     }
@@ -96,8 +97,8 @@ public class ControllerInicio {
     public String Carrito(@RequestParam("nombreProd") String nombreProd, ModelMap model, HttpSession session) {
 
 //      si no hay carro usuario
+        Pedido carro = (Pedido) session.getAttribute("carrito");
         if (session.getAttribute("usuario") == null) {
-            Pedido carro = (Pedido) session.getAttribute("carrito");
             if (carro == null) {
                 carro = new Pedido();
                 carro.setEstado("Carrito");
@@ -127,14 +128,61 @@ public class ControllerInicio {
                 producto.setPedido(carro);
                 carro.getRegistroPedidosCollection().add(producto);
             }
-//       productos.add(dao.getNombre(nombreProd));
-//       productos = (List<Producto>) session.getAttribute("carrito");
-//       productos.add(dao.getNombre(nombreProd));
             session.setAttribute("carrito", carro);
         } else {
-//            sacar todos los pedidos de la bd que tenga el usuario
-//            si no hay un pedido con estado carrito crear un pedido al usuario con datos de carrito
-//            si hay un pedido con estado carrito añadir a la bd el producto en cantidad 1
+            if (carro == null) {
+                List<Pedido> pedidos = dao.getTododosPedidos();
+                carro = new Pedido();
+                boolean valido = false;
+                int i = 0;
+                int num = Integer.MAX_VALUE;
+                if (pedidos.size()==0) {
+                    while (valido == false) {
+                        if (pedidos.get(i).getNumero() != num) {
+                            i++;
+                            if (i == pedidos.size()) {
+                                valido = true;
+                            }
+                        } else {
+                            i = 0;
+                            num--;
+                        }
+                    }
+                }
+                carro.setEstado("Carrito");
+                carro.setNumero(num);
+                String nomUsu = (String) (session.getAttribute("usuario"));
+                Usuario usuario = dao.getUsuario(nomUsu).get(0);
+                carro.setUsuario(usuario);
+                List<RegistroPedidos> productos = new ArrayList<RegistroPedidos>();
+                carro.setRegistroPedidosCollection(productos);
+                dao.insertarPedido(carro);
+            }
+            int i = 0;
+            boolean encontrado = false;
+            int pos = -1;
+            ArrayList<RegistroPedidos> rp = (ArrayList) carro.getRegistroPedidosCollection();
+            while (i < rp.size() && !encontrado) {
+                if (rp.get(i).getProducto1().getNombre().equals(nombreProd)) {
+                    encontrado = true;
+                    pos = i;
+                }
+                i++;
+            }
+            if (encontrado) {
+                int can = rp.get(pos).getCantidad() + 1;
+                rp.get(pos).setCantidad(can);
+//                carro.setRegistroPedidosCollection(rp);
+
+            } else {
+                RegistroPedidos producto = new RegistroPedidos();
+                producto.setCantidad(1);
+                producto.setProducto1(dao.getNombre(nombreProd));
+                producto.setPedido(carro);
+                carro.getRegistroPedidosCollection().add(producto);
+            }
+            dao.actualizarPedido(carro.getNumero(), carro);
+            session.setAttribute("carrito", carro);
         }
         return "carrito";
     }
@@ -159,8 +207,8 @@ public class ControllerInicio {
             while (!rp.get(i).getProducto1().getNombre().equals(nombreProd)) {
                 i++;
             }
-            if(rp.get(i).getProducto1().getNombre().equals(nombreProd)){
-              rp.remove(i);
+            if (rp.get(i).getProducto1().getNombre().equals(nombreProd)) {
+                rp.remove(i);
             }
         }
         session.setAttribute("carrito", carro);

@@ -31,6 +31,11 @@
             <a href="/tienda_e.jimenezgr/Inicio/Autenticacion" type="button" class="btn btn-primary">
                 <span class="glyphicon glyphicon-user"></span>
                 <span>Mi cuenta</span>
+                <c:if test="${usuario!=null}">
+                    <div>
+                        ${usuario}  
+                    </div>
+                </c:if>
             </a>
         </span>
         <span class="col-lg-5">

@@ -16,14 +16,15 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap-theme.min.css'/>"/>
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
         <link rel="stylesheet" type="text/css" href="<c:url value='/css/estilo.css'/>"/>
+        <script src="<c:url value='/js/funciones.js'/>"></script>
     </head>
     <body>
         <div id="contenedor">
             <c:import url="cabecera.jsp" charEncoding="utf-8"/>
-            
+
             <div id = "registro" class="row">
                 <div id="formLog" class="panel panel-default col-lg-5">
-                    <form method="post" action="/ControllerLogin">
+                    <form name="formLog"  method="post" action="/tienda_e.jimenezgr/Login/Logueo" onsubmit="validar_camposLogin()">
                         <p class="row">
                             <strong>¿Eres YA CLIENTE de Poxmania? </strong>
                         </p>
@@ -31,16 +32,17 @@
                             Introduce tus identificantes por favor: 
                         </p>
                         <p class="row">
-                            <span class="col-lg-4">Tu dirección de correo electrónico</span>
-                            <input class="col-lg-6" name="email" type="email" placeholder="Tu dirección de correo electrónico" value="" required>
+                            <span class="col-lg-4">Tu usuario</span>
+                            <input class="col-lg-6" name="usuario" type="text" placeholder="Tu usuario" value="" required>
                         </p>
                         <p class="row">
                             <span class="col-lg-4">Tu contraseña</span>
-                            <input class="col-lg-6" name="password" type="password" placeholder="Tu contraseña " required>
+                            <input class="col-lg-6" name="pwd" type="password" placeholder="Tu contraseña " required>
                         </p>
-                        <input class="btn btn-primary row col-lg-offset-4" name="logBoton" type="button" value="Continuar">
+                        <input class="btn btn-primary row col-lg-offset-4" name="logBoton" type="submit" value="Continuar">
                     </form>
                 </div>
+
                 <div id ="formRegistro" class="panel panel-default col-lg-5 col-lg-offset-1">
                     <form method="get" action="/tienda_e.jimenezgr/Inicio/Registro">
                         <p class="row">
