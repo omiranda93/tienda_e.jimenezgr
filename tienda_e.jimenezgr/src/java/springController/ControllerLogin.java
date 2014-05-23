@@ -4,6 +4,7 @@ import entities.Categoria;
 import entities.Pedido;
 import entities.Producto;
 import entities.RegistroPedidos;
+import entities.Usuario;
 import entities.tiendaDAO;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,19 +36,23 @@ public class ControllerLogin {
             session.setMaxInactiveInterval(1800);
             
             if(session.getAttribute("carrito")!=null){
-                Pedido p = (Pedido) session.getAttribute("carrito");
-                List <Pedido> usuarioP = dao.getPedidosUsuario(usuario);
-                Pedido usuarioCarrito = new Pedido(1, false, "Carrito", "", "", "");
-                usuarioCarrito.setRegistroPedidosCollection(new ArrayList<RegistroPedidos> ());
-                for(int i = 0; i<usuarioP.size(); i++){
-                    if ("Carrito".equalsIgnoreCase(usuarioP.get(i).getEstado())){
-                        usuarioCarrito = usuarioP.get(i);
-                    }
-                }
-                
-                usuarioCarrito.getRegistroPedidosCollection().addAll(p.getRegistroPedidosCollection());
-                session.setAttribute("carrito", usuarioCarrito);
-                dao.modificarPeidoCollection(usuarioCarrito, p);
+                Pedido p = new Pedido(1,false,"Carrito","luisin","maijaus","10101");
+                Usuario oscar=dao.getUsuario("o.miranda").get(0);
+                p.setUsuario(oscar);
+                dao.insertarPedido(p);
+//                Pedido p = (Pedido) session.getAttribute("carrito");
+//                List <Pedido> usuarioP = dao.getPedidosUsuario(usuario);
+//                Pedido usuarioCarrito = new Pedido(1, false, "Carrito", "", "", "");
+//                usuarioCarrito.setRegistroPedidosCollection(new ArrayList<RegistroPedidos> ());
+//                for(int i = 0; i<usuarioP.size(); i++){
+//                    if ("Carrito".equalsIgnoreCase(usuarioP.get(i).getEstado())){
+//                        usuarioCarrito = usuarioP.get(i);
+//                    }
+//                }
+//                //NO AUMENTA SI MISMO PRODUCTO
+//                usuarioCarrito.getRegistroPedidosCollection().addAll(p.getRegistroPedidosCollection());
+//                session.setAttribute("carrito", usuarioCarrito);
+//                dao.actualizarPedido(p.getNumero(),usuarioCarrito);
             }
            
             //comprobar cesta
