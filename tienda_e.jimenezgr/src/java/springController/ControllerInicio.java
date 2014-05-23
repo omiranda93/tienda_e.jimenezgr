@@ -136,20 +136,22 @@ public class ControllerInicio {
                 boolean valido = false;
                 int i = 0;
                 int num = Integer.MAX_VALUE;
-                while (valido == false) {
-                    if (pedidos.get(i).getNumero() != num) {
-                        i++;
-                        if (i == pedidos.size()) {
-                            valido = true;
+                if (pedidos != null) {
+                    while (valido == false) {
+                        if (pedidos.get(i).getNumero() != num) {
+                            i++;
+                            if (i == pedidos.size()) {
+                                valido = true;
+                            }
+                        } else {
+                            i = 0;
+                            num--;
                         }
-                    } else {
-                        i = 0;
-                        num--;
                     }
                 }
                 carro.setEstado("Carrito");
                 carro.setNumero(num);
-                String nomUsu=(String)(session.getAttribute("usuario"));
+                String nomUsu = (String) (session.getAttribute("usuario"));
                 Usuario usuario = dao.getUsuario(nomUsu).get(0);
                 carro.setUsuario(usuario);
                 List<RegistroPedidos> productos = new ArrayList<RegistroPedidos>();
