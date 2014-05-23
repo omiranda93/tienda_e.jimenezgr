@@ -130,13 +130,15 @@ public class ControllerInicio {
             }
             session.setAttribute("carrito", carro);
         } else {
+            boolean crear=false;
             if (carro == null) {
+                crear=true;
                 List<Pedido> pedidos = dao.getTododosPedidos();
                 carro = new Pedido();
                 boolean valido = false;
                 int i = 0;
                 int num = Integer.MAX_VALUE;
-                if (pedidos.size()==0) {
+                if (pedidos.size()!=0) {
                     while (valido == false) {
                         if (pedidos.get(i).getNumero() != num) {
                             i++;
@@ -154,9 +156,12 @@ public class ControllerInicio {
                 String nomUsu = (String) (session.getAttribute("usuario"));
                 Usuario usuario = dao.getUsuario(nomUsu).get(0);
                 carro.setUsuario(usuario);
+                carro.setPendiente(false);
+                carro.setNombre("");
+                carro.setDireccion("");
+                carro.setTelefono("");
                 List<RegistroPedidos> productos = new ArrayList<RegistroPedidos>();
                 carro.setRegistroPedidosCollection(productos);
-                dao.insertarPedido(carro);
             }
             int i = 0;
             boolean encontrado = false;
@@ -181,7 +186,11 @@ public class ControllerInicio {
                 producto.setPedido(carro);
                 carro.getRegistroPedidosCollection().add(producto);
             }
-            dao.actualizarPedido(carro.getNumero(), carro);
+            if (crear){
+                dao.insertarPedido(carro);
+            } else{
+                dao.actualizarPedido(carro.getNumero(), carro);
+            }
             session.setAttribute("carrito", carro);
         }
         return "carrito";

@@ -184,6 +184,18 @@ public class tiendaDAO {
         pedido.setPendiente(true);
         manager.getTransaction().commit();
     }
+     
+    public List<Pedido> getPedidosUsuario(String usuario) {
+        String where = "p.nombre = '"+usuario+"'";
+        return getPedidosQuery(where);
+    }
+    
+    public void modificarPeidoCollection(Pedido antiguo, Pedido nuevo) {
+        manager.getTransaction().begin();
+        Pedido pedidoAntiguo = manager.find(Pedido.class, antiguo.getNumero());
+        pedidoAntiguo.getRegistroPedidosCollection().addAll(nuevo.getRegistroPedidosCollection());
+        manager.getTransaction().commit();
+    }
 
     //Ususarios
     public List<Usuario> getTodosUsuarios() {
@@ -191,7 +203,7 @@ public class tiendaDAO {
     }
 
     public List<Usuario> getUsuario(String usuario) {
-        String where = "u.credencialusuario = '" + usuario;
+        String where = "u.credencialusuario = '" + usuario+"'";
         return getUsuariosQuery(where);
     }
 
