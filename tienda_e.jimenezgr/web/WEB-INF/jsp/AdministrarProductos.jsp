@@ -22,21 +22,31 @@
                             ${producto.nombre}
                             <input type='text' name='precio' value="${producto.precio}">
                             <input type='text' name='cantidad' value="${producto.cantidad}">
-                            <input type='textarea' name='descripcion' value="${producto.descripcion}">
-                            <select MULTIPLE NAME='categorias' SIZE='4'> 
+                            <input type='textarea' rows="4" cols="50" name='descripcion' value="${producto.descripcion}">
+                            <label>Añadir categoria</label>
+                            <select name='categorias' > 
+                                <option value="">Seleccione una categoria</option>
+                                <c:forEach var="categoria" items="${categoriasListadas}">
+                                    
+                                            <option value='${categoria.clave}'>${categoria.nombre}</option>
+                                        
+                                    
+                                </c:forEach>
+                            </select>
+                            <label>Eliminar categoria</label>
+                                 <select name='categorias2' > 
+                                     <option value="">Seleccione una categoria</option>
                                 <c:forEach var="categoria" items="${categoriasListadas}">
                                     <c:choose>
                                         <c:when test="${producto.categoriaCollection.contains(categoria)}">
-                                            <option value='${categoria.clave}'selected>${categoria.nombre}</option>
-                                        </c:when>
-                                        <c:otherwise>
                                             <option value='${categoria.clave}'>${categoria.nombre}</option>
-                                        </c:otherwise>
+                                        </c:when>
                                     </c:choose>
                                 </c:forEach>
                             </select>
-                             Imagen: <input type="file" name="file"><br /> 
-                             Nombre: <input type="text" name="name"><br /> <br /> 
+                            <br /> 
+                             Imagen: <input type="file" name="file">
+                             Nombre de la imagen: <input type="text" name="name"><br /> <br /> 
                             <input type='submit' name='editar' value='Editar' onclick="alert('Has editado este producto')">
                         </form>
                     </td><td><form method="get" action='/tienda_e.jimenezgr/Administracion/EliminarProducto' >

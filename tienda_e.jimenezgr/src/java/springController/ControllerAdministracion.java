@@ -175,7 +175,7 @@ public class ControllerAdministracion {
     }
     
     @RequestMapping(value="/EditarProducto", method=RequestMethod.POST)
-    public String EditarProducto(@RequestParam("cantidad") String cantidad, @RequestParam("precio") String precio, @RequestParam("descripcion") String descripcion, @RequestParam("categorias") String categoria, @RequestParam("contador") String contador,@RequestParam(value="name", required = false) String name, @RequestParam(value= "file", required = false) MultipartFile file,  ModelMap model, HttpSession session){
+    public String EditarProducto(@RequestParam("cantidad") String cantidad, @RequestParam("precio") String precio, @RequestParam("descripcion") String descripcion, @RequestParam("categorias") String categoria, @RequestParam("categorias2") String categoria2, @RequestParam("contador") String contador,@RequestParam(value="name", required = false) String name, @RequestParam(value= "file", required = false) MultipartFile file,  ModelMap model, HttpSession session){
         String nuevaImagen;
         //Imagen
         if (!file.isEmpty()) {
@@ -203,13 +203,15 @@ public class ControllerAdministracion {
                 Collection <ProductoTieneImagen> imagenes = new ArrayList <ProductoTieneImagen> ();
                 List <Producto>lista = (List <Producto>) session.getAttribute("productosListados");
                 Producto p = lista.get(Integer.parseInt(contador));
-                p.getCategoriaCollection().add(dao.getCategoria(categoria));
+                if(categoria!=""){
+                    p.getCategoriaCollection().add(dao.getCategoria(categoria));
+                }
                 ProductoTieneImagen img =new ProductoTieneImagen(p.getNombre(), nuevaImagen);
-                img.setPrincipal(Boolean.TRUE);
+                img.setPrincipal(false);
                 img.setProducto1(p);
                 imagenes.add(img);
                 p.setProductoTieneImagenCollection(imagenes);
-                dao.actualizarProducto(p.getNombre(), Double.parseDouble(precio), Integer.parseInt(cantidad), descripcion, p.getCategoriaCollection(), p.getProductoTieneImagenCollection());
+                dao.actualizarProducto(p.getNombre(), Double.parseDouble(precio), Integer.parseInt(cantidad), descripcion, p.getCategoriaCollection(), p.getProductoTieneImagenCollection(), categoria2);
                 lista = dao.getTodosProductos();
                 session.setAttribute("productosListados", lista);
                 return "Administrador";
@@ -220,10 +222,12 @@ public class ControllerAdministracion {
         } else {
             List <Producto>lista = (List <Producto>) session.getAttribute("productosListados");
             Producto p = lista.get(Integer.parseInt(contador));
-            p.getCategoriaCollection().add(dao.getCategoria(categoria));
+            if(categoria!=""){
+                p.getCategoriaCollection().add(dao.getCategoria(categoria));
+            }
 
 
-            dao.actualizarProducto(p.getNombre(), Double.parseDouble(precio), Integer.parseInt(cantidad), descripcion, p.getCategoriaCollection(), p.getProductoTieneImagenCollection());
+            dao.actualizarProducto(p.getNombre(), Double.parseDouble(precio), Integer.parseInt(cantidad), descripcion, p.getCategoriaCollection(), p.getProductoTieneImagenCollection(),categoria2);
             lista = dao.getTodosProductos();
             session.setAttribute("productosListados", lista);
             return "Administrador";

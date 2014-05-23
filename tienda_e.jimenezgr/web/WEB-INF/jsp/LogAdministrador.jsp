@@ -43,14 +43,14 @@
                 <tr>
                     <td>Usuario</td>
                     <td>
-                        <input type="text" name="usuario" maxlength="20" value="poxmaniaco">
+                        <input type="text" name="usuario" maxlength="20" value="poxmaniaco" required>
                     </td>
                 </tr>
 
                 <tr>
                     <td>Password</td>
                     <td>
-                        <input type="password" name="pwd" maxlength="15" value="nosomospixmania">
+                        <input type="password" name="pwd" maxlength="15" value="nosomospixmania" required>
                     </td>
                 </tr>
 

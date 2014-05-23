@@ -55,6 +55,14 @@ public class tiendaDAO {
         EntityTransaction tx = manager.getTransaction();
         tx.begin();
         manager.persist(producto);
+        for(Categoria c : producto.getCategoriaCollection()){
+            Categoria cat = manager.find(Categoria.class, c.getClave());
+            if(cat.getProductoCollection()==null){
+            }else{
+            if(!cat.getProductoCollection().contains(producto)){
+                cat.getProductoCollection().add(producto);
+            }}
+        }
         tx.commit();
         //manager.flush();
     }
@@ -74,7 +82,7 @@ public class tiendaDAO {
         manager.getTransaction().commit();
     }
 
-    public void actualizarProducto(String nombre, double precio, int cantidad, String descripcion, Collection<Categoria> categorias, Collection<ProductoTieneImagen> img) {
+    public void actualizarProducto(String nombre, double precio, int cantidad, String descripcion, Collection<Categoria> categorias, Collection<ProductoTieneImagen> img, String categoria2) {
         manager.getTransaction().begin();
         Producto p = manager.find(Producto.class, nombre);
         p.setCantidad(cantidad);
@@ -82,6 +90,19 @@ public class tiendaDAO {
         p.setDescripcion(descripcion);
         p.setPrecio(precio);
         p.setProductoTieneImagenCollection(img);
+        for(Categoria c : p.getCategoriaCollection()){
+            Categoria cat = manager.find(Categoria.class, c.getClave());
+            if(cat.getProductoCollection()==null){
+            }else{
+            if(!cat.getProductoCollection().contains(p)){
+                cat.getProductoCollection().add(p);
+            }}
+        }
+        Categoria cat = manager.find(Categoria.class, categoria2);
+        if(cat.getCategoriaCollection()==null){
+        }else{
+            cat.getProductoCollection().remove(p);
+        }
         manager.getTransaction().commit();
     }
 

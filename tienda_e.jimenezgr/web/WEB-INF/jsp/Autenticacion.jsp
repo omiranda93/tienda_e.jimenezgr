@@ -24,7 +24,7 @@
 
             <div id = "registro" class="row">
                 <div id="formLog" class="panel panel-default col-lg-5">
-                    <form name="formLog"  method="post" action="/tienda_e.jimenezgr/Login/Logueo" onsubmit="validar_camposLogin()">
+                    <form name="formLog"  method="post" action="/tienda_e.jimenezgr/Login/Logueo">
                         <p class="row">
                             <strong>¿Eres YA CLIENTE de Poxmania? </strong>
                         </p>
