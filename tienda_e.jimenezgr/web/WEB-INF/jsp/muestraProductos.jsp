@@ -21,6 +21,9 @@
     <body>
         <div id="contenedor">
             <c:import url="cabecera.jsp" charEncoding="utf-8"/>
+            <div>
+                <h1>${categoria}</h1>
+            </div>
             <div id="productosListados" class="col-lg-9 col-lg-offset-3">
                 <c:choose>
                     <c:when test="${productosListados.size()>0}">
@@ -56,11 +59,11 @@
                                     <div id="estado">
                                         <c:choose>
                                             <c:when test="${prod.cantidad>0}">
-                                                <span class="glyphicon glyphicon-ok"></span>
+                                                <span class="glyphicon glyphicon-ok ok"></span>
                                                 <span>En stock</span>
                                             </c:when>
                                             <c:otherwise>
-                                                <span class="glyphicon glyphicon-remove"></span>
+                                                <span class="glyphicon glyphicon-remove delete"></span>
                                                 <span>Sin stock. "Entrega en 3 semanas".</span>
                                             </c:otherwise>
                                         </c:choose>

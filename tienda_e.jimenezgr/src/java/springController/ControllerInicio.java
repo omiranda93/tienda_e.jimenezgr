@@ -34,8 +34,6 @@ public class ControllerInicio {
     @RequestMapping(method = RequestMethod.GET)
     public String index(ModelMap model, HttpSession session) {
 
-//        Pedido carrito = new Pedido();
-//        session.setAttribute("carrito", carrito);
         List<Producto> productosRandom = new ArrayList<Producto>();
         Random rand = new Random();
         for (int i = 0; i <= 5; i++) {
@@ -71,6 +69,8 @@ public class ControllerInicio {
         List<Producto> productosListados = new ArrayList<Producto>();
         productosListados = (List<Producto>) dao.getCategoria(clave).getProductoCollection();
         session.setAttribute("productosListados", productosListados);
+        String categoria=dao.getCategoria(clave).getNombre();
+        session.setAttribute("categoriaActual", categoria);
         return "muestraProductos";
     }
 
@@ -106,17 +106,17 @@ public class ControllerInicio {
             }
             int i = 0;
             boolean encontrado = false;
-            int pos=-1;
+            int pos = -1;
             ArrayList<RegistroPedidos> rp = (ArrayList) carro.getRegistroPedidosCollection();
-            while (i < rp.size() && !encontrado) {                
+            while (i < rp.size() && !encontrado) {
                 if (rp.get(i).getProducto1().getNombre().equals(nombreProd)) {
                     encontrado = true;
-                    pos=i;
+                    pos = i;
                 }
                 i++;
             }
             if (encontrado) {
-                int can=rp.get(pos).getCantidad()+1;
+                int can = rp.get(pos).getCantidad() + 1;
                 rp.get(pos).setCantidad(can);
 //                carro.setRegistroPedidosCollection(rp);
 
@@ -147,9 +147,20 @@ public class ControllerInicio {
     @RequestMapping(value = "/CarritoNuevaCantidad", method = RequestMethod.GET)
     public String CarritoNuevaCantidad(@RequestParam("cantidad") int cantidad, @RequestParam("nombreProd") String nombreProd, ModelMap model, HttpSession session) {
         Pedido carro = (Pedido) (session.getAttribute("carrito"));
-        for (RegistroPedidos prod : carro.getRegistroPedidosCollection()) {
-            if (prod.getProducto1().getNombre().equals(nombreProd)) {
-                prod.setCantidad(cantidad);
+        if (cantidad > 0) {
+            for (RegistroPedidos prod : carro.getRegistroPedidosCollection()) {
+                if (prod.getProducto1().getNombre().equals(nombreProd)) {
+                    prod.setCantidad(cantidad);
+                }
+            }
+        } else {
+            ArrayList<RegistroPedidos> rp = (ArrayList) carro.getRegistroPedidosCollection();
+            int i = 0;
+            while (!rp.get(i).getProducto1().getNombre().equals(nombreProd)) {
+                i++;
+            }
+            if(rp.get(i).getProducto1().getNombre().equals(nombreProd)){
+              rp.remove(i);
             }
         }
         session.setAttribute("carrito", carro);

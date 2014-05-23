@@ -7,10 +7,10 @@
     </div>
 
 
-    <div class="col-lg-4 well  col-lg-offset-1">
+    <div class="col-lg-4 well col-lg-offset-1">
         <form name="formNombre" method='get' action='/tienda_e.jimenezgr/Inicio/BuscaProductos'>
             <div class="form-group col-lg-9">
-                <input class="form-control" type='search' name='nombreProd' value="¿Qué estás buscando?"/>
+                <input class="form-control" type='search' name='nombreProd' placeholder="¿Qué estás buscando?"/>
             </div>
             <input type='hidden' name='busqueda' value='nombre' />
             <input type='submit' class="btn btn-primary" name='BuscarNombre' value='Buscar'>
@@ -38,25 +38,26 @@
                 <span class="glyphicon glyphicon-shopping-cart"></span>
                 <span>Cesta</span>
                 <%//si el parametro carro no esta vacio%>
-                <c:if test="${carro!=null}">
-                    <span><c:out value="(${carro.totalProductos()})"/></span>
+                <c:if test="${carrito!=null}">
+                    <span><c:out value="(${carrito.totalProductos()})"/></span>
                 </c:if>                
             </a>    
         </span>
     </div>
 </div>
-                
-                
-  
 
-<div id="menu">
-    <ul>
-        <c:forEach var="categ" items="${categorias}">
-            <c:if test="${categ.essuper==true}">
-                <c:choose>
-                    <c:when test="${categ.categoriaCollection1.size()>0}">
-                        <li class="btn-group">
-                            <a href="/tienda_e.jimenezgr/Inicio/MuestraProductos?clave=${categ.clave}" name= "categoriaProd" class="btn-default dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><c:out value="${categ.nombre}"/>
+
+
+
+<div id="menu" class="collapse navbar-collapse navbar-default ">
+    <ul class="nav navbar-nav">
+        <li><a href="/tienda_e.jimenezgr/Inicio" class="glyphicon glyphicon-home"></a></li>
+            <c:forEach var="categ" items="${categorias}">
+                <c:if test="${categ.essuper==true}">
+                    <c:choose>
+                        <c:when test="${categ.categoriaCollection1.size()>0}">
+                        <li class="dropdown">
+                            <a href="/tienda_e.jimenezgr/Inicio/MuestraProductos?clave=${categ.clave}" name= "categoriaProd" class="dropdown-toggle" data-toggle="dropdown"><c:out value="${categ.nombre}"/>
                             </a>            
                             <%--buscar hijos y guardarlos en hijos--%>
                             <ul class="dropdown-menu">

@@ -1,6 +1,6 @@
 body{
-    
-    
+
+
 }
 
 *{
@@ -14,4 +14,34 @@ body{
     margin-left:-625px;
     left:50%;
     padding: 5px 1px 0px 1px;
+}
+
+
+ul li:hover > ul{
+    display:block;
+}
+
+.ok{
+    color: #7dd800;
+}
+.delete{
+    color: #f82000;
+}
+
+.precioS{
+    font-size: 1em;
+    color: #f82000;
+    font-weight: bold;
+}
+
+.precioM{
+    color: #f82000;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.precioL{
+    color: #f82000;
+    font-size: 2em;
+    font-weight: bold;
 }
