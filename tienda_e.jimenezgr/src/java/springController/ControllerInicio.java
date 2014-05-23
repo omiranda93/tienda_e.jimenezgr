@@ -132,7 +132,7 @@ public class ControllerInicio {
             if (carro == null) {
                 List<Pedido> pedidos = dao.getTododosPedidos();
                 carro = new Pedido();
-                boolean valido = true;
+                boolean valido = false;
                 int i = 0;
                 int num = Integer.MAX_VALUE;
                 while (valido == false) {
