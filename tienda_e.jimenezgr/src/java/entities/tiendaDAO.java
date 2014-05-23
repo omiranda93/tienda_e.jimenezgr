@@ -161,6 +161,20 @@ public class tiendaDAO {
         tx.commit();
         //manager.flush();
     }
+    
+    public void actualizarPedidos(Pedido p, String estado){
+        manager.getTransaction().begin();
+        Pedido pedido = manager.find(Pedido.class, p.getNumero());
+        pedido.setEstado(estado);
+        manager.getTransaction().commit();
+    }
+    
+    public void actualizarPreparado(Pedido p){
+        manager.getTransaction().begin();
+        Pedido pedido = manager.find(Pedido.class, p.getNumero());
+        pedido.setPendiente(true);
+        manager.getTransaction().commit();
+    }
 
     //Ususarios
     public List<Usuario> getTodosUsuarios() {

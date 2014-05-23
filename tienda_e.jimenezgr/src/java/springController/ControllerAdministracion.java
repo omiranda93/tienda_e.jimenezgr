@@ -189,8 +189,20 @@ public class ControllerAdministracion {
     
     
     @RequestMapping(value="/EstadoPedido", method=RequestMethod.GET)
-    public String EstadoPedido(ModelMap model, HttpSession session){
+    public String EstadoPedido(@RequestParam("estado") String estado, @RequestParam("contador") String contador,ModelMap model, HttpSession session){
         
+        List <Pedido> pedidos = (List <Pedido>) session.getAttribute("pedidosListados");
+        Pedido p = pedidos.get(Integer.parseInt(contador));
+        dao.actualizarPedidos(p, estado);
+        session.setAttribute("pedidosListados", dao.getTododosPedidos());
+        return "Administrador";
+    }
+    @RequestMapping(value="/PedidoPreparado", method=RequestMethod.GET)
+    public String PedidoPreparado(@RequestParam("contador") String contador, ModelMap model, HttpSession session){
+        
+        List <Pedido> pedidos = (List <Pedido>) session.getAttribute("pedidosListados");
+        Pedido p = pedidos.get(Integer.parseInt(contador));
+        dao.actualizarPreparado(p);
         return "Administrador";
     }
 }

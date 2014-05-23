@@ -24,7 +24,7 @@
                             <input type='text' name='cantidad' value="${producto.cantidad}">
                             <input type='textarea' name='descripcion' value="${producto.descripcion}">
                             <select MULTIPLE NAME='categorias' SIZE='4'> 
-                                <c:forEach var="categoria" items="${categoriasListadas}" varStatus="contador">
+                                <c:forEach var="categoria" items="${categoriasListadas}">
                                     <c:choose>
                                         <c:when test="${producto.categoriaCollection.contains(categoria)}">
                                             <option value='${categoria.clave}'selected>${categoria.nombre}</option>
