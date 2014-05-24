@@ -5,25 +5,24 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Página de Administración</title>
+        <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″>
+        <title>Mis pedidos</title>  
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap-theme.min.css'/>"/>
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
         <link rel="stylesheet" type="text/css" href="<c:url value='/css/estilo.css'/>"/>
-
     </head>
     <body>
-        <%//si el parametro admin esta vacio (no nos hemos identificado)%>
-        <c:if  test="${admin == null}"> 
-            <%//asigna a la variable error el valor correspondiente%>
-            <c:set var="error" value="Debe loguearse como administrador para ver esta página" scope="session"/>
-            <%//redirige a LogAdministrador.jsp%>
-            <c:redirect url="/Administracion"/>
+        <c:if  test="${usuario == null}"> 
+            <%//redirige a index.jsp%>
+            <c:redirect url="/Inicio"/>
         </c:if>
         <div id="contenedor">
-            <c:import url="menuAdmin.jsp" charEncoding="utf-8"/>
-
-            <p class="well">Bienvenido</p>
+            
+            <c:import url="cabecera.jsp" charEncoding="utf-8"/>
+            
+            
+            
+            <c:import url="footer.jsp" charEncoding="utf-8"/>
         </div>
     </body>
 </html>

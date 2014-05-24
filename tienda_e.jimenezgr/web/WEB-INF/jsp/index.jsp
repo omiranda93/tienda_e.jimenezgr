@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 19-may-2014, 16:37:30
-    Author     : eduas
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -24,9 +18,6 @@
     <body>
         <div id="contenedor">
             <c:import url="cabecera.jsp" charEncoding="utf-8"/>
-
-
-
 
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">

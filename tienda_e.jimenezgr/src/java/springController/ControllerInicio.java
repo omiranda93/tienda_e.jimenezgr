@@ -258,5 +258,8 @@ public class ControllerInicio {
         session.setAttribute("carrito", carro);
         return "carrito";
     }
+    
+    
+
 
 }

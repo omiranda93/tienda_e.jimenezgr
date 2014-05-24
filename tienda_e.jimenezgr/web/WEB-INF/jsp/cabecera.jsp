@@ -18,38 +18,48 @@
     </div>
 
     <div class="col-lg-3  col-lg-offset-1">
-
-        <span class="col-lg-5">
-            <c:choose>
-                <c:when test="${usuario==null}">
-                    <a href="/tienda_e.jimenezgr/Inicio/Autenticacion" type="button" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-user"></span>
-                        <span>Mi cuenta</span>
-                    </a>
-                </c:when>
-                <c:otherwise>
-                    <a href="/tienda_e.jimenezgr/Login/cerrarSesionUser" type="button" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-user"></span>
-                        <span>Cerrar sesión</span>
-                    </a>
-                </c:otherwise>
-            </c:choose>
-        </span>
-        <span class="col-lg-5">
-            <a href="/tienda_e.jimenezgr/Inicio/CarritoVer" type="button" class="btn btn-primary">
-                <span class="glyphicon glyphicon-shopping-cart"></span>
-                <span>Cesta</span>
-                <%//si el parametro carro no esta vacio%>
+        <div class="row">
+            <span class="col-lg-5">
                 <c:choose>
-                    <c:when test="${carrito!=null}">
-                        <span><c:out value="(${carrito.totalProductos()})"/></span>
+                    <c:when test="${usuario==null}">
+                        <a href="/tienda_e.jimenezgr/Inicio/Autenticacion" type="button" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <span>Mi cuenta</span>
+                        </a>
                     </c:when>
                     <c:otherwise>
-                        <span>(0)</span>
+                        <a href="/tienda_e.jimenezgr/Inicio/MisPedidos" type="button" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <span>Mis pedidos</span>
+                        </a>
+
                     </c:otherwise>
                 </c:choose>
-            </a>    
-        </span>
+            </span>
+            <span class="col-lg-5 col-lg-offset-1">
+                <a href="/tienda_e.jimenezgr/Inicio/CarritoVer" type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                    <span>Cesta</span>
+                    <%//si el parametro carro no esta vacio%>
+                    <c:choose>
+                        <c:when test="${carrito!=null}">
+                            <span><c:out value="(${carrito.totalProductos()})"/></span>
+                        </c:when>
+                        <c:otherwise>
+                            <span>(0)</span>
+                        </c:otherwise>
+                    </c:choose>
+                </a>    
+            </span>
+        </div>
+        <c:if test="${usuario!=null}">
+            <div class="row">
+                <a href="/tienda_e.jimenezgr/Login/cerrarSesionUser" type="button" class="btn btn-primary col-lg-12">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <span>Cerrar sesión</span>
+                </a>
+            </div>
+        </c:if>
     </div>
 </div>
 

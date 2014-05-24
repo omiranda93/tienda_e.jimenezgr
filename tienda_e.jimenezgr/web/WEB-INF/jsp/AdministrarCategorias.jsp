@@ -17,7 +17,7 @@
         <c:if  test="${admin == null}"> 
             <%//asigna a la variable error el valor correspondiente%>
             <c:set var="error" value="Debe loguearse como administrador para ver esta página" scope="session"/>
-            <%//redirige a login.jsp%>
+            <%//redirige a LogAdministrador.jsp%>
             <c:redirect url="/Administracion"/>
         </c:if>
         <div id="contenedor">
