@@ -63,4 +63,16 @@ public class ControllerLogin {
             return "Autenticacion";
         }
     }
+    
+    
+    @RequestMapping(value="/cerrarSesionUser", method=RequestMethod.GET)
+    public String cerrarSesionUser(ModelMap model, HttpSession session){
+        //cierra la sesion;
+            session.invalidate();
+            //crea el mensaje de confirmacion;
+            model.addAttribute("confirmacion","Se ha cerrado la sesión");
+            //redirige a Autenticacion.jsp;
+        return "Autenticacion";
+    }
+    
 }

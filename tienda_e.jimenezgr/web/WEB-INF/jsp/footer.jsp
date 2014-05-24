@@ -51,6 +51,7 @@
         </div>
         <center>
             <p class="row">Copyright 2014 Poxmania. Reservados todos los derechos</p>
+            <p><a href="/tienda_e.jimenezgr/Administracion">Administrar</a></p>
         </center>
     </div>
 </div>
