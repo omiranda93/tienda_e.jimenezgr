@@ -36,11 +36,8 @@
                                 <c:forEach var="categoria" items="${categoriasListadas}">
                                     <c:choose>
                                         <c:when test="${producto.categoriaCollection.contains(categoria)}">
-                                            <option value='${categoria.clave}'selected>${categoria.nombre}</option>
-                                        </c:when>
-                                        <c:otherwise>
                                             <option value='${categoria.clave}'>${categoria.nombre}</option>
-                                        </c:otherwise>
+                                        </c:when>
                                     </c:choose>
                                 </c:forEach>
                             </select>

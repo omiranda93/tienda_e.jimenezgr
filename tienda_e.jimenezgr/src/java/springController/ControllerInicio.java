@@ -93,6 +93,41 @@ public class ControllerInicio {
         return "muestraProductos";
     }
 
+    
+    @RequestMapping(value = "/Registrarse", method = RequestMethod.POST)
+    public String Registro(@RequestParam("password") String password, @RequestParam("usuario") String usuario, @RequestParam("nomape") String nomape, @RequestParam(value="telefono", required = false) String telefono, @RequestParam(value="direccion", required = false) String direccion,  ModelMap model, HttpSession session) {
+        Usuario u = new Usuario(usuario, password, nomape);
+        String direccionP ="aaa";
+        String telefonoP ="bbb";
+        if (direccion!=null){
+            u.setDireccion(direccion);
+            direccionP = u.getDireccion();
+        }
+        if (telefono!=null){
+            u.setTelefono(telefono);
+            telefonoP = u.getTelefono();
+        }
+        dao.insertarUsuario(u);
+        
+        int numero = 0;
+        List <Pedido> pedidos = dao.getTododosPedidos();
+        for(int i =0; i<pedidos.size(); i++){
+            if (pedidos.get(i).getEstado().equals("Carrito")){
+                numero = pedidos.get(i).getNumero();
+            }
+        }
+        numero++;
+        
+        
+        Pedido p = new Pedido(numero,false,"Carrito",nomape,direccionP,telefonoP,u);
+        
+        dao.insertarPedido(p);
+        
+        session.setAttribute(usuario, usuario);
+        
+        return "index";
+    }
+    
     @RequestMapping(value = "/Carrito", method = RequestMethod.GET)
     public String Carrito(@RequestParam("nombreProd") String nombreProd, ModelMap model, HttpSession session) {
 
@@ -189,7 +224,7 @@ public class ControllerInicio {
             if (crear){
                 dao.insertarPedido(carro);
             } else{
-                dao.actualizarPedido(carro.getNumero(), carro);
+                dao.actualizarPedido(carro, carro.getRegistroPedidosCollection());
             }
             session.setAttribute("carrito", carro);
         }
@@ -223,5 +258,7 @@ public class ControllerInicio {
         session.setAttribute("carrito", carro);
         return "carrito";
     }
+    
+    
 
 }

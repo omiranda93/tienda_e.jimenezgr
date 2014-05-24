@@ -21,7 +21,7 @@
         <div id="contenedor">
             <c:import url="cabecera.jsp" charEncoding="utf-8"/>
             <div id="formReg">
-                <form method="post" action="/ControlerLogin">
+                <form method="post" action="/tienda_e.jimenezgr/Inicio/Registrarse">
                     <div class="row panel panel-default">
 
                         <h4 class="col-lg-1">
@@ -38,11 +38,11 @@
                             </p>
                             <p>
                                 Confirmación de contraseña* 
-                                <input name="password" size="40" type="password" required>
+                                <input name="password2" size="40" type="password" required>
                             </p>
                             <p>
                                 Usuario* 
-                                <input name="Usuario" size="40" type="text" required>
+                                <input name="usuario" size="40" type="text" required>
                             </p>
                         </div>
                     </div>
@@ -53,16 +53,16 @@
                         <div class="col-lg-10 col-lg-offset-1">
                             <p>
                                 Nombre y Apellidos* 
-                                <input name="Nombre" size="40" type="text" required>
+                                <input name="nomape" size="40" type="text" required>
                             </p>
 
                             <p>
                                 Teléfono
-                                <input name="Telefono" size="40" type="text">
+                                <input name="telefono" size="40" type="text">
                             </p>
                             <p>
                                 Dirección
-                                <input name="Dirección" size="40" type="text">
+                                <input name="direccion" size="40" type="text">
                             </p>
                             <p>
                                 <input class="btn btn-primary" name="regBoton" type="submit" value="Continuar">
