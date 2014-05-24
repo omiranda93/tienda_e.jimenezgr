@@ -55,13 +55,14 @@ public class tiendaDAO {
         EntityTransaction tx = manager.getTransaction();
         tx.begin();
         manager.persist(producto);
-        for(Categoria c : producto.getCategoriaCollection()){
+        for (Categoria c : producto.getCategoriaCollection()) {
             Categoria cat = manager.find(Categoria.class, c.getClave());
-            if(cat.getProductoCollection()==null){
-            }else{
-            if(!cat.getProductoCollection().contains(producto)){
-                cat.getProductoCollection().add(producto);
-            }}
+            if (cat.getProductoCollection() == null) {
+            } else {
+                if (!cat.getProductoCollection().contains(producto)) {
+                    cat.getProductoCollection().add(producto);
+                }
+            }
         }
         tx.commit();
         //manager.flush();
@@ -90,17 +91,18 @@ public class tiendaDAO {
         p.setDescripcion(descripcion);
         p.setPrecio(precio);
         p.setProductoTieneImagenCollection(img);
-        for(Categoria c : p.getCategoriaCollection()){
+        for (Categoria c : p.getCategoriaCollection()) {
             Categoria cat = manager.find(Categoria.class, c.getClave());
-            if(cat.getProductoCollection()==null){
-            }else{
-            if(!cat.getProductoCollection().contains(p)){
-                cat.getProductoCollection().add(p);
-            }}
+            if (cat.getProductoCollection() == null) {
+            } else {
+                if (!cat.getProductoCollection().contains(p)) {
+                    cat.getProductoCollection().add(p);
+                }
+            }
         }
         Categoria cat = manager.find(Categoria.class, categoria2);
-        if(cat.getCategoriaCollection()==null){
-        }else{
+        if (cat.getCategoriaCollection() == null) {
+        } else {
             cat.getProductoCollection().remove(p);
         }
         manager.getTransaction().commit();
@@ -147,7 +149,7 @@ public class tiendaDAO {
         manager.getTransaction().commit();
     }
 
-    public void actualizarPedido(Pedido actualizar, Collection <RegistroPedidos> carrito) {
+    public void actualizarPedido(Pedido actualizar, Collection<RegistroPedidos> carrito) {
         manager.getTransaction().begin();
         Pedido p = manager.find(Pedido.class, actualizar.getNumero());
         p.setRegistroPedidosCollection(carrito);
@@ -207,19 +209,24 @@ public class tiendaDAO {
         pedido.setPendiente(true);
         manager.getTransaction().commit();
     }
-     
+
     public List<Pedido> getPedidosUsuarioCarrito(String usuario) {
-        String where = "p.nombre = '"+usuario+"' AND p.estado= 'Carrito'";
+        String where = "p.nombre = '" + usuario + "' AND p.estado= 'Carrito'";
         return getPedidosQuery(where);
     }
-    
+
+    public List<Pedido> getTodosPedidosUser(String usuario) {
+        String where = "p.nombre = '" + usuario + "'";
+        return getPedidosQuery(where);
+    }
+
     public void modificarPeidoCollection(Pedido antiguo, Pedido nuevo) {
         manager.getTransaction().begin();
         Pedido pedidoAntiguo = manager.find(Pedido.class, antiguo.getNumero());
         pedidoAntiguo.getRegistroPedidosCollection().addAll(nuevo.getRegistroPedidosCollection());
         manager.getTransaction().commit();
     }
-    
+
     public void eliminarPedido(Pedido pedido) {
 //        EntityTransaction tx = manager.getTransaction();
 //        tx.begin();
@@ -236,7 +243,7 @@ public class tiendaDAO {
     }
 
     public List<Usuario> getUsuario(String usuario) {
-        String where = "u.credencialusuario = '" + usuario+"'";
+        String where = "u.credencialusuario = '" + usuario + "'";
         return getUsuariosQuery(where);
     }
 
@@ -292,16 +299,14 @@ public class tiendaDAO {
         tx.commit();
         //manager.flush();
     }
-    
-    
-    
-    public void insertarRegistroPedido(RegistroPedidos ped){
+
+    public void insertarRegistroPedido(RegistroPedidos ped) {
         manager.getTransaction().begin();
         manager.persist(ped);
         manager.getTransaction().commit();
     }
-    
-    public void insertarRegistroPedidoPK(RegistroPedidosPK ped){
+
+    public void insertarRegistroPedidoPK(RegistroPedidosPK ped) {
         manager.getTransaction().begin();
         manager.persist(ped);
         manager.getTransaction().commit();

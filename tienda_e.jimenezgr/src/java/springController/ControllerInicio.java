@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package springController;
 
 import entities.Categoria;
@@ -259,5 +255,12 @@ public class ControllerInicio {
         return "carrito";
     }
     
+    @RequestMapping(value = "/VerPedidos", method = RequestMethod.GET)
+    public String VerPedidos(ModelMap model, HttpSession session) {
+        String usuario = (String) session.getAttribute("usuario");
+        session.setAttribute("pedidosUser", dao.getTodosPedidosUser(usuario));
+        return "MisPedidos";
+    }
+        
 
 }

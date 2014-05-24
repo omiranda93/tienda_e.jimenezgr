@@ -28,7 +28,7 @@
                         </a>
                     </c:when>
                     <c:otherwise>
-                        <a href="/tienda_e.jimenezgr/Inicio/MisPedidos" type="button" class="btn btn-primary">
+                        <a href="/tienda_e.jimenezgr/Inicio/VerPedidos" type="button" class="btn btn-primary">
                             <span class="glyphicon glyphicon-user"></span>
                             <span>Mis pedidos</span>
                         </a>
