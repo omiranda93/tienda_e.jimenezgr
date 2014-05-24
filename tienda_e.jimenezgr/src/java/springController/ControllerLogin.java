@@ -4,6 +4,7 @@ import entities.Categoria;
 import entities.Pedido;
 import entities.Producto;
 import entities.RegistroPedidos;
+import entities.RegistroPedidosPK;
 import entities.Usuario;
 import entities.tiendaDAO;
 import java.util.ArrayList;
@@ -37,16 +38,16 @@ public class ControllerLogin {
             session.setMaxInactiveInterval(1800);
             
             if(session.getAttribute("carrito")!=null){
-//                Pedido p = new Pedido(1,false,"Carrito","luisin","maijaus","10101");
-//                Usuario oscar=dao.getUsuario("o.miranda").get(0);
-//                p.setUsuario(oscar);
-//                dao.insertarPedido(p);
                 Pedido p = (Pedido) session.getAttribute("carrito");
-                Pedido usuarioP = dao.getPedidosUsuarioCarrito(usuario).get(0);               
-                usuarioP.setRegistroPedidosCollection(p.getRegistroPedidosCollection());
+                Pedido usuarioP = dao.getPedidosUsuarioCarrito(dao.getUsuario(usuario).get(0).getNombre()).get(0);
+                for(RegistroPedidos ped : p.getRegistroPedidosCollection()){
+                    RegistroPedidosPK pk = new RegistroPedidosPK(usuarioP.getNumero(), ped.getProducto1().getNombre());
+                    ped.setRegistroPedidosPK(pk);
+                    ped.setPedido(usuarioP);
+                    dao.insertarRegistroPedido(ped);
+                }
                 session.setAttribute("carrito", usuarioP);
                 dao.actualizarPedido(usuarioP, usuarioP.getRegistroPedidosCollection());
-                dao.insertarPedido(usuarioP);
             }
            
             //comprobar cesta

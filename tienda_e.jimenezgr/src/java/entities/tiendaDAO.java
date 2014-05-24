@@ -292,6 +292,20 @@ public class tiendaDAO {
         tx.commit();
         //manager.flush();
     }
+    
+    
+    
+    public void insertarRegistroPedido(RegistroPedidos ped){
+        manager.getTransaction().begin();
+        manager.persist(ped);
+        manager.getTransaction().commit();
+    }
+    
+    public void insertarRegistroPedidoPK(RegistroPedidosPK ped){
+        manager.getTransaction().begin();
+        manager.persist(ped);
+        manager.getTransaction().commit();
+    }
 
 //    public Autor getAutor(int codigoAutor) {
 //        //String sql = "select a from Autor a where a.idautor = "+codigoAutor;
