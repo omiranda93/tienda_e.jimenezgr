@@ -20,23 +20,26 @@
             <c:redirect url="/Administracion"/>
         </c:if>
 
-        <c:import url="menuAdmin.jsp" charEncoding="utf-8"/>
+        <div id="contenedor">
 
-        <c:set var="a" value="carrito" ></c:set>
-        <c:forEach var="pedido" items="${pedidosListados}" varStatus="contador">
-            <c:if test="${pedido.estado != a && pedido.pendiente == false}">
-                ${pedido.numero}
-                <form method="get" action='/tienda_e.jimenezgr/Administracion/EstadoPedido' >
-                    <input type='text' name='estado' value='${pedido.estado}'>
-                    <input type='submit' name='editar' value='Editar estado' onclick="alert('Has cambiado el estado del pedido ${pedido.numero}')">
-                    <input type='hidden' name='contador' value='${contador.index}'>
-                </form>
-                <form method="get" action='/tienda_e.jimenezgr/Administracion/PedidoPreparado' >
-                    <input type='text' name='estado' value='${pedido.estado}'>
-                    <input type='submit' name='Preparado' value='Preparado' onclick="alert('El producto esta preparado y sera enviado')">
-                    <input type='hidden' name='contador' value='${contador.index}'>
-                </form>
-            </c:if>
-        </c:forEach>    
+            <c:import url="menuAdmin.jsp" charEncoding="utf-8"/>
+
+            <c:set var="a" value="carrito" ></c:set>
+            <c:forEach var="pedido" items="${pedidosListados}" varStatus="contador">
+                <c:if test="${pedido.estado != a && pedido.pendiente == false}">
+                    ${pedido.numero}
+                    <form method="get" action='/tienda_e.jimenezgr/Administracion/EstadoPedido' >
+                        <input type='text' name='estado' value='${pedido.estado}'>
+                        <input type='submit' name='editar' value='Editar estado' onclick="alert('Has cambiado el estado del pedido ${pedido.numero}')">
+                        <input type='hidden' name='contador' value='${contador.index}'>
+                    </form>
+                    <form method="get" action='/tienda_e.jimenezgr/Administracion/PedidoPreparado' >
+                        <input type='text' name='estado' value='${pedido.estado}'>
+                        <input type='submit' name='Preparado' value='Preparado' onclick="alert('El producto esta preparado y sera enviado')">
+                        <input type='hidden' name='contador' value='${contador.index}'>
+                    </form>
+                </c:if>
+            </c:forEach>   
+        </div>
     </body>
 </html>

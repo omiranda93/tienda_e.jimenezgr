@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Random;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,7 +34,7 @@ public class ControllerInicio {
 
     @RequestMapping(method = RequestMethod.GET)
     public String index(ModelMap model, HttpSession session) {
-
+        dao = new tiendaDAO();
         List<Producto> productosRandom = new ArrayList<Producto>();
         Random rand = new Random();
         for (int i = 0; i <= 5; i++) {
@@ -94,22 +93,21 @@ public class ControllerInicio {
         return "muestraProductos";
     }
 
-    
     @RequestMapping(value = "/Registrarse", method = RequestMethod.POST)
-    public String Registro(@RequestParam("password") String password, @RequestParam("usuario") String usuario, @RequestParam("nomape") String nomape, @RequestParam(value="telefono", required = false) String telefono, @RequestParam(value="direccion", required = false) String direccion,  ModelMap model, HttpSession session) {
+    public String Registro(@RequestParam("password") String password, @RequestParam("usuario") String usuario, @RequestParam("nomape") String nomape, @RequestParam(value = "telefono", required = false) String telefono, @RequestParam(value = "direccion", required = false) String direccion, ModelMap model, HttpSession session) {
         Usuario u = new Usuario(usuario, password, nomape);
-        String direccionP ="aaa";
-        String telefonoP ="bbb";
-        if (direccion!=null){
+        String direccionP = "aaa";
+        String telefonoP = "bbb";
+        if (direccion != null) {
             u.setDireccion(direccion);
             direccionP = u.getDireccion();
         }
-        if (telefono!=null){
+        if (telefono != null) {
             u.setTelefono(telefono);
             telefonoP = u.getTelefono();
         }
         dao.insertarUsuario(u);
-        
+
         int numero = 0;
         List <Pedido> pedidos = dao.getTododosPedidos();
         for(int i =0; i<pedidos.size(); i++){
@@ -118,17 +116,16 @@ public class ControllerInicio {
             }
         }
         numero++;
-        
-        
-        Pedido p = new Pedido(numero,false,"Carrito",nomape,direccionP,telefonoP,u);
-        
+
+        Pedido p = new Pedido(numero, false, "Carrito", nomape, direccionP, telefonoP, u);
+
         dao.insertarPedido(p);
-        
+
         session.setAttribute(usuario, usuario);
-        
+
         return "index";
     }
-    
+
     @RequestMapping(value = "/Carrito", method = RequestMethod.GET)
     public String Carrito(@RequestParam("nombreProd") String nombreProd, ModelMap model, HttpSession session) {
 
@@ -211,8 +208,8 @@ public class ControllerInicio {
                 }
                 rp.remove(i);
             }
-            if (rp.isEmpty()){
-                carro=null;
+            if (rp.isEmpty()) {
+                carro = null;
             }
         }
         

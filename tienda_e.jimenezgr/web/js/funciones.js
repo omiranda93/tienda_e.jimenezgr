@@ -1,6 +1,4 @@
 
-
-
 function soloCaracterPrecioValido() {
     if ((event.keyCode < 46) || (event.keyCode > 57) || (event.keyCode === 47))
         event.returnValue = false;
