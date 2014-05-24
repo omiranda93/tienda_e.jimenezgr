@@ -29,7 +29,6 @@
                             <c:when test="${carrito!=null}">
                                 <c:forEach var="prod" items="${carrito.registroPedidosCollection}">
                                     <div class="row panel panel-default">
-
                                         <%//imagen principal%>
                                         <c:set var="imagenPrincipal" value="${null}"/>
                                         <c:forEach var="img" items="${prod.producto1.productoTieneImagenCollection}">
@@ -40,8 +39,8 @@
                                         <a class="col-lg-2" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.producto1.getNombre()}"><img width="80px" src="<c:url value='${imagenPrincipal}'/>"></a>
 
                                         <%//nombrec stock y cantidad%>
-                                        <div class="col-lg-3">
-                                            <a class="row" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.producto1.getNombre()}"><c:out value="${prod.producto1.getNombre()}"/></a>
+                                        <div class="col-lg-4">
+                                            <a class="nombreS" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.producto1.getNombre()}"><c:out value="${prod.producto1.getNombre()}"/></a>
                                             <c:choose>
                                                 <c:when test="${prod.producto1.cantidad>0}">
                                                     <div class="row">
@@ -66,18 +65,19 @@
                                             <a href="/tienda_e.jimenezgr/Inicio/CarritoNuevaCantidad?cantidad=0&nombreProd=${prod.producto1.nombre}" class="row"><span class="glyphicon glyphicon-remove delete"></span>Eliminar</a>
 
                                         </div>
-                                        <div class="col-lg-3 col-lg-offset-4">      
+                                        <div class="col-lg-3 col-lg-offset-3">      
                                             <span class="precioM">         
                                                 <script>
-                                                    var precio =${prod.producto1.precio};
-                                                    precio = formatoPrecio(precio);
-                                                    document.write(precio);
+                                                            var precio =${prod.producto1.precio};
+                                                            precio = formatoPrecio(precio);
+                                                            document.write(precio);
                                                 </script>
                                             </span>
                                             <span class="precioS">IVA incluido</span>
                                         </div>
-                                    </div>
+                                    </div>                                 
                                 </c:forEach>
+
                                 <div class="row panel panel-default">
                                     <div class="col-lg-5">
                                         <b>Importe total:</b>(¡Gastos de envío gratuitos!)
@@ -103,14 +103,15 @@
 
                     <div class="col-lg-3 panel panel-default">
                         <a href="" class="btn btn-primary row center-block">Hacer mi pedido</a>
-                        <div class="col-lg-6">
-                            <b>Importe total: </b>(gastos de envío gratis)
+                        <div class="col-lg-5">
+                            <b>Importe total: </b>
                         </div>
 
-                        <div class="col-lg-5 col-lg-offset-1">
+                        <div class="col-lg-6 col-lg-offset-1">
                             <span class="precioM"><script>document.write(precio);</script></span>
                             <span class="precioS">IVA incluido</span>
                         </div>
+                        <div class="row col-lg-11 col-lg-offset-1">(gastos de envío gratis)</div>
                     </div>
                 </div>
             </div>

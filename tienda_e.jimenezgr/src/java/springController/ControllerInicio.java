@@ -254,6 +254,9 @@ public class ControllerInicio {
             if (rp.get(i).getProducto1().getNombre().equals(nombreProd)) {
                 rp.remove(i);
             }
+            if (rp.isEmpty()){
+                carro=null;
+            }
         }
         session.setAttribute("carrito", carro);
         return "carrito";

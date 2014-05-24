@@ -40,9 +40,14 @@
                 <span class="glyphicon glyphicon-shopping-cart"></span>
                 <span>Cesta</span>
                 <%//si el parametro carro no esta vacio%>
-                <c:if test="${carrito!=null}">
-                    <span><c:out value="(${carrito.totalProductos()})"/></span>
-                </c:if>                
+                <c:choose>
+                    <c:when test="${carrito!=null}">
+                        <span><c:out value="(${carrito.totalProductos()})"/></span>
+                    </c:when>
+                    <c:otherwise>
+                        <span>(0)</span>
+                    </c:otherwise>
+                </c:choose>
             </a>    
         </span>
     </div>
