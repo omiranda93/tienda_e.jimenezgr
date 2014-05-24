@@ -18,14 +18,6 @@
     </div>
 
     <div class="col-lg-3  col-lg-offset-1">
-        <c:choose>
-            <c:when test="${usuario!=null}"> <%--falta comprobar logueo--%>
-                <c:set var="direccion" value="miPedido.jsp"/>
-            </c:when>
-            <c:otherwise>
-                <c:set var="direccion" value="Autenticacion.jsp"/>
-            </c:otherwise>
-        </c:choose>
 
         <span class="col-lg-5">
             <c:choose>
@@ -48,9 +40,14 @@
                 <span class="glyphicon glyphicon-shopping-cart"></span>
                 <span>Cesta</span>
                 <%//si el parametro carro no esta vacio%>
-                <c:if test="${carrito!=null}">
-                    <span><c:out value="(${carrito.totalProductos()})"/></span>
-                </c:if>                
+                <c:choose>
+                    <c:when test="${carrito!=null}">
+                        <span><c:out value="(${carrito.totalProductos()})"/></span>
+                    </c:when>
+                    <c:otherwise>
+                        <span>(0)</span>
+                    </c:otherwise>
+                </c:choose>
             </a>    
         </span>
     </div>

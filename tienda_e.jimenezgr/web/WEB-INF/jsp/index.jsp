@@ -67,7 +67,7 @@
                                 </c:if>       
                             </c:forEach>
                             <a class="row" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"><img width="150px" src="<c:url value='${imagenPrincipal}'/>"></a>
-                            <a class="nombre" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"><small>${prod.nombre}</small></a><br>
+                            <a class="nombreS" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"><small>${prod.nombre}</small></a><br>
                             <a class="precioM" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}">
                                 <script>
                                     var precio =${prod.precio};
