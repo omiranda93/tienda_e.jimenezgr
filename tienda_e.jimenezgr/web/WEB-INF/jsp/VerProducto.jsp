@@ -22,7 +22,7 @@
         <div id="contenedor">
             <c:import url="cabecera.jsp" charEncoding="utf-8"/>
             <div id="contenido">
-                <h1><c:out value="${producto.nombre}"/></h1>
+                <div class="row nombreL"><c:out value="${producto.nombre}"/></div>
                 <div id="infoProd">
                     <div id="infoSup" class="row">
                         <div id="imagenesProd" class="col-lg-3 panel panel-default">
@@ -52,7 +52,7 @@
                                         document.write(precio);
                                     </script>
                                 </span>
-                                <span class="precioS">
+                                <span class="precioL">
                                     IVA incluido
                                 </span>
                             </div>                    
@@ -64,7 +64,7 @@
                         </div>
 
                         <div id="comprarProd" class="panel panel-default col-lg-3">
-                            <a class="btn btn-link" href="/tienda_e.jimenezgr/Inicio/Carrito?nombreProd=${producto.nombre}">
+                            <a class="btn btn-link row col-lg-12" href="/tienda_e.jimenezgr/Inicio/Carrito?nombreProd=${producto.nombre}">
                                 <span class="glyphicon glyphicon-shopping-cart center-block"></span>
                                 Añadir a la cesta 
                             </a>

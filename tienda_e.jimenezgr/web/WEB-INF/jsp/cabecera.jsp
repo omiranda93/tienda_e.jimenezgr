@@ -18,14 +18,6 @@
     </div>
 
     <div class="col-lg-3  col-lg-offset-1">
-        <c:choose>
-            <c:when test="${usuario!=null}"> <%--falta comprobar logueo--%>
-                <c:set var="direccion" value="miPedido.jsp"/>
-            </c:when>
-            <c:otherwise>
-                <c:set var="direccion" value="Autenticacion.jsp"/>
-            </c:otherwise>
-        </c:choose>
 
         <span class="col-lg-5">
             <c:choose>

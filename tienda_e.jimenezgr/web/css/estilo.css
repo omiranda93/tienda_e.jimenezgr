@@ -45,9 +45,13 @@ ul li:hover > ul{
     font-size: 2em;
     font-weight: bold;
 }
-
-.nombre{
+.nombreS{
     color: #262626;
-    font-size: 1.8em;
+    font-size: 1.7em;
+    font-weight: bold;
+}
+.nombreL{
+    color: #262626;
+    font-size: 2.2em;
     font-weight: bold;
 }

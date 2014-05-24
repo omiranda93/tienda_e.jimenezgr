@@ -47,9 +47,9 @@
                                 </c:forEach>
 
                                 <a class="col-lg-2" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"><img width="100px" src="<c:url value='${imagenPrincipal}'/>"></a>
-                                <a class="col-lg-2" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"><c:out value="${prod.getNombre()}"/></a>
+                                <a class="col-lg-4 nombreS" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"><c:out value="${prod.getNombre()}"/></a>
                                 <a class="col-lg-3 col-lg-offset-2" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}">
-                                    <span>         
+                                    <span class="precioM">         
                                         <script>
                                             var precio =${prod.precio};
                                             precio = formatoPrecio(precio);
