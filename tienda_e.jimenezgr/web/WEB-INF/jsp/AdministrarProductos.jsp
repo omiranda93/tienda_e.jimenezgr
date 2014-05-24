@@ -22,8 +22,8 @@
         </c:if>
         <div id="contenedor">
             <c:import url="menuAdmin.jsp" charEncoding="utf-8"/>
-            <div>
-                <b>Productos</b>
+            <div class="row">
+                <h3>Editar o Eliminar Productos</h3>
                 <c:forEach var="producto" items="${productosListados}" varStatus="contador">
                     <div class="row panel panel-default">
                         <h3>${producto.nombre}</h3>
@@ -37,7 +37,7 @@
                                 </span>
                                 <span class="col-lg-2">
                                     <b>Stock:</b>
-                                    <input type='text' name='cantidad' value="${producto.cantidad}">
+                                    <input type='number' min="0" name='cantidad' value="${producto.cantidad}">
                                 </span>
                                 <span class="col-lg-4">
                                     <b>Añadir Categoría:</b>
@@ -93,27 +93,45 @@
                 </c:forEach>
             </div>
 
-            <form method= "post" action='/tienda_e.jimenezgr/Administracion/InsertarProducto' enctype="multipart/form-data">
-                <b>Nombre:</b>
-                <input type='text' name='nombre'>
-                <b>Precio:</b>
-                <input type='text' name='precio'>
-                <b>Stock:</b>
-                <input type='text' name='cantidad'>
-                <b>Descripción:</b>
-                <input type='textarea' maxlength="1000" name='descripcion'>
-                <b>Categoria:</b>
-                <select MULTIPLE NAME='categorias' SIZE='4'> 
-                    <c:forEach var="categoria" items="${categoriasListadas}" varStatus="contador">
-                        <option value='${categoria.clave}'>${categoria.nombre}</option>
-                    </c:forEach>
-                </select>
-                <b>Imagen:</b>
-                Imagen: <input type="file" name="file"><br /> 
-                Nombre: <input type="text" name="name"><br /> <br /> 
-                <input type='submit' name='Añadir' value='Agregar' onclick="alert('Has añadido este producto a los disponibles.')">
-            </form>
-            <a href="/tienda_e.jimenezgr/Administracion">Volver</a>
+            <div class="row">
+                <h3>Agregar nuevo producto</h3>
+                <form class="panel panel-default" method= "post" action='/tienda_e.jimenezgr/Administracion/InsertarProducto' enctype="multipart/form-data">
+                    <div class="row well">
+                        <span class="col-lg-2">
+                            <b>Nombre:</b>
+                            <input type='text' name='nombre'>
+                        </span>
+                        <span class="col-lg-2">
+
+                            <b>Precio:</b>
+                            <input type='text' name='precio' onkeypress="soloCaracterPrecioValido()">
+                        </span>
+                        <span class="col-lg-2">
+                            <b>Stock:</b>
+                            <input type='number' min="0" name='cantidad'>
+                        </span>
+                        <span class="col-lg-2">
+                            <b>Categoria:</b>
+                            <select MULTIPLE NAME='categorias' SIZE='4'> 
+                                <c:forEach var="categoria" items="${categoriasListadas}" varStatus="contador">
+                                    <option value='${categoria.clave}'>${categoria.nombre}</option>
+                                </c:forEach>
+                            </select>
+                        </span>
+                    </div>
+                    <div class="row well">
+                        <b>Descripción:</b>
+                        <textarea class="form-control" name='descripcion' rows="5" style="width: 450px;" maxlength="1000">${producto.descripcion}</textarea>
+                    </div>
+                    <div class="row well">
+                        <b>Imagen:</b>
+                        Imagen: <input type="file" name="file"><br /> 
+                        Nombre: <input type="text" name="name"><br /> <br /> 
+                        <input type='submit' name='Añadir' value='Agregar' onclick="alert('Has añadido este producto a los disponibles.')">
+                    </div>
+                </form>
+                <a href="/tienda_e.jimenezgr/Administracion">Volver</a>
+            </div>
         </div>
     </body>
 </html>
