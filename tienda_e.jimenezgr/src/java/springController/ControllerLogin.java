@@ -37,6 +37,10 @@ public class ControllerLogin {
             session.setMaxInactiveInterval(1800);
             
             if(session.getAttribute("carrito")!=null){
+//                Pedido p = new Pedido(1,false,"Carrito","luisin","maijaus","10101");
+//                Usuario oscar=dao.getUsuario("o.miranda").get(0);
+//                p.setUsuario(oscar);
+//                dao.insertarPedido(p);
                 Pedido p = (Pedido) session.getAttribute("carrito");
                 Pedido usuarioP = dao.getPedidosUsuarioCarrito(usuario).get(0);               
                 usuarioP.setRegistroPedidosCollection(p.getRegistroPedidosCollection());
@@ -53,4 +57,16 @@ public class ControllerLogin {
             return "Autenticacion";
         }
     }
+    
+    
+    @RequestMapping(value="/cerrarSesionUser", method=RequestMethod.GET)
+    public String cerrarSesionUser(ModelMap model, HttpSession session){
+        //cierra la sesion;
+            session.invalidate();
+            //crea el mensaje de confirmacion;
+            model.addAttribute("confirmacion","Se ha cerrado la sesión");
+            //redirige a Autenticacion.jsp;
+        return "Autenticacion";
+    }
+    
 }

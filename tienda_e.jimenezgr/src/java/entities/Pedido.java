@@ -105,6 +105,8 @@ public class Pedido implements Serializable {
         setTelefono(ped.getTelefono());
         setUsuario(ped.getUsuario());
     }
+    
+
 
     public Integer getNumero() {
         return numero;

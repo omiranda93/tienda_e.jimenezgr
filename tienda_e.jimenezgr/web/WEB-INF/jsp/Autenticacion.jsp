@@ -22,6 +22,28 @@
         <div id="contenedor">
             <c:import url="cabecera.jsp" charEncoding="utf-8"/>
 
+            <%//si el parametro confirmacion no esta vacio%>
+            <c:if test="${confirmacion!=null}">
+                <%//lanza una alerta con la confirmacion%>
+                <script>alert("${confirmacion}");</script>
+                <%//elimina la confirmacion%>
+                <c:set var="confirmacion" value="${null}" scope="session"/>           
+            </c:if>
+
+            <%//si el parametro error no esta vacio%>
+            <c:if test="${error != null}">  
+                <%//lanza una alerta con el error)%>
+                <script>alert('${error}');</script>
+                <%//elimina el error%>
+                <c:set var="error" value="${null}" scope="session"/>
+            </c:if>
+            <%//si el parametro usuario no esta vacio (estamos conectados como administrador)%>
+
+            <c:if  test="${usuario != null}">
+                <%//redirige a index%>
+                <c:redirect url="/Inicio"/>
+            </c:if>
+
             <div id = "registro" class="row">
                 <div id="formLog" class="panel panel-default col-lg-5">
                     <form name="formLog"  method="post" action="/tienda_e.jimenezgr/Login/Logueo">

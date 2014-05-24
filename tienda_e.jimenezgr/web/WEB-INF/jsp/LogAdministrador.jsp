@@ -14,13 +14,21 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Administración</title>
         <script src="<c:url value='/js/funciones.js'/>"></script>
-        
+
     </head>
     <body>
-         <%//si el parametro usuario no esta vacio (estamos conectados como administrador)%>
-        <c:if  test="${usuario != null}">
-            <%//redirige a paginaAdministracion%>
-            <c:redirect url="/Administracion/Administrador"/>
+        <%//si el parametro admin no esta vacio (estamos conectados como administrador)%>
+        <c:if  test="${admin != null}">
+            <%//redirige a Administrador%>
+            <c:redirect url="Administracion/Administrador"/>
+        </c:if>
+
+        <%//si el parametro confirmacion no esta vacio%>
+        <c:if test="${confirmacion!=null}">
+            <%//lanza una alerta con la confirmacion%>
+            <script>alert("${confirmacion}");</script>
+            <%//elimina la confirmacion%>
+            <c:set var="confirmacion" value="${null}" scope="session"/>           
         </c:if>
 
         <%//si el parametro error no esta vacio%>
@@ -31,10 +39,9 @@
             <c:set var="error" value="${null}" scope="session"/>
         </c:if>
 
-        <%//inicia sesion;
-          //Formulario de tipo post que llama a ServletLogin con parametro login=true y el usuario y contrasenia
-          //tambien como parametro. Valida que los campos esten bien rellenados con la funcion validar_camposLogin() del js%>
-        <form name="formLog"  method="POST" action="/tienda_e.jimenezgr/Administracion/Autenticacion" onSubmit="return validar_camposLogin()">
+
+        <%//inicia sesion;//%>
+        <form name="formLog"  method="POST" action="/tienda_e.jimenezgr/Administracion/Autenticacion">
             <table align="center" width="200px">
                 <tr>
                     <td colspan="2" align="center"><h3>Iniciar sesión</h3></td>

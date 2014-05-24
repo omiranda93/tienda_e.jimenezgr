@@ -30,82 +30,79 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Shkire
  *
  */
-
 @Controller
 @RequestMapping("/Administracion")
 public class ControllerAdministracion {
-    
-    tiendaDAO dao = new tiendaDAO();    
+
+    tiendaDAO dao = new tiendaDAO();
 //    @RequestMapping(value="/Inicio", method = RequestMethod.GET)
 //    public String Inicio(ModelMap model, HttpSession session) {
 //      return "Inicio";
 //   }
-    
-    @RequestMapping(method=RequestMethod.GET)
-    public String index(ModelMap model, HttpSession session){
-        
-        List <Producto> productosListados = new ArrayList <Producto>();
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String index(ModelMap model, HttpSession session) {
+
+        List<Producto> productosListados = new ArrayList<Producto>();
         productosListados = dao.getTodosProductos();
         session.setAttribute("productosListados", productosListados);
-        
-        List <Categoria> categoriasListadas = new ArrayList <Categoria>();
+
+        List<Categoria> categoriasListadas = new ArrayList<Categoria>();
         categoriasListadas = dao.getTodasCategorias();
         session.setAttribute("categoriasListadas", categoriasListadas);
-        
-        List <Pedido> pedidosListados = new ArrayList <Pedido>();
+
+        List<Pedido> pedidosListados = new ArrayList<Pedido>();
         pedidosListados = dao.getTododosPedidos();
         session.setAttribute("pedidosListados", pedidosListados);
-        
+
         return "LogAdministrador";
     }
-    
-    @RequestMapping(value="/Autenticacion", method = RequestMethod.POST)
-   public String Autenticacion(@RequestParam("usuario")String usuario, @RequestParam("pwd")String pwd,ModelMap model, HttpSession session) {
-       
-      if(!dao.getAdministrador(usuario, pwd).isEmpty()){
-          session.setAttribute("usuario", usuario);
-          return "Administrador";
-      }else{
-          String error ="Usuario o contraseña incorrectos";
-          session.setAttribute("error", error);
-          return "LogAdministrador";
-      }
-   }
-   
-   @RequestMapping(value="/Administrador", method=RequestMethod.GET)
-    public String yaRegistrado(ModelMap model, HttpSession session){
-        
+
+    @RequestMapping(value = "/Autenticacion", method = RequestMethod.POST)
+    public String Autenticacion(@RequestParam("usuario") String usuario, @RequestParam("pwd") String pwd, ModelMap model, HttpSession session) {
+
+        if (!dao.getAdministrador(usuario, pwd).isEmpty()) {
+            session.setAttribute("admin", usuario);
+            return "Administrador";
+        } else {
+            String error = "Usuario o contraseña incorrectos";
+            session.setAttribute("error", error);
+            return "LogAdministrador";
+        }
+    }
+
+    @RequestMapping(value = "/Administrador", method = RequestMethod.GET)
+    public String yaRegistrado(ModelMap model, HttpSession session) {
+
         return "Administrador";
     }
-    
-    
-    @RequestMapping(value="/AdminProductos", method=RequestMethod.GET)
-    public String AdminProducto(ModelMap model, HttpSession session){
-        
-        List <Producto> productosListados = new ArrayList <Producto>();
+
+    @RequestMapping(value = "/AdminProductos", method = RequestMethod.GET)
+    public String AdminProducto(ModelMap model, HttpSession session) {
+
+        List<Producto> productosListados = new ArrayList<Producto>();
         productosListados = dao.getTodosProductos();
         session.setAttribute("productosListados", productosListados);
-        
+
         return "AdministrarProductos";
     }
-    
-    @RequestMapping(value="/AdminPedidos", method=RequestMethod.GET)
-    public String AdminPedidos(ModelMap model, HttpSession session){
-        
+
+    @RequestMapping(value = "/AdminPedidos", method = RequestMethod.GET)
+    public String AdminPedidos(ModelMap model, HttpSession session) {
+
         return "AdministrarPedidos";
     }
-    
-    @RequestMapping(value="/AdminCategorias", method=RequestMethod.GET)
-    public String AdminCategorias(ModelMap model, HttpSession session){
-        List <Categoria> categoriasListadas = new ArrayList <Categoria>();
+
+    @RequestMapping(value = "/AdminCategorias", method = RequestMethod.GET)
+    public String AdminCategorias(ModelMap model, HttpSession session) {
+        List<Categoria> categoriasListadas = new ArrayList<Categoria>();
         categoriasListadas = dao.getTodasCategorias();
         session.setAttribute("categoriasListadas", categoriasListadas);
         return "AdministrarCategorias";
     }
-    
-    
-    @RequestMapping(value="/InsertarProducto", method=RequestMethod.POST)
-    public String InsertarProducto(@RequestParam("nombre") String nombre, @RequestParam("cantidad") String cantidad, @RequestParam("precio") String precio, @RequestParam("descripcion") String descripcion,  @RequestParam("categorias") String categoria, @RequestParam("name") String name, @RequestParam("file") MultipartFile file, ModelMap model, HttpSession session){
+
+    @RequestMapping(value = "/InsertarProducto", method = RequestMethod.POST)
+    public String InsertarProducto(@RequestParam("nombre") String nombre, @RequestParam("cantidad") String cantidad, @RequestParam("precio") String precio, @RequestParam("descripcion") String descripcion, @RequestParam("categorias") String categoria, @RequestParam("name") String name, @RequestParam("file") MultipartFile file, ModelMap model, HttpSession session) {
         String nuevaImagen;
         //Imagen
         if (!file.isEmpty()) {
@@ -113,7 +110,7 @@ public class ControllerAdministracion {
                 byte[] bytes = file.getBytes();
 
                 // Creating the directory to store file
-                String realPath  = session.getServletContext().getRealPath("/Recursos/productos-img");
+                String realPath = session.getServletContext().getRealPath("/Recursos/productos-img");
                 realPath = realPath.replaceAll("build/web/Recursos/productos-img", "") + "web/Recursos/productos-img";
 //                File dir = new File(rootPath + File.separator + "tmpFiles");
 //                if (!dir.exists()){
@@ -126,15 +123,14 @@ public class ControllerAdministracion {
                 stream.write(bytes);
                 stream.close();
 
-                
                 //Añadir producto
                 nuevaImagen = "/Recursos/productos-img" + File.separator + name;
-                
-                Collection <ProductoTieneImagen> imagenes = new ArrayList <ProductoTieneImagen> ();
-                Collection <Categoria> categorias = new ArrayList <Categoria>();
+
+                Collection<ProductoTieneImagen> imagenes = new ArrayList<ProductoTieneImagen>();
+                Collection<Categoria> categorias = new ArrayList<Categoria>();
                 categorias.add(dao.getCategoria(categoria));
                 Producto p = new Producto(nombre, Double.parseDouble(precio), Integer.parseInt(cantidad), descripcion, categorias);
-                ProductoTieneImagen img =new ProductoTieneImagen(p.getNombre(), nuevaImagen);
+                ProductoTieneImagen img = new ProductoTieneImagen(p.getNombre(), nuevaImagen);
                 img.setPrincipal(Boolean.TRUE);
                 img.setProducto1(p);
                 imagenes.add(img);
@@ -142,27 +138,21 @@ public class ControllerAdministracion {
                 dao.insertarProducto(p);
                 session.setAttribute("productosListados", dao.getTodosProductos());
                 return "Administrador";
-                
+
             } catch (Exception e) {
-                throw new RuntimeException("You failed to upload " + name + " => " + e.getMessage(),e);
+                throw new RuntimeException("You failed to upload " + name + " => " + e.getMessage(), e);
             }
         } else {
             throw new RuntimeException("You failed to upload " + name + " because the file was empty.");
-            
-        }
-            
-        
 
-        
-             
-        
-        
+        }
+
     }
-    
-    @RequestMapping(value="/EliminarProducto", method=RequestMethod.GET)
-    public String EliminarProducto(@RequestParam("contador") String contador, ModelMap model, HttpSession session){
-        
-        List <Producto>lista = (List <Producto>) session.getAttribute("productosListados");
+
+    @RequestMapping(value = "/EliminarProducto", method = RequestMethod.GET)
+    public String EliminarProducto(@RequestParam("contador") String contador, ModelMap model, HttpSession session) {
+
+        List<Producto> lista = (List<Producto>) session.getAttribute("productosListados");
         Producto p = lista.get(Integer.parseInt(contador));
         dao.eliminarProducto(p);
         lista = dao.getTodosProductos();
@@ -179,7 +169,7 @@ public class ControllerAdministracion {
                 byte[] bytes = file.getBytes();
 
                 // Creating the directory to store file
-                String realPath  = session.getServletContext().getRealPath("/Recursos/productos-img");
+                String realPath = session.getServletContext().getRealPath("/Recursos/productos-img");
                 realPath = realPath.replaceAll("build/web/Recursos/productos-img", "") + "web/Recursos/productos-img";
 //                File dir = new File(rootPath + File.separator + "tmpFiles");
 //                if (!dir.exists()){
@@ -192,12 +182,11 @@ public class ControllerAdministracion {
                 stream.write(bytes);
                 stream.close();
 
-                
                 //Añadir producto
                 nuevaImagen = "/Recursos/productos-img" + File.separator + name;
-                
-                Collection <ProductoTieneImagen> imagenes = new ArrayList <ProductoTieneImagen> ();
-                List <Producto>lista = (List <Producto>) session.getAttribute("productosListados");
+
+                Collection<ProductoTieneImagen> imagenes = new ArrayList<ProductoTieneImagen>();
+                List<Producto> lista = (List<Producto>) session.getAttribute("productosListados");
                 Producto p = lista.get(Integer.parseInt(contador));
                 if(categoria!=""){
                     p.getCategoriaCollection().add(dao.getCategoria(categoria));
@@ -211,12 +200,12 @@ public class ControllerAdministracion {
                 lista = dao.getTodosProductos();
                 session.setAttribute("productosListados", lista);
                 return "Administrador";
-                
+
             } catch (Exception e) {
-                throw new RuntimeException("You failed to upload " + name + " => " + e.getMessage(),e);
+                throw new RuntimeException("You failed to upload " + name + " => " + e.getMessage(), e);
             }
         } else {
-            List <Producto>lista = (List <Producto>) session.getAttribute("productosListados");
+            List<Producto> lista = (List<Producto>) session.getAttribute("productosListados");
             Producto p = lista.get(Integer.parseInt(contador));
             if(categoria!=""){
                 p.getCategoriaCollection().add(dao.getCategoria(categoria));
@@ -227,80 +216,80 @@ public class ControllerAdministracion {
             lista = dao.getTodosProductos();
             session.setAttribute("productosListados", lista);
             return "Administrador";
-            
+
         }
-        
-        
-        
-        
+
     }
-    
-    
-    
-    
-    
-    
-    @RequestMapping(value="/InsertarCategoria", method=RequestMethod.GET)
-    public String InsertarCategoria(@RequestParam("nombreCategoria") String nombre, @RequestParam(value="claveSuper", required = false) String claveSuper  , ModelMap model, HttpSession session){
+
+    @RequestMapping(value = "/InsertarCategoria", method = RequestMethod.GET)
+    public String InsertarCategoria(@RequestParam("nombreCategoria") String nombre, @RequestParam(value = "claveSuper", required = false) String claveSuper, ModelMap model, HttpSession session) {
         String clave = "cat";
         int cont = dao.getTodasCategorias().size();
-        for(int i = 0; i<Integer.MAX_VALUE;i++){
-            if (!(clave+cont).equals(dao.getTodasCategorias().get(i).getClave())){
+        for (int i = 0; i < Integer.MAX_VALUE; i++) {
+            if (!(clave + cont).equals(dao.getTodasCategorias().get(i).getClave())) {
                 break;
             }
             cont++;
         }
-        clave = "clave"+cont;
-        if (claveSuper != null){
+        clave = "clave" + cont;
+        if (claveSuper != null) {
             Categoria c = new Categoria(clave, nombre, false);
             Categoria madre = dao.getCategoria(claveSuper);
             dao.insertarCategoria(c);
             dao.añadirMadre(madre, c);
             dao.añadirHija(madre, c);
-            
-        }else{
+
+        } else {
             Categoria c = new Categoria(clave, nombre, true);
             dao.insertarCategoria(c);
         }
         session.setAttribute("categoriasListadas", dao.getTodasCategorias());
         return "Administrador";
     }
-    
-    @RequestMapping(value="/BorrarCategoria", method=RequestMethod.GET)
-    public String EliminarCategoria(@RequestParam("clave") String clave, ModelMap model, HttpSession session){
+
+    @RequestMapping(value = "/BorrarCategoria", method = RequestMethod.GET)
+    public String EliminarCategoria(@RequestParam("clave") String clave, ModelMap model, HttpSession session) {
         Categoria c = dao.getCategoria(clave);
         dao.eliminarCategoria(c);
         session.setAttribute("categoriasListadas", dao.getTodasCategorias());
         return "Administrador";
     }
-    
-    @RequestMapping(value="/EditarCategoria", method=RequestMethod.GET)
-    public String EditarCategoria(@RequestParam("clave") String clave, @RequestParam("nombreCategoria") String nombre ,ModelMap model, HttpSession session){
-        
+
+    @RequestMapping(value = "/EditarCategoria", method = RequestMethod.GET)
+    public String EditarCategoria(@RequestParam("clave") String clave, @RequestParam("nombreCategoria") String nombre, ModelMap model, HttpSession session) {
+
         dao.actualizarCategoria(clave, nombre);
         session.setAttribute("categoriasListadas", dao.getTodasCategorias());
         return "Administrador";
     }
-    
-    
-    
-    
-    
-    @RequestMapping(value="/EstadoPedido", method=RequestMethod.GET)
-    public String EstadoPedido(@RequestParam("estado") String estado, @RequestParam("contador") String contador,ModelMap model, HttpSession session){
-        
-        List <Pedido> pedidos = (List <Pedido>) session.getAttribute("pedidosListados");
+
+    @RequestMapping(value = "/EstadoPedido", method = RequestMethod.GET)
+    public String EstadoPedido(@RequestParam("estado") String estado, @RequestParam("contador") String contador, ModelMap model, HttpSession session) {
+
+        List<Pedido> pedidos = (List<Pedido>) session.getAttribute("pedidosListados");
         Pedido p = pedidos.get(Integer.parseInt(contador));
         dao.actualizarPedidos(p, estado);
         session.setAttribute("pedidosListados", dao.getTododosPedidos());
         return "Administrador";
     }
-    @RequestMapping(value="/PedidoPreparado", method=RequestMethod.GET)
-    public String PedidoPreparado(@RequestParam("contador") String contador, ModelMap model, HttpSession session){
-        
-        List <Pedido> pedidos = (List <Pedido>) session.getAttribute("pedidosListados");
+
+    @RequestMapping(value = "/PedidoPreparado", method = RequestMethod.GET)
+    public String PedidoPreparado(@RequestParam("contador") String contador, ModelMap model, HttpSession session) {
+
+        List<Pedido> pedidos = (List<Pedido>) session.getAttribute("pedidosListados");
         Pedido p = pedidos.get(Integer.parseInt(contador));
         dao.actualizarPreparado(p);
         return "Administrador";
     }
+
+    @RequestMapping(value = "/cerrarSesionAdmin", method = RequestMethod.GET)
+    public String cerrarSesionAdmin(ModelMap model, HttpSession session) {
+        //cierra la sesion;
+        session.invalidate();
+        //crea el mensaje de confirmacion;
+        model.addAttribute("confirmacion", "Se ha cerrado la sesión");
+        //redirige a LogAdministracion.jsp;
+        return "LogAdministrador";
+    }
+
 }

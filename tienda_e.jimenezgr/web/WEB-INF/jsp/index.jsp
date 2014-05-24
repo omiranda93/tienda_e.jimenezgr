@@ -56,7 +56,7 @@
 
 
             <div id="prodAleatorios" class="row">
-                <h2 class="row">Algunos alguno de nuestros productos:</h2>
+                <h2 class="row">Algunos de nuestros productos:</h2>
                 <div class="panel panel-default row">
                     <c:forEach var="prod" items="${productosAleatorios}" varStatus="indice">
                         <div class="col-lg-2">
@@ -67,14 +67,26 @@
                                 </c:if>       
                             </c:forEach>
                             <a class="row" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"><img width="150px" src="<c:url value='${imagenPrincipal}'/>"></a>
-                            <a class="row" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}">${prod.nombre}</a>
-                            <a class="row" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}">
+                            <a class="nombre" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}"><small>${prod.nombre}</small></a><br>
+                            <a class="precioM" href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}">
                                 <script>
                                     var precio =${prod.precio};
                                     precio = formatoPrecio(precio);
                                     document.write(precio);
                                 </script>
 
+                            </a><br>
+                            <a href="/tienda_e.jimenezgr/Inicio/VerProducto?nombre=${prod.getNombre()}">
+                                <c:choose>
+                                    <c:when test="${prod.cantidad>0}">
+                                        <span class="glyphicon glyphicon-ok ok"></span>
+                                        <span>En stock.</span>
+                                    </c:when>
+                                    <c:otherwise>                                  
+                                        <span class="glyphicon glyphicon-remove delete"></span>
+                                        <span>Sin stock. "Entrega en 3 semanas".</span>
+                                    </c:otherwise>
+                                </c:choose>
                             </a>
                         </div>
                     </c:forEach>

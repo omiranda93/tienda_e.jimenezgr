@@ -19,7 +19,7 @@
 
     <div class="col-lg-3  col-lg-offset-1">
         <c:choose>
-            <c:when test="logueado"> <%--falta comprobar logueo--%>
+            <c:when test="${usuario!=null}"> <%--falta comprobar logueo--%>
                 <c:set var="direccion" value="miPedido.jsp"/>
             </c:when>
             <c:otherwise>
@@ -28,15 +28,20 @@
         </c:choose>
 
         <span class="col-lg-5">
-            <a href="/tienda_e.jimenezgr/Inicio/Autenticacion" type="button" class="btn btn-primary">
-                <span class="glyphicon glyphicon-user"></span>
-                <span>Mi cuenta</span>
-                <c:if test="${usuario!=null}">
-                    <div>
-                        ${usuario}  
-                    </div>
-                </c:if>
-            </a>
+            <c:choose>
+                <c:when test="${usuario==null}">
+                    <a href="/tienda_e.jimenezgr/Inicio/Autenticacion" type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-user"></span>
+                        <span>Mi cuenta</span>
+                    </a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/tienda_e.jimenezgr/Login/cerrarSesionUser" type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-user"></span>
+                        <span>Cerrar sesión</span>
+                    </a>
+                </c:otherwise>
+            </c:choose>
         </span>
         <span class="col-lg-5">
             <a href="/tienda_e.jimenezgr/Inicio/CarritoVer" type="button" class="btn btn-primary">
