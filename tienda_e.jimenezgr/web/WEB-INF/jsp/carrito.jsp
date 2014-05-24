@@ -102,7 +102,7 @@
                     </div>
 
                     <div class="col-lg-3 panel panel-default">
-                        <a href="" class="btn btn-primary row center-block">Hacer mi pedido</a>
+                        <a href="/tienda_e.jimenezgr/Inicio/Pedir" class="btn btn-primary row center-block">Hacer mi pedido</a>
                         <div class="col-lg-5">
                             <b>Importe total: </b>
                         </div>

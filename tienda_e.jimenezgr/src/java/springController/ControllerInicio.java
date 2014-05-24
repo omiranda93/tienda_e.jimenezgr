@@ -5,6 +5,7 @@ import entities.Categoria;
 import entities.Pedido;
 import entities.Producto;
 import entities.RegistroPedidos;
+import entities.RegistroPedidosPK;
 import entities.Usuario;
 import entities.tiendaDAO;
 import java.util.ArrayList;
@@ -104,9 +105,9 @@ public class ControllerInicio {
         dao.insertarUsuario(u);
 
         int numero = 0;
-        List<Pedido> pedidos = dao.getTododosPedidos();
-        for (int i = 0; i < pedidos.size(); i++) {
-            if (pedidos.get(i).getEstado().equals("Carrito")) {
+        List <Pedido> pedidos = dao.getTododosPedidos();
+        for(int i =0; i<pedidos.size(); i++){
+            if (i==pedidos.size()-1){
                 numero = pedidos.get(i).getNumero();
             }
         }
@@ -158,69 +159,18 @@ public class ControllerInicio {
             }
             session.setAttribute("carrito", carro);
         } else {
-            boolean crear = false;
-            if (carro == null) {
-                crear = true;
-                List<Pedido> pedidos = dao.getTododosPedidos();
-                carro = new Pedido();
-                boolean valido = false;
-                int i = 0;
-                int num = Integer.MAX_VALUE;
-                if (pedidos.size() != 0) {
-                    while (valido == false) {
-                        if (pedidos.get(i).getNumero() != num) {
-                            i++;
-                            if (i == pedidos.size()) {
-                                valido = true;
-                            }
-                        } else {
-                            i = 0;
-                            num--;
-                        }
-                    }
-                }
-                carro.setEstado("Carrito");
-                carro.setNumero(num);
-                String nomUsu = (String) (session.getAttribute("usuario"));
-                Usuario usuario = dao.getUsuario(nomUsu).get(0);
-                carro.setUsuario(usuario);
-                carro.setPendiente(false);
-                carro.setNombre("");
-                carro.setDireccion("");
-                carro.setTelefono("");
-                List<RegistroPedidos> productos = new ArrayList<RegistroPedidos>();
-                carro.setRegistroPedidosCollection(productos);
-            }
-            int i = 0;
-            boolean encontrado = false;
-            int pos = -1;
-            ArrayList<RegistroPedidos> rp = (ArrayList) carro.getRegistroPedidosCollection();
-            while (i < rp.size() && !encontrado) {
-                if (rp.get(i).getProducto1().getNombre().equals(nombreProd)) {
-                    encontrado = true;
-                    pos = i;
-                }
-                i++;
-            }
-            if (encontrado) {
-                int can = rp.get(pos).getCantidad() + 1;
-                rp.get(pos).setCantidad(can);
-//                carro.setRegistroPedidosCollection(rp);
-
-            } else {
-                RegistroPedidos producto = new RegistroPedidos();
-                producto.setCantidad(1);
-                producto.setProducto1(dao.getNombre(nombreProd));
-                producto.setPedido(carro);
-                carro.getRegistroPedidosCollection().add(producto);
-            }
-            if (crear) {
-                dao.insertarPedido(carro);
-            } else {
-                dao.actualizarPedido(carro, carro.getRegistroPedidosCollection());
-            }
+            Producto p = dao.getProductosNombre(nombreProd).get(0);
+            String usuario = (String) session.getAttribute("usuario");
+            Usuario u = dao.getUsuario(usuario).get(0);
+            Pedido usuarioP = dao.getPedidosUsuarioCarrito(dao.getUsuario(usuario).get(0).getNombre()).get(0);
+            RegistroPedidosPK pk = new RegistroPedidosPK(usuarioP.getNumero(), p.getNombre());
+            RegistroPedidos pedido = new RegistroPedidos(pk, 1);
+            pedido.setPedido(usuarioP);
+            pedido.setProducto1(p);
+            dao.insertarRegistroPedido(pedido);
+            carro.getRegistroPedidosCollection().add(pedido);
             session.setAttribute("carrito", carro);
-        }
+        }        
         return "carrito";
     }
 
@@ -235,32 +185,65 @@ public class ControllerInicio {
         if (cantidad > 0) {
             for (RegistroPedidos prod : carro.getRegistroPedidosCollection()) {
                 if (prod.getProducto1().getNombre().equals(nombreProd)) {
+                    if(session.getAttribute("usuario")!=null){
+                        dao.modificarRegistroPedido(prod, cantidad);
+                    }
                     prod.setCantidad(cantidad);
                 }
             }
         } else {
-            ArrayList<RegistroPedidos> rp = (ArrayList) carro.getRegistroPedidosCollection();
+           List<RegistroPedidos>rp=(List<RegistroPedidos>) carro.getRegistroPedidosCollection();
             int i = 0;
             while (!rp.get(i).getProducto1().getNombre().equals(nombreProd)) {
                 i++;
             }
             if (rp.get(i).getProducto1().getNombre().equals(nombreProd)) {
+                RegistroPedidos p = rp.get(i);
+                if(session.getAttribute("usuario")!=null){
+                   dao.eliminarRegistroPedido(p); 
+                }
                 rp.remove(i);
             }
             if (rp.isEmpty()) {
                 carro = null;
             }
         }
+        
+        
         session.setAttribute("carrito", carro);
         return "carrito";
+    }
+    
+    @RequestMapping(value = "/Pedir", method = RequestMethod.GET)
+    public String pedir(ModelMap model, HttpSession session) {
+        Pedido carro = (Pedido) session.getAttribute("carrito");
+        if (session.getAttribute("usuario") == null) {
+            return "Autenticacion";
+        }else{
+            List <Pedido> pedidos = dao.getTododosPedidos();
+            int numero = 0;
+            for(int i =0; i<pedidos.size(); i++){
+            if (i==pedidos.size()-1){
+                numero = pedidos.get(i).getNumero();
+            }
+            }
+            numero++;
+            
+            Pedido nuevo = new Pedido(carro,numero);
+            String usuario = (String) session.getAttribute("usuario");
+            dao.insertarPedido(nuevo);
+            dao.actualizarPedidos(carro, "En tramite");
+            carro = dao.getPedidosUsuarioCarrito(dao.getUsuario(usuario).get(0).getNombre()).get(0);
+            session.setAttribute("carrito", carro);
+            return "index";
+        }
     }
     
     @RequestMapping(value = "/VerPedidos", method = RequestMethod.GET)
     public String VerPedidos(ModelMap model, HttpSession session) {
         String usuario = (String) session.getAttribute("usuario");
         session.setAttribute("pedidosUser", dao.getTodosPedidosUser(usuario));
-        return "MisPedidos";
+        return "VerPedidos";
     }
-        
 
 }
