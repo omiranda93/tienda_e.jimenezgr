@@ -36,11 +36,21 @@
                             <input type='text' name='cantidad' value="${producto.cantidad}">
                             <b>Descripción:</b>
                             <input type='textarea' maxlength="1000" name='descripcion' value="${producto.descripcion}">
-                            <b>Categoría:</b>
+                            <b>Añadir Categoría:</b>
                             <select name='categorias'> 
                                 <c:forEach var="categoria" items="${categoriasListadas}">
                                     <c:choose>
                                         <c:when test="${producto.categoriaCollection.contains(categoria)}">
+                                            <option value='${categoria.clave}'>${categoria.nombre}</option>
+                                        </c:when>
+                                    </c:choose>
+                                </c:forEach>
+                            </select>
+                            <b>Eliminar Categoría:</b>
+                             <select name='categorias2'> 
+                                <c:forEach var="categoria" items="${categoriasListadas}">
+                                    <c:choose>
+                                        <c:when test="${!producto.categoriaCollection.contains(categoria)}">
                                             <option value='${categoria.clave}'>${categoria.nombre}</option>
                                         </c:when>
                                     </c:choose>
