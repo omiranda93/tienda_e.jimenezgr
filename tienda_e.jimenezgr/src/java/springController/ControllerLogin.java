@@ -48,6 +48,9 @@ public class ControllerLogin {
                 }
                 session.setAttribute("carrito", usuarioP);
                 dao.actualizarPedido(usuarioP, usuarioP.getRegistroPedidosCollection());
+            }else{
+                Pedido usuarioP = dao.getPedidosUsuarioCarrito(dao.getUsuario(usuario).get(0).getNombre()).get(0);
+                session.setAttribute("carrito", usuarioP);
             }
            
             //comprobar cesta

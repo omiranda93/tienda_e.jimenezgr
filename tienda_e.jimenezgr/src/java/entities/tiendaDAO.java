@@ -213,10 +213,15 @@ public class tiendaDAO {
         return getPedidosQuery(where);
     }
     
-    public void modificarPeidoCollection(Pedido antiguo, Pedido nuevo) {
+    public List<Pedido> getTodosPedidosUser(String usuario) {
+        String where = "p.nombre = '"+usuario+"'";
+        return getPedidosQuery(where);
+    }
+    
+    public void modificarPeidoCollection(Pedido p) {
         manager.getTransaction().begin();
-        Pedido pedidoAntiguo = manager.find(Pedido.class, antiguo.getNumero());
-        pedidoAntiguo.getRegistroPedidosCollection().addAll(nuevo.getRegistroPedidosCollection());
+        Pedido pedidoAntiguo = manager.find(Pedido.class, p.getNumero());
+        pedidoAntiguo.setRegistroPedidosCollection(null);
         manager.getTransaction().commit();
     }
     
@@ -301,11 +306,28 @@ public class tiendaDAO {
         manager.getTransaction().commit();
     }
     
-    public void insertarRegistroPedidoPK(RegistroPedidosPK ped){
+    public void eliminarRegistroPedido(RegistroPedidos ped){
         manager.getTransaction().begin();
-        manager.persist(ped);
+        RegistroPedidos p = manager.find(RegistroPedidos.class, ped.getRegistroPedidosPK());
+        manager.remove(p);
         manager.getTransaction().commit();
     }
+    
+    public void modificarRegistroPedido(RegistroPedidos ped, int cantidad){
+        manager.getTransaction().begin();
+        RegistroPedidos p = manager.find(RegistroPedidos.class, ped.getRegistroPedidosPK());
+        p.setCantidad(cantidad);
+        manager.getTransaction().commit();
+    }
+    
+    public void modificarRegistroPedido2(RegistroPedidos ped, RegistroPedidosPK numero){
+        manager.getTransaction().begin();
+        RegistroPedidos p = manager.find(RegistroPedidos.class, ped.getRegistroPedidosPK());
+        p.setRegistroPedidosPK(numero);
+        manager.getTransaction().commit();
+    }
+    
+    
 
 //    public Autor getAutor(int codigoAutor) {
 //        //String sql = "select a from Autor a where a.idautor = "+codigoAutor;

@@ -81,6 +81,16 @@ public class Pedido implements Serializable {
         this.registroPedidosCollection = new ArrayList <RegistroPedidos> ();
     }
 
+    public Pedido(Pedido p, int n) {
+        this.direccion = p.getDireccion();
+        this.estado = "Carrito";
+        this.nombre = p.getNombre();
+        this.numero = n;
+        this.pendiente = p.getPendiente();
+        this.telefono = p.getTelefono();
+        this.usuario = p.getUsuario();  
+    }
+    
     public Pedido(Integer numero) {
         this.numero = numero;
     }
