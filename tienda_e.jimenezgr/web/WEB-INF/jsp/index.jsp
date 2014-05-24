@@ -10,14 +10,15 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap-theme.min.css'/>"/>
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
         <script src="<c:url value='/js/funciones.js'/>"></script>
-        <script src="<c:url value='/bootstrap/js/bootstrap.min.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/bootstrap/js/bootstrap.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/bootstrap/js/bootstrap-carousel.js'/>"></script>
         <script src="http://code.jquery.com/jquery-1.7.2.js"></script>
         <link rel="stylesheet" type="text/css" href="<c:url value='/css/estilo.css'/>"/>
     </head>
 
     <body>
         <div id="contenedor">
-            <c:import url="cabecera.jsp" charEncoding="utf-8"/>
+            <c:import url="cabecera.jsp" charEncoding="utf-8"/>            
 
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -26,16 +27,18 @@
                 </ol>
                 <!-- Carousel items -->
                 <div class="carousel-inner">
-                    <div class="active item"><img src="<c:url value='/Recursos/anuncio1.jpg'/>"></div>
-                    <div class="item"><img src="<c:url value='/Recursos/anuncio2.gif'/>"></div>
+                    <div class="active item">
+                        <img src="<c:url value='/Recursos/anuncio1.jpg'/>">
+                    </div>
+                    <div class="item">
+                        <img src="<c:url value='/Recursos/anuncio2.gif'/>">
+                    </div>
 
                 </div>
                 <!-- Carousel nav -->
                 <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
                 <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
             </div>
-
-
 
 
 
