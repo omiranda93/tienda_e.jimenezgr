@@ -42,7 +42,7 @@
                                         <p class="row"><b>Cantidad: </b>${prod.cantidad}</p>
                                     </div>
                                     <div class="col-lg-3 col-lg-offset-3">      
-                                        <span class="precioM">         
+                                        <span class="precioS">         
                                             <script>
                                                 var precio =${prod.producto1.precio};
                                                 precio = formatoPrecio(precio);
@@ -50,14 +50,25 @@
                                             </script>
                                         </span>
                                         <span class="precioS">IVA incluido</span>
+                                        <div class="nombreS">
+                                            x ${prod.cantidad} =     
+                                            <span class="precioM">
+                                                <script>
+                                                    var precio =${prod.producto1.precio};
+                                                    precio *= ${prod.cantidad};
+                                                    precio = formatoPrecio(precio);
+                                                    document.write(precio);
+                                                </script>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>                                 
                             </c:forEach>
 
-                            <div>
-                                <span class="nombreL col-lg-2">Total</span>
-                                <c:set var="total" value="${carrito.precioTotal()}"></c:set>
-                                    <div class="col-lg-3 col-lg-offset-5">
+                            <div class="row">
+                                <span class="nombreL col-lg-2 col-lg-offset-7">Total: </span>
+                                <c:set var="total" value="${pedido.precioTotal()}"></c:set>
+                                    <div class="col-lg-3">
                                         <span class="precioL">         
                                             <script>
                                                 var precio =${total};
@@ -68,7 +79,6 @@
                                     <span class="precioS">IVA incluido</span>
                                 </div>                                                    
                             </div>
-
                         </div>
                     </c:if>
                 </c:forEach>
