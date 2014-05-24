@@ -246,8 +246,9 @@ public class ControllerInicio {
     @RequestMapping(value = "/VerPedidos", method = RequestMethod.GET)
     public String VerPedidos(ModelMap model, HttpSession session) {
         String usuario = (String) session.getAttribute("usuario");
-        session.setAttribute("pedidosUser", dao.getProductosNombre(dao.getUsuario(usuario).get(0).getNombre()));
-        return "VerPedidos";
+        usuario=dao.getUsuario(usuario).get(0).getNombre();
+        session.setAttribute("pedidosUser", dao.getTodosPedidosUser(usuario));
+        return "MisPedidos";
     }
 
 }
