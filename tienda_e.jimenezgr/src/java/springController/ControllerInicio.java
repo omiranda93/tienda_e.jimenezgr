@@ -109,9 +109,9 @@ public class ControllerInicio {
         dao.insertarUsuario(u);
 
         int numero = 0;
-        List<Pedido> pedidos = dao.getTododosPedidos();
-        for (int i = 0; i < pedidos.size(); i++) {
-            if (i == pedidos.size() - 1) {
+        List <Pedido> pedidos = dao.getTododosPedidos();
+        for(int i =0; i<pedidos.size(); i++){
+            if (i==pedidos.size()-1){
                 numero = pedidos.get(i).getNumero();
             }
         }
@@ -174,7 +174,7 @@ public class ControllerInicio {
             dao.insertarRegistroPedido(pedido);
             carro.getRegistroPedidosCollection().add(pedido);
             session.setAttribute("carrito", carro);
-        }
+        }        
         return "carrito";
     }
 
@@ -189,22 +189,22 @@ public class ControllerInicio {
         if (cantidad > 0) {
             for (RegistroPedidos prod : carro.getRegistroPedidosCollection()) {
                 if (prod.getProducto1().getNombre().equals(nombreProd)) {
-                    if (session.getAttribute("usuario") != null) {
+                    if(session.getAttribute("usuario")!=null){
                         dao.modificarRegistroPedido(prod, cantidad);
                     }
                     prod.setCantidad(cantidad);
                 }
             }
         } else {
-            List<RegistroPedidos> rp = (List<RegistroPedidos>) carro.getRegistroPedidosCollection();
+           List<RegistroPedidos>rp=(List<RegistroPedidos>) carro.getRegistroPedidosCollection();
             int i = 0;
             while (!rp.get(i).getProducto1().getNombre().equals(nombreProd)) {
                 i++;
             }
             if (rp.get(i).getProducto1().getNombre().equals(nombreProd)) {
                 RegistroPedidos p = rp.get(i);
-                if (session.getAttribute("usuario") != null) {
-                    dao.eliminarRegistroPedido(p);
+                if(session.getAttribute("usuario")!=null){
+                   dao.eliminarRegistroPedido(p); 
                 }
                 rp.remove(i);
             }
@@ -212,27 +212,28 @@ public class ControllerInicio {
                 carro = null;
             }
         }
-
+        
+        
         session.setAttribute("carrito", carro);
         return "carrito";
     }
-
+    
     @RequestMapping(value = "/Pedir", method = RequestMethod.GET)
     public String pedir(ModelMap model, HttpSession session) {
         Pedido carro = (Pedido) session.getAttribute("carrito");
         if (session.getAttribute("usuario") == null) {
             return "Autenticacion";
-        } else {
-            List<Pedido> pedidos = dao.getTododosPedidos();
+        }else{
+            List <Pedido> pedidos = dao.getTododosPedidos();
             int numero = 0;
-            for (int i = 0; i < pedidos.size(); i++) {
-                if (i == pedidos.size() - 1) {
-                    numero = pedidos.get(i).getNumero();
-                }
+            for(int i =0; i<pedidos.size(); i++){
+            if (i==pedidos.size()-1){
+                numero = pedidos.get(i).getNumero();
+            }
             }
             numero++;
-
-            Pedido nuevo = new Pedido(carro, numero);
+            
+            Pedido nuevo = new Pedido(carro,numero);
             String usuario = (String) session.getAttribute("usuario");
             dao.insertarPedido(nuevo);
             dao.actualizarPedidos(carro, "En tramite");
@@ -241,13 +242,12 @@ public class ControllerInicio {
             return "index";
         }
     }
-
+    
     @RequestMapping(value = "/VerPedidos", method = RequestMethod.GET)
     public String VerPedidos(ModelMap model, HttpSession session) {
         String usuario = (String) session.getAttribute("usuario");
-        usuario = dao.getUsuario(usuario).get(0).getNombre();
-        session.setAttribute("pedidosUser", dao.getTodosPedidosUser(usuario));
-        return "MisPedidos";
+        session.setAttribute("pedidosUser", dao.getProductosNombre(dao.getUsuario(usuario).get(0).getNombre()));
+        return "VerPedidos";
     }
 
 }
