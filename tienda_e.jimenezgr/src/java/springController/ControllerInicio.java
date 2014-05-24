@@ -243,7 +243,7 @@ public class ControllerInicio {
     public String VerPedidos(ModelMap model, HttpSession session) {
         String usuario = (String) session.getAttribute("usuario");
         session.setAttribute("pedidosUser", dao.getTodosPedidosUser(usuario));
-        return "VerPedidos";
+        return "MisPedidos";
     }
 
 }

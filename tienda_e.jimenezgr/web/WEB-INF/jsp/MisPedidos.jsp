@@ -21,7 +21,6 @@
             <c:import url="cabecera.jsp" charEncoding="utf-8"/>
             <div>
                 <c:forEach var="pedido" items="${pedidosUser}">
-
                     <c:forEach var="prod" items="${pedido.registroPedidosCollection}">
                         <div class="row panel panel-default">
                             <%//imagen principal%>

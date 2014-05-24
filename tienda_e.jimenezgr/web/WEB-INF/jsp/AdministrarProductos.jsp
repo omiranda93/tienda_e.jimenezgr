@@ -40,7 +40,7 @@
                                     <input type='number' min="0" name='cantidad' value="${producto.cantidad}">
                                 </span>
                                 <span class="col-lg-4">
-                                    <b>Añadir Categoría:</b>
+                                    <b>Eliminar Categoría:</b>
                                     <select name='categorias'> 
                                         <c:forEach var="categoria" items="${categoriasListadas}">
                                             <c:choose>
@@ -52,7 +52,7 @@
                                     </select>
                                 </span>
                                 <span class="col-lg-4">
-                                    <b>Eliminar Categoría:</b>
+                                    <b>Añadir Categoría:</b>
                                     <select name='categorias2'> 
                                         <c:forEach var="categoria2" items="${categoriasListadas}">
                                             <c:choose>
