@@ -13,12 +13,8 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Random;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
-import org.jboss.weld.logging.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -207,7 +203,7 @@ public class ControllerAdministracion {
         } else {
             List<Producto> lista = (List<Producto>) session.getAttribute("productosListados");
             Producto p = lista.get(Integer.parseInt(contador));
-            if(categoria!=""){
+            if(!"".equals(categoria)){
                 p.getCategoriaCollection().add(dao.getCategoria(categoria));
             }
 

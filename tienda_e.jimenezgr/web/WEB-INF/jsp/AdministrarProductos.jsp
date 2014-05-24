@@ -27,44 +27,68 @@
                 <c:forEach var="producto" items="${productosListados}" varStatus="contador">
                     <div class="row panel panel-default">
                         <h3>${producto.nombre}</h3>
-                        <form method= "post" action='/tienda_e.jimenezgr/Administracion/EditarProducto' enctype="multipart/form-data">
-                            <input type='hidden' name='accion' value='editar'>
-                            <input type='hidden' name='contador' value='${contador.index}'>
-                            <b>Precio:</b>
-                            <input type='text' name='precio' value="${producto.precio}">
-                            <b>Stock:</b>
-                            <input type='text' name='cantidad' value="${producto.cantidad}">
-                            <b>Descripción:</b>
-                            <input type='textarea' maxlength="1000" name='descripcion' value="${producto.descripcion}">
-                            <b>Añadir Categoría:</b>
-                            <select name='categorias'> 
-                                <c:forEach var="categoria" items="${categoriasListadas}">
-                                    <c:choose>
-                                        <c:when test="${producto.categoriaCollection.contains(categoria)}">
-                                            <option value='${categoria.clave}'>${categoria.nombre}</option>
-                                        </c:when>
-                                    </c:choose>
-                                </c:forEach>
-                            </select>
-                            <b>Eliminar Categoría:</b>
-                             <select name='categorias2'> 
-                                <c:forEach var="categoria" items="${categoriasListadas}">
-                                    <c:choose>
-                                        <c:when test="${!producto.categoriaCollection.contains(categoria)}">
-                                            <option value='${categoria.clave}'>${categoria.nombre}</option>
-                                        </c:when>
-                                    </c:choose>
-                                </c:forEach>
-                            </select>
-                            Imagen: <input type="file" name="file"><br /> 
-                            Nombre: <input type="text" name="name"><br /> <br /> 
-                            <input type='submit' name='editar' value='Editar' onclick="alert('Has editado este producto')">
+                        <form class="panel panel-default" method= "post" action='/tienda_e.jimenezgr/Administracion/EditarProducto' enctype="multipart/form-data" onsubmit="return confirmar('¿Desea editar el producto?')">
+                            <input class="col-lg-3" type='hidden' name='accion' value='editar'>
+                            <input class="col-lg-3" type='hidden' name='contador' value='${contador.index}'>
+                            <div class="row well">
+                                <span class="col-lg-2">
+                                    <b>Precio:</b>
+                                    <input type='text' name='precio' value="${producto.precio}" onkeypress="soloCaracterPrecioValido()">
+                                </span>
+                                <span class="col-lg-2">
+                                    <b>Stock:</b>
+                                    <input type='text' name='cantidad' value="${producto.cantidad}">
+                                </span>
+                                <span class="col-lg-4">
+                                    <b>Añadir Categoría:</b>
+                                    <select name='categorias'> 
+                                        <c:forEach var="categoria" items="${categoriasListadas}">
+                                            <c:choose>
+                                                <c:when test="${producto.categoriaCollection.contains(categoria)}">
+                                                    <option value='${categoria.clave}'>${categoria.nombre}</option>
+                                                </c:when>
+                                            </c:choose>
+                                        </c:forEach>
+                                    </select>
+                                </span>
+                                <span class="col-lg-4">
+                                    <b>Eliminar Categoría:</b>
+                                    <select name='categorias2'> 
+                                        <c:forEach var="categoria2" items="${categoriasListadas}">
+                                            <c:choose>
+                                                <c:when test="${!producto.categoriaCollection.contains(categoria2)}">
+                                                    <option value='${categoria2.clave}'>${categoria2.nombre}</option>
+                                                </c:when>
+                                            </c:choose>
+                                        </c:forEach>
+                                    </select>
+                                </span>
+                            </div>
+                            <div class="row well">
+                                <b>Descripción:</b>
+                                <textarea class="form-control" name='descripcion' rows="5" style="width: 450px;" maxlength="1000">${producto.descripcion}</textarea>
+                            </div>
+                            <div class="row well">
+                                <span class="col-lg-4">
+                                    Imagen: <input type="file" name="file">
+                                </span>
+                                <span class="col-lg-3">
+                                    Nombre para la nueva imagen: <input type="text" name="name"> 
+                                </span>
+                            </div>
+                            <div class="row well">
+                                <b>Editar producto</b>
+                                <input type='submit' class="btn btn-primary" name='editar' value='Editar'>
+                            </div>
                         </form>
-                        <form method="get" action='/tienda_e.jimenezgr/Administracion/EliminarProducto' >
-                            <input type='hidden' name='busqueda' value='borrar'>
-                            <input type='submit' name='borrar' value='Borrar' onclick="alert('Has borrado este producto')">
-                            <input type='hidden' name='contador' value='${contador.index}'>
-                        </form>
+                        <div class="row well">
+                            <form method="get" action='/tienda_e.jimenezgr/Administracion/EliminarProducto' onsubmit="return confirmar('¿Desea eliminar el producto?')" >
+                                <input type='hidden' name='busqueda' value='borrar'>
+                                <b>Eliminar producto</b>
+                                <input type='submit' class="btn btn-primary" name='borrar' value='Borrar'>
+                                <input type='hidden' name='contador' value='${contador.index}'>
+                            </form>
+                        </div>
                     </div>
                 </c:forEach>
             </div>

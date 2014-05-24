@@ -13,15 +13,14 @@
 
     </head>
     <body>
+        <%//si el parametro admin esta vacio (no nos hemos identificado)%>
+        <c:if  test="${admin == null}"> 
+            <%//asigna a la variable error el valor correspondiente%>
+            <c:set var="error" value="Debe loguearse como administrador para ver esta página" scope="session"/>
+            <%//redirige a login.jsp%>
+            <c:redirect url="/Administracion"/>
+        </c:if>
         <div id="contenedor">
-            <%//si el parametro admin esta vacio (no nos hemos identificado)%>
-            <c:if  test="${admin == null}"> 
-                <%//asigna a la variable error el valor correspondiente%>
-                <c:set var="error" value="Debe loguearse como administrador para ver esta página" scope="session"/>
-                <%//redirige a login.jsp%>
-                <c:redirect url="/Administracion"/>
-            </c:if>
-
             <c:import url="menuAdmin.jsp" charEncoding="utf-8"/>
 
             <p class="well">Bienvenido</p>

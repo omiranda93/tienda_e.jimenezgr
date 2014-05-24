@@ -23,13 +23,6 @@
 
     <body>
         <div id="contenedor">
-            <%//si la sesion es nueva%>
-            <c:if test="${pageContext.session.new}">
-                <%//establece el tiempo maximo de inactividad en 30 minutos%>
-                <c:set target="${pageContext.session}" property="maxInactiveInterval" value="1800" />
-            </c:if>
-
-
             <c:import url="cabecera.jsp" charEncoding="utf-8"/>
 
 
