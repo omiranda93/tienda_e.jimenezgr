@@ -7,6 +7,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -77,19 +78,32 @@ public class Pedido implements Serializable {
     private Collection<RegistroPedidos> registroPedidosCollection;
 
     public Pedido() {
+        this.registroPedidosCollection = new ArrayList <RegistroPedidos> ();
     }
 
     public Pedido(Integer numero) {
         this.numero = numero;
     }
 
-    public Pedido(Integer numero, Boolean pendiente, String estado, String nombre, String direccion, String telefono) {
+    public Pedido(Integer numero, Boolean pendiente, String estado, String nombre, String direccion, String telefono, Usuario usuario) {
         this.numero = numero;
         this.pendiente = pendiente;
         this.estado = estado;
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
+        this.usuario = usuario;
+        this.registroPedidosCollection = new ArrayList <RegistroPedidos> ();
+    }
+    
+    public void setPedido(Pedido ped){
+        setPendiente(ped.getPendiente());
+        setEstado(ped.getEstado());
+        setDireccion(ped.getDireccion());
+        setNombre(ped.getNombre());
+        setRegistroPedidosCollection(ped.getRegistroPedidosCollection());
+        setTelefono(ped.getTelefono());
+        setUsuario(ped.getUsuario());
     }
 
     public Integer getNumero() {
@@ -100,7 +114,7 @@ public class Pedido implements Serializable {
         this.numero = numero;
     }
 
-    public Serializable getPendiente() {
+    public Boolean getPendiente() {
         return pendiente;
     }
 

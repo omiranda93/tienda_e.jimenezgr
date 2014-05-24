@@ -147,10 +147,10 @@ public class tiendaDAO {
         manager.getTransaction().commit();
     }
 
-    public void actualizarPedido(int num, Pedido pedido) {
+    public void actualizarPedido(Pedido actualizar, Collection <RegistroPedidos> carrito) {
         manager.getTransaction().begin();
-        Pedido p = manager.find(Pedido.class, num);
-        p = pedido;
+        Pedido p = manager.find(Pedido.class, actualizar.getNumero());
+        p.setRegistroPedidosCollection(carrito);
         manager.getTransaction().commit();
     }
 
@@ -185,10 +185,12 @@ public class tiendaDAO {
     }
 
     public void insertarPedido(Pedido pedido) {
-        EntityTransaction tx = manager.getTransaction();
-        tx.begin();
+//        EntityTransaction tx = manager.getTransaction();
+//        tx.begin();
+        manager.getTransaction().begin();
         manager.persist(pedido);
-        tx.commit();
+        manager.getTransaction().commit();
+//        tx.commit();
         //manager.flush();
     }
 
@@ -206,8 +208,8 @@ public class tiendaDAO {
         manager.getTransaction().commit();
     }
      
-    public List<Pedido> getPedidosUsuario(String usuario) {
-        String where = "p.nombre = '"+usuario+"'";
+    public List<Pedido> getPedidosUsuarioCarrito(String usuario) {
+        String where = "p.nombre = '"+usuario+"' AND p.estado= 'Carrito'";
         return getPedidosQuery(where);
     }
     
@@ -216,6 +218,16 @@ public class tiendaDAO {
         Pedido pedidoAntiguo = manager.find(Pedido.class, antiguo.getNumero());
         pedidoAntiguo.getRegistroPedidosCollection().addAll(nuevo.getRegistroPedidosCollection());
         manager.getTransaction().commit();
+    }
+    
+    public void eliminarPedido(Pedido pedido) {
+//        EntityTransaction tx = manager.getTransaction();
+//        tx.begin();
+        manager.getTransaction().begin();
+        manager.remove(pedido);
+        manager.getTransaction().commit();
+//        tx.commit();
+        //manager.flush();
     }
 
     //Ususarios
