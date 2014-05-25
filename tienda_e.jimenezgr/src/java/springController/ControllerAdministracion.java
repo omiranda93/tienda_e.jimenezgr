@@ -254,7 +254,7 @@ public class ControllerAdministracion {
     @RequestMapping(value = "/BorrarCategoria", method = RequestMethod.GET)
     public String EliminarCategoria(@RequestParam("clave") String clave, ModelMap model, HttpSession session) {
         Categoria c = dao.getCategoria(clave);
-        dao.eliminarCategoria(c);
+        dao.eliminarCategoria(c);        
         session.setAttribute("categoriasListadas", dao.getTodasCategorias());
         return "Administrador";
     }
