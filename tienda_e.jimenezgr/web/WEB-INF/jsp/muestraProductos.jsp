@@ -60,11 +60,11 @@
                                         <c:choose>
                                             <c:when test="${prod.cantidad>0}">
                                                 <span class="glyphicon glyphicon-ok ok"></span>
-                                                <span>En stock</span>
+                                                <span class="text-info">En stock</span>
                                             </c:when>
                                             <c:otherwise>
                                                 <span class="glyphicon glyphicon-remove delete"></span>
-                                                <span>Sin stock. "Entrega en 3 semanas".</span>
+                                                <span class="text-info">Sin stock. "Entrega en 3 semanas".</span>
                                             </c:otherwise>
                                         </c:choose>
                                     </div>

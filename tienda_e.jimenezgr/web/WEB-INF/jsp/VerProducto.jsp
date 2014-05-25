@@ -46,7 +46,7 @@
                                         document.write(precio);
                                     </script>
                                 </span>
-                                <span class="precioL">
+                                <span class="precioM">
                                     IVA incluido
                                 </span>
                             </div>                    
