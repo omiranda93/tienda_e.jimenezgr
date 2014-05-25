@@ -1,9 +1,3 @@
-<%-- 
-    Document   : VerProducto
-    Created on : 20-may-2014, 18:53:55
-    Author     : Usuario
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>

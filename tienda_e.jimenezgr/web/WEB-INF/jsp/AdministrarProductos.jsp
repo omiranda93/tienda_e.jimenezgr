@@ -26,7 +26,7 @@
                 <h3>Editar o Eliminar Productos</h3>
                 <c:forEach var="producto" items="${productosListados}" varStatus="contador">
                     <div class="row panel panel-default">
-                        <h3>${producto.nombre}</h3>
+                        <h3 class="blue">${producto.nombre}</h3>
                         <form class="panel panel-default" method= "post" action='/tienda_e.jimenezgr/Administracion/EditarProducto' enctype="multipart/form-data" onsubmit="return confirmar('¿Desea editar el producto?')">
                             <input class="col-lg-3" type='hidden' name='accion' value='editar'>
                             <input class="col-lg-3" type='hidden' name='contador' value='${contador.index}'>
@@ -39,7 +39,7 @@
                                     <b>Stock:</b>
                                     <input type='number' min="0" name='cantidad' value="${producto.cantidad}">
                                 </span>
-                                <span class="col-lg-4">
+                                <span class="col-lg-4 text-center">
                                     <b>Eliminar Categoría:</b>
                                     <select name='categorias'> 
                                         <c:forEach var="categoria" items="${categoriasListadas}">

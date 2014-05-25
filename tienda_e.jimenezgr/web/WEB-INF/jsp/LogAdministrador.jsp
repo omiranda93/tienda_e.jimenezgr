@@ -1,9 +1,3 @@
-<%-- 
-    Document   : LogAdministrador
-    Created on : 22-may-2014, 9:28:28
-    Author     : oscarmirandabravo
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -14,7 +8,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Administración</title>
         <script src="<c:url value='/js/funciones.js'/>"></script>
-
+        <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap-theme.min.css'/>"/>
+        <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
+        <link rel="stylesheet" type="text/css" href="<c:url value='/css/estilo.css'/>"/>
     </head>
     <body>
         <%//si el parametro admin no esta vacio (estamos conectados como administrador)%>
@@ -38,37 +34,44 @@
             <%//elimina el error%>
             <c:set var="error" value="${null}" scope="session"/>
         </c:if>
+        <div id="contenedor">
+            <div id="header" class="row">
+                <div class="col-lg-3">
+                    <a href="/tienda_e.jimenezgr/Inicio" title="inicio"  >
+                        <img src="<c:url value='/Recursos/poxmania-logo.png'/>">
+                    </a>
+                </div>
 
 
-        <%//inicia sesion;//%>
-        <form name="formLog"  method="POST" action="/tienda_e.jimenezgr/Administracion/Autenticacion">
-            <table align="center" width="200px">
-                <tr>
-                    <td colspan="2" align="center"><h3>Iniciar sesión</h3></td>
-                </tr>
+                <div class="col-lg-4 well col-lg-offset-1 text-center">
+                    <h2>Entrar como Administrador</h2>
+                </div>
 
-                <tr>
-                    <td>Usuario</td>
-                    <td>
-                        <input type="text" name="usuario" maxlength="20" value="poxmaniaco" required>
-                    </td>
-                </tr>
+                <span class="col-lg-3 col-lg-offset-1 text-center">
+                    <a class="btn btn-primary" href="/tienda_e.jimenezgr/Inicio">Volver a inicio</a>
+                </span>
+            </div>
 
-                <tr>
-                    <td>Password</td>
-                    <td>
-                        <input type="password" name="pwd" maxlength="15" value="nosomospixmania" required>
-                    </td>
-                </tr>
 
-                <tr>
-                    <td colspan="2" align="right">
-                        <input type='submit' value='Entrar'>
-                    </td>
+            <div class="row">
+                <form class="panel panel-default col-lg-6 col-lg-offset-3" name="formLog"  method="POST" action="/tienda_e.jimenezgr/Administracion/Autenticacion">
+                    <div class="well text-center">
+                        <h3>Iniciar sesión</h3>
+                        <p class="row">
+                            <span class="col-lg-4">Usuario</span>
 
-                </tr>
-            </table>
-        </form>
-        <a class="boton" href="/tienda_e.jimenezgr/Inicio">Página de poxmania</a>
+                            <input class="col-lg-6" type="text" name="usuario" maxlength="20" required>
+                        </p>
+                        <p class="row">
+                            <span class="col-lg-4">Contraseña</span>
+
+                            <input class="col-lg-6" type="password" name="pwd" maxlength="15" required>
+                        </p>
+                        <input class="btn btn-primary row col-lg-offset-4" type='submit' class="btn btn-primary" value='Entrar'>
+                    </div>
+                </form>
+            </div>
+
+        </div>
     </body>
 </html>

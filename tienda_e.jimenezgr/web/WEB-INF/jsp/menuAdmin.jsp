@@ -8,11 +8,11 @@
     </div>
         
         
-    <div class="col-lg-4 well col-lg-offset-1">
-        <center><h2>Página de Administración</h2></center>
+    <div class="col-lg-4 well col-lg-offset-1 text-center">
+        <h2>Página de Administración</h2>
     </div>
 
-    <div class="col-lg-3  col-lg-offset-1">
+    <div class="col-lg-3 col-lg-offset-1">
         <c:choose>
             <c:when test="logueado"> <%--falta comprobar logueo--%>
                 <c:set var="direccion" value="miPedido.jsp"/>
