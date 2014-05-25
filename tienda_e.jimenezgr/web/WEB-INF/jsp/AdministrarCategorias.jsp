@@ -97,23 +97,33 @@
                                 </c:when>
                                 <c:otherwise>
                                     <li class="panel panel-default">
-                                        <h3 class="well">Supercategoría <span class="blue">${categ.nombre}</span></h3>
-                                        <div class="row">
-                                            <span class="col-lg-4">
-                                                <form method="get" action="/tienda_e.jimenezgr/Administracion/EditarCategoria" onsubmit="return confirmar('¿Desea editar el nombre de esta categoría?')">
-                                                    <b>Editar nombre</b>
-                                                    <input type="text" name="nombreCategoria" value="${categ.nombre}">
-                                                    <input type="hidden" name="clave" value="${categ.clave}">
-                                                    <input type="submit" class="btn btn-primary" name="editar" value="Editar">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#${cont.index}"><h3 class="well">Supercategoría <span class="blue">${categ.nombre}</span></h3></a>
+                                        <div id="${cont.index}" class="panel-collapse collapse">
+                                            <div class="row">
+                                                <span class="col-lg-4">
+                                                    <form method="get" action="/tienda_e.jimenezgr/Administracion/EditarCategoria" onsubmit="return confirmar('¿Desea editar el nombre de esta categoría?')">
+                                                        <b>Editar nombre</b>
+                                                        <input type="text" name="nombreCategoria" value="${categ.nombre}">
+                                                        <input type="hidden" name="clave" value="${categ.clave}">
+                                                        <input type="submit" class="btn btn-primary" name="editar" value="Editar">
+                                                    </form>
+                                                </span>
+                                                <span class="col-lg-5">
+                                                    <form method="get" action='/tienda_e.jimenezgr/Administracion/BorrarCategoria' onsubmit="return confirmar('¿Desea eliminar esta categoría?')" >
+                                                        <input type='hidden' name='clave' value='${categ.clave}'>                                                
+                                                        <b>Borrar supercategoría y todas sus subcategorías</b>
+                                                        <input type='submit' class="btn btn-primary" name='borrar' value='Borrar'>
+                                                    </form>
+                                                </span>
+                                            </div>
+                                            <div class="row">
+                                                <form method="get" action="/tienda_e.jimenezgr/Administracion/InsertarCategoria">
+                                                    <b>Añadir nueva subcategoría</b>
+                                                    <input type="text" name="nombreCategoria" value="" required>
+                                                    <input type="hidden" name="claveSuper" value="${categ.clave}">
+                                                    <input type="submit" class="btn btn-primary" name="editar" value="Agregar">
                                                 </form>
-                                            </span>
-                                            <span class="col-lg-5">
-                                                <form method="get" action='/tienda_e.jimenezgr/Administracion/BorrarCategoria' onsubmit="return confirmar('¿Desea eliminar esta categoría?')" >
-                                                    <input type='hidden' name='clave' value='${categ.clave}'>                                                
-                                                    <b>Borrar supercategoría y todas sus subcategorías</b>
-                                                    <input type='submit' class="btn btn-primary" name='borrar' value='Borrar'>
-                                                </form>
-                                            </span>
+                                            </div>
                                         </div>
                                     </li>
                                 </c:otherwise>

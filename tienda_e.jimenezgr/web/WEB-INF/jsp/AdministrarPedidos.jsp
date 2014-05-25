@@ -29,7 +29,7 @@
                 <h3 class="panel panel-title blue text-center col-lg-6 col-lg-offset-3">Administrar pedidos</h3>
             </div>
             <div class="row">
-                <h3>Editar o Añadir Categorías</h3>
+                <h3>Cambiar estado o preparar pedido</h3>
                 <c:set var="a" value="carrito" ></c:set>
                 <c:forEach var="pedido" items="${pedidosListados}" varStatus="contador">
                     <c:if test="${pedido.estado != a && pedido.pendiente == false}">                        
