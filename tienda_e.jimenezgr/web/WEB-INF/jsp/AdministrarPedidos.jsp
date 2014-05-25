@@ -10,6 +10,8 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap-theme.min.css'/>"/>
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
         <link rel="stylesheet" type="text/css" href="<c:url value='/css/estilo.css'/>"/>
+        <script src="http://code.jquery.com/jquery-1.7.2.js"></script>
+        <script type="text/javascript" src="<c:url value='/bootstrap/js/bootstrap.min.js'/>"></script>
     </head>
     <body>
         <%//si el parametro admin esta vacio (no nos hemos identificado)%>
@@ -32,8 +34,10 @@
                 <c:forEach var="pedido" items="${pedidosListados}" varStatus="contador">
                     <c:if test="${pedido.estado != a && pedido.pendiente == false}">                        
                         <div class="panel panel-default">
-                            <h3 class="well">Pedido  <span class="blue">nº ${pedido.numero}</span></h3>
-                            <div class="row">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#${contador.index}">
+                                <h3 class="well">Pedido  <span class="blue">nº ${pedido.numero}</span></h3>
+                            </a>
+                            <div id="${contador.index}" class="row panel-collapse collapse">
                                 <span class="col-lg-5">
                                     <form method="get" action='/tienda_e.jimenezgr/Administracion/EstadoPedido' >
                                         <b>Editar estado:</b>
