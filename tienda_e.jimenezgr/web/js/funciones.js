@@ -4,7 +4,14 @@ function soloCaracterPrecioValido() {
         event.returnValue = false;
 }
 
-
+function comprobarClave() {
+    if (document.formReg.password.value !== document.form.password2.value) {
+        alert("Las contraseñas no coinciden");
+        document.formReg.password.focus();
+        return false;
+    }
+    document.formReg.submit();
+}
 function validarProducto() {
     if (document.formAgregar.nombreProd.value === "") {
         alert("Por favor, introduzca el nombre");
@@ -37,9 +44,9 @@ function confirmar(msg)
         return false;
 }
 
-function formatoPrecio(precio){
-    precio=parseFloat(precio).toFixed(2);
-    precio= precio+" €";
+function formatoPrecio(precio) {
+    precio = parseFloat(precio).toFixed(2);
+    precio = precio + " €";
     return precio;
 }
 

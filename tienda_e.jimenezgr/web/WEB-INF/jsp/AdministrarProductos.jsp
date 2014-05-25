@@ -23,6 +23,9 @@
         <div id="contenedor">
             <c:import url="menuAdmin.jsp" charEncoding="utf-8"/>
             <div class="row">
+                <h3 class="panel panel-title blue text-center col-lg-6 col-lg-offset-3">Administrar productos</h3>
+            </div>
+            <div class="row">
                 <h3>Editar o Eliminar Productos</h3>
                 <c:forEach var="producto" items="${productosListados}" varStatus="contador">
                     <div class="row panel panel-default">
@@ -130,7 +133,6 @@
                         <input type='submit' name='Añadir' value='Agregar' onclick="alert('Has añadido este producto a los disponibles.')">
                     </div>
                 </form>
-                <a href="/tienda_e.jimenezgr/Administracion">Volver</a>
             </div>
         </div>
     </body>

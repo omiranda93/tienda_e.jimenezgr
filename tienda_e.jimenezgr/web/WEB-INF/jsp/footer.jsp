@@ -1,6 +1,5 @@
-<div id="footer">
-    <div id="footTop" class="row">
-
+<div id="footer" class="panel panel-footer">
+    <div class="row">
         <ul class="col-lg-2">
             <li class="listHeader">¿Quiénes somos?</li>
             <li><a href="">Condiciones generales de venta de Poxmania</a></li>
@@ -40,8 +39,8 @@
         </ul>   
 
     </div>
-
-    <div id="footBop" class="row well">
+    
+    <div class="row well">
         <div class="row">
             <center>
                 <span><a href="">Información legal</a>  | </span>

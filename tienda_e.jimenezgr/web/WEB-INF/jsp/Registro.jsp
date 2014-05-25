@@ -16,12 +16,13 @@
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap-theme.min.css'/>"/>
         <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
         <link rel="stylesheet" type="text/css" href="<c:url value='/css/estilo.css'/>"/>
+        <script src="<c:url value='/js/funciones.js'/>"></script>
     </head>
     <body>
         <div id="contenedor">
             <c:import url="cabecera.jsp" charEncoding="utf-8"/>
             <div id="formReg">
-                <form method="post" action="/tienda_e.jimenezgr/Inicio/Registrarse">
+                <form name="formReg" method="post" action="/tienda_e.jimenezgr/Inicio/Registrarse" onsubmit="return comprobarClave()">
                     <div class="row panel panel-default">
 
                         <h4 class="col-lg-1">

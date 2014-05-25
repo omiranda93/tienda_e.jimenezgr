@@ -52,7 +52,7 @@
                             </div>                    
 
                             <div id="infoInf" class="row well center-block">
-                                <h2>Descripción:</h2>
+                                <h2 class="blue">Descripción:</h2>
                                 <p>${producto.descripcion }</p>
                             </div>
                         </div>
@@ -62,21 +62,19 @@
                                 <span class="glyphicon glyphicon-shopping-cart center-block"></span>
                                 Añadir a la cesta 
                             </a>
-                            <div class="availability">
+                            <div class="row col-lg-12">
                                 <c:choose>
                                     <c:when test="${producto.cantidad>0}">
                                         <span class="glyphicon glyphicon-ok ok"></span>
-                                        <span>En stock. Plazo de entrega 4-6 dias hábiles. Garantia 1 año.</span>
+                                        <span class="text-info">En stock. Plazo de entrega 4-6 dias hábiles. Garantia 1 año.</span>
                                     </c:when>
                                     <c:otherwise>                                  
                                         <span class="glyphicon glyphicon-remove delete"></span>
-                                        <span>Sin stock. "Entrega en 3 semanas".</span>
+                                        <span class="text-info">Sin stock. "Entrega en 3 semanas".</span>
                                     </c:otherwise>
                                 </c:choose>
 
-                                <strong>
-                                    <span>Sin gastos de envio</span>
-                                </strong>
+                                        <div class="text-warning text-center">Sin gastos de envio</div>
                             </div>
                         </div>
                     </div>
