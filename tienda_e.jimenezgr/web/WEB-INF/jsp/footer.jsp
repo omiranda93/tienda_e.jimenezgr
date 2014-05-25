@@ -1,4 +1,4 @@
-<div id="footer" class="panel panel-footer">
+<div id="footer">
     <div class="row">
         <ul class="col-lg-2">
             <li class="listHeader">¿Quiénes somos?</li>
