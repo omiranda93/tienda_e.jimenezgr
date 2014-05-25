@@ -155,7 +155,10 @@ public class ControllerAdministracion {
                 byte[] bytes = file.getBytes();
 
                 // Creating the directory to store file
-                String realPath = session.getServletContext().getRealPath("/Recursos/productos-img");
+                String realPath = session.getServletContext().getRealPath("/Recursos/productos-img");if (realPath.contains("\\")) {
+                    //cambia las \ por /;
+                    realPath = realPath.replaceAll("\\\\", "/");
+                }
                 realPath = realPath.replaceAll("build/web/Recursos/productos-img", "") + "web/Recursos/productos-img";
 //                File dir = new File(rootPath + File.separator + "tmpFiles");
 //                if (!dir.exists()){
@@ -179,7 +182,7 @@ public class ControllerAdministracion {
                     dao.actualizarProductoAñadirCategoria(p.getNombre(), categoria2);
                 }
                 ProductoTieneImagen img = new ProductoTieneImagen(p.getNombre(), nuevaImagen);
-                img.setPrincipal(true);
+                img.setPrincipal(false);
                 img.setProducto1(p);
                 imagenes.add(img);
                 p.setProductoTieneImagenCollection(imagenes);
