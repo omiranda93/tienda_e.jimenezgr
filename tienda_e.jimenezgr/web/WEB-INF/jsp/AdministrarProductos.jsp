@@ -102,16 +102,16 @@
                     <div class="row well">
                         <span class="col-lg-2">
                             <b>Nombre:</b>
-                            <input type='text' name='nombre'>
+                            <input type='text' name='nombre' required>
                         </span>
                         <span class="col-lg-2">
 
                             <b>Precio:</b>
-                            <input type='text' name='precio' onkeypress="soloCaracterPrecioValido()">
+                            <input type='text' name='precio' onkeypress="soloCaracterPrecioValido()" required>
                         </span>
                         <span class="col-lg-2">
                             <b>Stock:</b>
-                            <input type='number' min="0" name='cantidad'>
+                            <input type='number' min="0" name='cantidad' required>
                         </span>
                         <span class="col-lg-2">
                             <b>Categoria:</b>

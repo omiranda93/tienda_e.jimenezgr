@@ -5,13 +5,14 @@ function soloCaracterPrecioValido() {
 }
 
 function comprobarClave() {
-    if (document.formReg.password.value !== document.form.password2.value) {
+    if (document.formReg.password.value !== document.formReg.password2.value) {
         alert("Las contraseñas no coinciden");
         document.formReg.password.focus();
         return false;
     }
     document.formReg.submit();
 }
+
 function validarProducto() {
     if (document.formAgregar.nombreProd.value === "") {
         alert("Por favor, introduzca el nombre");

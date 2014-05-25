@@ -80,7 +80,7 @@
                                                 <span class="col-lg-7">
                                                     <form method="get" action="/tienda_e.jimenezgr/Administracion/InsertarCategoria">
                                                         <b>Añadir nueva subcategoría</b>
-                                                        <input type="text" name="nombreCategoria" value="">
+                                                        <input type="text" name="nombreCategoria" value="" required>
                                                         <input type="hidden" name="claveSuper" value="${categ.clave}">
                                                         <input type="submit" class="btn btn-primary" name="editar" value="Agregar">
                                                     </form>
@@ -118,7 +118,7 @@
                         <h3 class="well">Añadir nueva supercategoría</h3>
                         <form method= "get" action='/tienda_e.jimenezgr/Administracion/InsertarCategoria'>
                             <b>Nombre:</b>
-                            <input type='text' name='nombreCategoria'>
+                            <input type='text' name='nombreCategoria' required>
                             <input type='submit' class="btn btn-primary" name='Añadir' value='Agregar' onclick="alert('Has añadido esta categoria.')">
                         </form>
                     </li>
