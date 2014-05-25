@@ -235,6 +235,7 @@ public class ControllerAdministracion {
             }
             cont++;
         }
+        cont++;
         clave = "clave" + cont;
         if (claveSuper != null) {
             Categoria c = new Categoria(clave, nombre, false);
@@ -252,9 +253,12 @@ public class ControllerAdministracion {
     }
 
     @RequestMapping(value = "/BorrarCategoria", method = RequestMethod.GET)
-    public String EliminarCategoria(@RequestParam("clave") String clave, ModelMap model, HttpSession session) {
-        Categoria c = dao.getCategoria(clave);
+    public String EliminarCategoria(@RequestParam("clave") String clave, @RequestParam(value="clavePadre", required = false) String clavePadre, ModelMap model, HttpSession session) {
+        Categoria c = dao.getCategoria(clave);  
         dao.eliminarCategoria(c);
+        if(!(clavePadre==null)){
+            dao.getCategoria(clavePadre).getCategoriaCollection1().remove(c);
+        }
         session.setAttribute("categoriasListadas", dao.getTodasCategorias());
         return "Administrador";
     }

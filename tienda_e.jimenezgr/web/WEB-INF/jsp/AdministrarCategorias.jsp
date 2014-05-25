@@ -72,7 +72,8 @@
                                                             </span>
                                                             <span class="col-lg-5">
                                                                 <form method="get" action='/tienda_e.jimenezgr/Administracion/BorrarCategoria' onsubmit="return confirmar('¿Desea eliminar esta categoría?')" >
-                                                                    <input type='hidden' name='clave' value='${hijo.clave}'>                                                
+                                                                    <input type='hidden' name='clave' value='${hijo.clave}'>  
+                                                                    <input type='hidden' name='clavePadre' value='${categ.clave}'>  
                                                                     <b>Borrar subcategoría</b>
                                                                     <input type='submit' class="btn btn-primary" name='borrar' value='Borrar'>
                                                                 </form>
