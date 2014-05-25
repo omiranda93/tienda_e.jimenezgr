@@ -50,6 +50,7 @@
                                     <span class="col-lg-4 text-center">
                                         <b>Eliminar Categoría:</b>
                                         <select name='categorias'> 
+                                            <option value=''>Seleccione una categoria</option>
                                             <c:forEach var="categoria" items="${categoriasListadas}">
                                                 <c:choose>
                                                     <c:when test="${producto.categoriaCollection.contains(categoria)}">
@@ -62,6 +63,7 @@
                                     <span class="col-lg-4">
                                         <b>Añadir Categoría:</b>
                                         <select name='categorias2'> 
+                                            <option value=''>Seleccione una categoria</option>
                                             <c:forEach var="categoria2" items="${categoriasListadas}">
                                                 <c:choose>
                                                     <c:when test="${!producto.categoriaCollection.contains(categoria2)}">

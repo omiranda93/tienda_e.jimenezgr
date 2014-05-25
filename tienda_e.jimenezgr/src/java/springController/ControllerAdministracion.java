@@ -184,15 +184,20 @@ public class ControllerAdministracion {
                 Collection<ProductoTieneImagen> imagenes = new ArrayList<ProductoTieneImagen>();
                 List<Producto> lista = (List<Producto>) session.getAttribute("productosListados");
                 Producto p = lista.get(Integer.parseInt(contador));
-                if(categoria!=""){
-                    p.getCategoriaCollection().add(dao.getCategoria(categoria));
+                if(!"".equals(categoria2)){
+                    p.getCategoriaCollection().add(dao.getCategoria(categoria2));
+                    dao.actualizarProductoAñadirCategoria(p.getNombre(), categoria2);
                 }
                 ProductoTieneImagen img =new ProductoTieneImagen(p.getNombre(), nuevaImagen);
-                img.setPrincipal(false);
+                img.setPrincipal(true);
                 img.setProducto1(p);
                 imagenes.add(img);
                 p.setProductoTieneImagenCollection(imagenes);
-                dao.actualizarProducto(p.getNombre(), Double.parseDouble(precio), Integer.parseInt(cantidad), descripcion, p.getCategoriaCollection(), p.getProductoTieneImagenCollection(), categoria2);
+                if(!"".equals(categoria)){
+                    dao.actualizarProductoEliminarCategoria(p.getNombre(), categoria);
+                    p.getCategoriaCollection().remove(dao.getCategoria(categoria));
+                }
+                dao.actualizarProducto(p.getNombre(), Double.parseDouble(precio), Integer.parseInt(cantidad), descripcion, p.getCategoriaCollection(), p.getProductoTieneImagenCollection());
                 lista = dao.getTodosProductos();
                 session.setAttribute("productosListados", lista);
                 return "Administrador";
@@ -203,12 +208,15 @@ public class ControllerAdministracion {
         } else {
             List<Producto> lista = (List<Producto>) session.getAttribute("productosListados");
             Producto p = lista.get(Integer.parseInt(contador));
-            if(!"".equals(categoria)){
-                p.getCategoriaCollection().add(dao.getCategoria(categoria));
+            if(!"".equals(categoria2)){
+                p.getCategoriaCollection().add(dao.getCategoria(categoria2));
+                dao.actualizarProductoAñadirCategoria(p.getNombre(), categoria2);
             }
-
-
-            dao.actualizarProducto(p.getNombre(), Double.parseDouble(precio), Integer.parseInt(cantidad), descripcion, p.getCategoriaCollection(), p.getProductoTieneImagenCollection(),categoria2);
+            if(!"".equals(categoria)){
+                dao.actualizarProductoEliminarCategoria(p.getNombre(), categoria);
+                p.getCategoriaCollection().remove(dao.getCategoria(categoria));
+            }
+            dao.actualizarProducto(p.getNombre(), Double.parseDouble(precio), Integer.parseInt(cantidad), descripcion, p.getCategoriaCollection(), p.getProductoTieneImagenCollection());
             lista = dao.getTodosProductos();
             session.setAttribute("productosListados", lista);
             return "Administrador";

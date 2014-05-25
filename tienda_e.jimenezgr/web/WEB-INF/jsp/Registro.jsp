@@ -58,12 +58,12 @@
                             </p>
 
                             <p>
-                                Teléfono
-                                <input name="telefono" size="40" type="text">
+                                Teléfono*
+                                <input name="telefono" size="40" type="text" required="">
                             </p>
                             <p>
-                                Dirección
-                                <input name="direccion" size="40" type="text">
+                                Dirección*
+                                <input name="direccion" size="40" type="text" required="">
                             </p>
                             <p>
                                 <input class="btn btn-primary" name="regBoton" type="submit" value="Continuar">
