@@ -74,7 +74,7 @@
                     <c:choose>
                         <c:when test="${categ.categoriaCollection1.size()>0}">
                         <li class="dropdown">
-                            <a href="/tienda_e.jimenezgr/Inicio/MuestraProductos?clave=${categ.clave}" name= "categoriaProd" class="dropdown-toggle" data-toggle="dropdown"><c:out value="${categ.nombre}"/>
+                            <a href="/tienda_e.jimenezgr/Inicio/MuestraProductos?clave=${categ.clave}" name= "categoriaProd" class="dropdown-toggle"><c:out value="${categ.nombre}"/>
                             </a>            
                             <%--buscar hijos y guardarlos en hijos--%>
                             <ul class="dropdown-menu">
