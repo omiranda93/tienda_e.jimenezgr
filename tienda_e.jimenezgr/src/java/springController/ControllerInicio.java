@@ -171,9 +171,14 @@ public class ControllerInicio {
             RegistroPedidos pedido = new RegistroPedidos(pk, 1);
             pedido.setPedido(usuarioP);
             pedido.setProducto1(p);
-            dao.insertarRegistroPedido(pedido);
-            carro.getRegistroPedidosCollection().add(pedido);
-            session.setAttribute("carrito", carro);
+            if(dao.getTodosRegistroPedido().contains(pedido)){
+                dao.modificarRegistroPedido(pedido, dao.getRegistroPedidos(pedido).get(0).getCantidad()+1);
+            }else{
+                dao.insertarRegistroPedido(pedido);
+//                carro.getRegistroPedidosCollection().add(pedido);
+            }
+            Pedido usuarioP2 = dao.getPedidosUsuarioCarrito(dao.getUsuario(usuario).get(0).getNombre()).get(0);
+            session.setAttribute("carrito", usuarioP2);
         }        
         return "carrito";
     }
@@ -227,7 +232,7 @@ public class ControllerInicio {
             List <Pedido> pedidos = dao.getTododosPedidos();
             int numero = 0;
             for(int i =0; i<pedidos.size(); i++){
-            if (i==pedidos.size()-1){
+            if (numero <= pedidos.get(i).getNumero()){
                 numero = pedidos.get(i).getNumero();
             }
             }

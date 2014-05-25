@@ -36,13 +36,18 @@ public class ControllerLogin {
                 Pedido p = (Pedido) session.getAttribute("carrito");
                 Pedido usuarioP = dao.getPedidosUsuarioCarrito(dao.getUsuario(usuario).get(0).getNombre()).get(0);
                 for (RegistroPedidos ped : p.getRegistroPedidosCollection()) {
-                    RegistroPedidosPK pk = new RegistroPedidosPK(usuarioP.getNumero(), ped.getProducto1().getNombre());
-                    ped.setRegistroPedidosPK(pk);
-                    ped.setPedido(usuarioP);
-                    dao.insertarRegistroPedido(ped);
+                        RegistroPedidosPK pk = new RegistroPedidosPK(usuarioP.getNumero(), ped.getProducto1().getNombre());
+                        ped.setRegistroPedidosPK(pk);
+                        ped.setPedido(usuarioP);
+                        if(dao.getTodosRegistroPedido().contains(ped)){
+                            dao.modificarRegistroPedido(ped, ped.getCantidad()+dao.getRegistroPedidos(ped).get(0).getCantidad());
+                        }else{
+                            dao.insertarRegistroPedido(ped);
+                        }
                 }
-                session.setAttribute("carrito", usuarioP);
                 dao.actualizarPedido(usuarioP, usuarioP.getRegistroPedidosCollection());
+                Pedido usuarioP2 = dao.getPedidosUsuarioCarrito(dao.getUsuario(usuario).get(0).getNombre()).get(0);
+                session.setAttribute("carrito", usuarioP2);
             }else{
                 Pedido usuarioP = dao.getPedidosUsuarioCarrito(dao.getUsuario(usuario).get(0).getNombre()).get(0);
                 session.setAttribute("carrito", usuarioP);
