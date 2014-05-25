@@ -1,5 +1,3 @@
-
-
 package springController;
 
 import entities.Categoria;
@@ -21,20 +19,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- *
- * @author Shkire
- *
- */
 @Controller
 @RequestMapping("/Administracion")
 public class ControllerAdministracion {
 
     tiendaDAO dao = new tiendaDAO();
-//    @RequestMapping(value="/Inicio", method = RequestMethod.GET)
-//    public String Inicio(ModelMap model, HttpSession session) {
-//      return "Inicio";
-//   }
+
 
     @RequestMapping(method = RequestMethod.GET)
     public String index(ModelMap model, HttpSession session) {
@@ -107,11 +97,11 @@ public class ControllerAdministracion {
 
                 // Creating the directory to store file
                 String realPath = session.getServletContext().getRealPath("/Recursos/productos-img");
+                if (realPath.contains("\\")) {
+                    //cambia las \ por /;
+                    realPath = realPath.replaceAll("\\\\", "/");
+                }
                 realPath = realPath.replaceAll("build/web/Recursos/productos-img", "") + "web/Recursos/productos-img";
-//                File dir = new File(rootPath + File.separator + "tmpFiles");
-//                if (!dir.exists()){
-//                    dir.mkdirs();
-//                }
                 // Create the file on server
                 File serverFile = new File(realPath + File.separator + name);
                 BufferedOutputStream stream = new BufferedOutputStream(
@@ -155,9 +145,9 @@ public class ControllerAdministracion {
         session.setAttribute("productosListados", lista);
         return "Administrador";
     }
-    
-    @RequestMapping(value="/EditarProducto", method=RequestMethod.POST)
-    public String EditarProducto(@RequestParam("cantidad") String cantidad, @RequestParam("precio") String precio, @RequestParam("descripcion") String descripcion, @RequestParam("categorias") String categoria, @RequestParam("categorias2") String categoria2, @RequestParam("contador") String contador,@RequestParam(value="name", required = false) String name, @RequestParam(value= "file", required = false) MultipartFile file,  ModelMap model, HttpSession session){
+
+    @RequestMapping(value = "/EditarProducto", method = RequestMethod.POST)
+    public String EditarProducto(@RequestParam("cantidad") String cantidad, @RequestParam("precio") String precio, @RequestParam("descripcion") String descripcion, @RequestParam("categorias") String categoria, @RequestParam("categorias2") String categoria2, @RequestParam("contador") String contador, @RequestParam(value = "name", required = false) String name, @RequestParam(value = "file", required = false) MultipartFile file, ModelMap model, HttpSession session) {
         String nuevaImagen;
         //Imagen
         if (!file.isEmpty()) {
@@ -184,16 +174,16 @@ public class ControllerAdministracion {
                 Collection<ProductoTieneImagen> imagenes = new ArrayList<ProductoTieneImagen>();
                 List<Producto> lista = (List<Producto>) session.getAttribute("productosListados");
                 Producto p = lista.get(Integer.parseInt(contador));
-                if(!"".equals(categoria2)){
+                if (!"".equals(categoria2)) {
                     p.getCategoriaCollection().add(dao.getCategoria(categoria2));
                     dao.actualizarProductoAñadirCategoria(p.getNombre(), categoria2);
                 }
-                ProductoTieneImagen img =new ProductoTieneImagen(p.getNombre(), nuevaImagen);
+                ProductoTieneImagen img = new ProductoTieneImagen(p.getNombre(), nuevaImagen);
                 img.setPrincipal(true);
                 img.setProducto1(p);
                 imagenes.add(img);
                 p.setProductoTieneImagenCollection(imagenes);
-                if(!"".equals(categoria)){
+                if (!"".equals(categoria)) {
                     dao.actualizarProductoEliminarCategoria(p.getNombre(), categoria);
                     p.getCategoriaCollection().remove(dao.getCategoria(categoria));
                 }
@@ -208,11 +198,11 @@ public class ControllerAdministracion {
         } else {
             List<Producto> lista = (List<Producto>) session.getAttribute("productosListados");
             Producto p = lista.get(Integer.parseInt(contador));
-            if(!"".equals(categoria2)){
+            if (!"".equals(categoria2)) {
                 p.getCategoriaCollection().add(dao.getCategoria(categoria2));
                 dao.actualizarProductoAñadirCategoria(p.getNombre(), categoria2);
             }
-            if(!"".equals(categoria)){
+            if (!"".equals(categoria)) {
                 dao.actualizarProductoEliminarCategoria(p.getNombre(), categoria);
                 p.getCategoriaCollection().remove(dao.getCategoria(categoria));
             }
@@ -253,10 +243,10 @@ public class ControllerAdministracion {
     }
 
     @RequestMapping(value = "/BorrarCategoria", method = RequestMethod.GET)
-    public String EliminarCategoria(@RequestParam("clave") String clave, @RequestParam(value="clavePadre", required = false) String clavePadre, ModelMap model, HttpSession session) {
-        Categoria c = dao.getCategoria(clave);  
+    public String EliminarCategoria(@RequestParam("clave") String clave, @RequestParam(value = "clavePadre", required = false) String clavePadre, ModelMap model, HttpSession session) {
+        Categoria c = dao.getCategoria(clave);
         dao.eliminarCategoria(c);
-        if(!(clavePadre==null)){
+        if (!(clavePadre == null)) {
             dao.getCategoria(clavePadre).getCategoriaCollection1().remove(c);
         }
         session.setAttribute("categoriasListadas", dao.getTodasCategorias());
