@@ -52,7 +52,7 @@
                                         <span class="precioS">IVA incluido</span>
                                         <div class="nombreS">
                                             x ${prod.cantidad} =     
-                                            <span class="precioM">
+                                            <span class="precioS">
                                                 <script>
                                                     var precio =${prod.producto1.precio};
                                                     precio *= ${prod.cantidad};
