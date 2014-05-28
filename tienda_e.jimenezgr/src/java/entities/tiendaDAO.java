@@ -330,6 +330,27 @@ public class tiendaDAO {
         manager.getTransaction().commit();
     }
     
+    public List<RegistroPedidos> getTodosRegistroPedido() {
+        return getRegistroPedidoQuery(null);        
+    }
+    
+    public List<RegistroPedidos> getRegistroPedidos(RegistroPedidos p) {
+        String where = "r.registroPedidosPK.numero = "+p.getRegistroPedidosPK().getNumero();
+        return getRegistroPedidoQuery(where);
+    }
+    
+    
+    private List<RegistroPedidos> getRegistroPedidoQuery(String where) {
+
+        String sql = "SELECT r FROM RegistroPedidos r";
+        if (where != null) {
+            sql += " where " + where;
+        }
+
+        Query query = manager.createQuery(sql);
+        return (List<RegistroPedidos>) query.getResultList();
+    }
+    
     
 
 //    public Autor getAutor(int codigoAutor) {
